@@ -26,5 +26,20 @@ namespace HolidayMakerUWP.Views
         {
             this.InitializeComponent();
         }
+
+        private void Slider_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            SeaDistansValue.Text = SeaDistansSlider.Value.ToString();
+        }
+
+        private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SeaDistansValue.Text = SeaDistansSlider.Value.ToString() + "Km";
+        }
+
+        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            CenterDistansValue.Text = CenterDistansSlider.Value.ToString() + "Km";
+        }
     }
 }
