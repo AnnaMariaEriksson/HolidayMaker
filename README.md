@@ -1,1 +1,2 @@
 # HolidayMaker
+## Rest specifikation
