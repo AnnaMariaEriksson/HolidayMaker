@@ -10,5 +10,10 @@ namespace HolidayMakerUWP.Model
     class Hotel
     {
         public List<Room> Rooms { get; set; }
+
+        public Hotel( List<Room> rooms)
+        {
+            rooms = Rooms;
+        }
     }
 }

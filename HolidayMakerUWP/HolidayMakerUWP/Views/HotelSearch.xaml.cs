@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HolidayMakerUWP.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,12 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class HotelSearch : Page
     {
+        public HotelSearchViewModel HotelSearchViewModel { get; set; }
         public HotelSearch()
         {
             this.InitializeComponent();
+            HotelSearchViewModel = new HotelSearchViewModel();
+            this.DataContext = HotelSearchViewModel.Rooms;
         }
 
         private void IncreaseOneButton_OnClick(object sender, RoutedEventArgs e)

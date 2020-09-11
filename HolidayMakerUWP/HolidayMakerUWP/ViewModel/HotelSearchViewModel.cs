@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace HolidayMakerUWP.ViewModel
 {
-    class HotelSearchViewModel
+    public class HotelSearchViewModel
     {
         public ObservableCollection<Room> Rooms { get; set; }
 

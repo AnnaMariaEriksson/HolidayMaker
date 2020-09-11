@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HolidayMakerUWP.Views"
+    xmlns:data="using:HolidayMakerUWP.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -50,6 +51,14 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
             <TextBox Text="Insert ObservableCollection here." FontSize="60"/>
+            <ListView ItemsSource="{x:Bind HotelSearchViewModel.Rooms}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:Hotel">
+                        <TextBlock x:Name="HotelLabelInfo" Text="{x:Bind Rooms}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
             <TextBox x:Name="WhenSearchButtonHasBeenPressedLabel" PlaceholderText="Väntar på att nån trycker på sökknappen" FontSize="40"/>
         </StackPanel>
     </Grid>
