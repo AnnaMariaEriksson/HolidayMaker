@@ -26,5 +26,20 @@ namespace HolidayMakerUWP.Views
         {
             this.InitializeComponent();
         }
+
+        private void IncreaseOneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            WhenSearchButtonHasBeenPressedLabel.Text = "Du tryckte på sökknappen. Tack!";
+        }
     }
 }
