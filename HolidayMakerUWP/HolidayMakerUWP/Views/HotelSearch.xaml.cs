@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HolidayMakerUWP.Model;
 using HolidayMakerUWP.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -44,6 +45,12 @@ namespace HolidayMakerUWP.Views
         private void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
             WhenSearchButtonHasBeenPressedLabel.Text = "Du tryckte på sökknappen. Tack!";
+            var rooms = HotelSearchViewModel.Rooms;
+
+            foreach (Room room in rooms)
+            {
+                
+            }
         }
     }
 }
