@@ -25,13 +25,13 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="4*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
                        Text="Bokning"
-                       HorizontalAlignment="Center"
+                       HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="56" />
 
@@ -57,19 +57,49 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         HorizontalAlignment="Left"
-                        >
+                        Spacing="20"
+                        Height="250"
+                        VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical"
                             Grid.Row="1"
                             Grid.Column="1"
-                            HorizontalAlignment="Center">
-                    <TextBlock Text="Namn" FontSize="24"/>
-                    <TextBlock Text="Efternamn" FontSize="24"/>
-                </StackPanel>
-                <TextBlock Text="Johan Svensson" FontSize="24"/>
-                <StackPanel>
+                            HorizontalAlignment="Center"
+                            Height="250"
+                            VerticalAlignment="Top">
+                    <TextBlock Text="Namn"
+                               FontSize="24" />
+                    <TextBlock Text="Efternamn"
+                               FontSize="24" />
+                    <TextBlock Text="Email"
+                               FontSize="24" />
+                    <TextBlock Text="Ange information"
+                               FontSize="28"
+                               VerticalAlignment="Bottom"
+                               Margin="0,35,0,0" />
+                    <TextBlock Text="Telefonnummer"
+                               FontSize="24" />
+                    <TextBlock Text="Adress"
+                               FontSize="24" />
+                </StackPanel >
 
+                <StackPanel VerticalAlignment="Top"
+                            Height="250">
+                    <TextBlock Text="Johan"
+                               FontSize="24" />
+                    <TextBlock Text="Svensson"
+                               FontSize="24" />
+                    <TextBlock Text="Johan.Svensson@gmail.com"
+                               FontSize="24" />
+                    <TextBox PlaceholderText="Ange telefonmummer"
+                             Margin="0,75,0,0" />
+                    <TextBox PlaceholderText="Ange adress" />
                 </StackPanel>
             </StackPanel>
+            <TextBlock Grid.Row="1"
+                       Grid.Column="2"
+                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                       VerticalAlignment="Center" 
+                       TextWrapping="Wrap"/>
         </Grid>
     </Grid>
 </Page>
