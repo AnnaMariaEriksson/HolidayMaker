@@ -26,7 +26,7 @@ namespace HolidayMakerUWP.Views
     public sealed partial class HotelSearch : Page
     {
         ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
-        ObservableCollection<Hotel> FilteredHotels;
+        ObservableCollection<Hotel> FilteredHotels { get; set; }
         private bool HasAllInclusive;
         private bool HasFullBoard;
         private bool HasHalfBoard;
@@ -34,135 +34,269 @@ namespace HolidayMakerUWP.Views
         private bool HasChildrensClub;
         private bool HasEntertainment;
         private bool HasPool;
+        ObservableCollection<Hotel> TempRemoveHotel = new ObservableCollection<Hotel>();
         public HotelSearch()
         {
             this.InitializeComponent();
 
-            Hotel h1 = new Hotel() { DistansToCenter = 30, DistansToBeach = 45, HasAllInclusive = "", HasFullBoard = "har", HasHalfBoard = false, HasRestaurant = true, HasChildrensClub = false, HasEntertainment = true, HasPool = false, HotelID = 1 };
-            Hotel h2 = new Hotel() { DistansToCenter = 30, DistansToBeach = 45, HasAllInclusive = "har", HasFullBoard = "", HasHalfBoard = false, HasRestaurant = true, HasChildrensClub = false, HasEntertainment = true, HasPool = false, HotelID = 2 };
-            Hotel h3 = new Hotel() { DistansToCenter = 30, DistansToBeach = 45, HasAllInclusive = "", HasFullBoard = "", HasHalfBoard = false, HasRestaurant = true, HasChildrensClub = false, HasEntertainment = true, HasPool = false, HotelID = 3 };
+            Hotel h1 = new Hotel() { DistansToCenter = 40, DistansToBeach = 10, HasAllInclusive = "", HasFullBoard = "har", HasHalfBoard = "", HasRestaurant = true, HasChildrensClub = false, HasEntertainment = true, HasPool = false, HotelID = 1 };
+            Hotel h2 = new Hotel() { DistansToCenter = 30, DistansToBeach = 25, HasAllInclusive = "har", HasFullBoard = "", HasHalfBoard = "har", HasRestaurant = true, HasChildrensClub = false, HasEntertainment = true, HasPool = false, HotelID = 2 };
+            Hotel h3 = new Hotel() { DistansToCenter = 50, DistansToBeach = 45, HasAllInclusive = "", HasFullBoard = "", HasHalfBoard = "", HasRestaurant = true, HasChildrensClub = false, HasEntertainment = true, HasPool = false, HotelID = 3 };
             Hotels.Add(h1);
             Hotels.Add(h2);
             Hotels.Add(h3);
+            HasAllInclusive = false;
             HasFullBoard = false;
             HasHalfBoard = false;
             HasRestaurant = false;
             HasChildrensClub = false;
             HasEntertainment = false;
             HasPool = false;
+            GetHotels("");
             CenterDistansSlider.Value = 50;
             SeaDistansSlider.Value = 50;
+            
     }
-        //Skitstort error fixa annars krashar det. kraschar vid andra knapptrycket.
-        public void GetHotelList()
+
+       
+        //Reset HotelListan
+        private ObservableCollection<Hotel> GetHotels(string InclusiveString)
         {
-                foreach(Hotel h in Hotels) 
-                {
-                foreach(Hotel ho in FilteredHotels)
-                {
-                    if(h.HotelID != ho.HotelID)
-                    {
-                        FilteredHotels.Add(h);
-                    }
- 
-                }
-                }
-                
-        }
-        private void Slider_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-            SeaDistansValue.Text = SeaDistansSlider.Value.ToString();
+
+            FilteredHotels = Hotels;
+            HotelList.ItemsSource = FilteredHotels;
+            return FilteredHotels;
         }
 
         private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
+            ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
             SeaDistansValue.Text = SeaDistansSlider.Value.ToString() + "Km";
-            string test;
-            GetHotels(test = "");
+
+            foreach (Hotel ho in FilteredHotels)
+            {
+                if (ho.DistansToBeach > SeaDistansSlider.Value)
+                {
+                    th.Add(ho);
+                    TempRemoveHotel.Add(ho);            
+                }
+                else
+                {
+                    th.Remove(ho);
+                    TempRemoveHotel.Remove(ho);
+                }
+
+            }
+              
+            foreach (Hotel h in th)
+                {
+                    FilteredHotels.Remove(h);
+                }
+           
+            foreach (Hotel h in TempRemoveHotel)
+             {
+                if (h.DistansToBeach <= SeaDistansSlider.Value && h.DistansToCenter <= CenterDistansSlider.Value)
+                {
+                    FilteredHotels.Add(h);
+                    HotelList.ItemsSource = FilteredHotels;
+                }
+             }
+
         }
 
         private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
+            ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
             CenterDistansValue.Text = CenterDistansSlider.Value.ToString() + "Km";
-            string test;
-            GetHotels(test = "");
-            
-        }
+            foreach (Hotel ho in FilteredHotels)
+            {
+                if (ho.DistansToCenter > CenterDistansSlider.Value)
+                {
+                    th.Add(ho);
+                    TempRemoveHotel.Add(ho);
+                }
+                else
+                {
+                    th.Remove(ho);
+                    TempRemoveHotel.Remove(ho);
+                }
 
-        private ObservableCollection<Hotel> GetHotels(string InclusiveString)
-        {
-            var FilteredHotelsTemp = Hotels;
-             FilteredHotels = new ObservableCollection<Hotel>(FilteredHotelsTemp);
-            return FilteredHotels;
+            }
+
+            foreach (Hotel h in th)
+            {
+                FilteredHotels.Remove(h);
+            }
+
+            foreach (Hotel h in TempRemoveHotel)
+            {
+                if (h.DistansToCenter <= CenterDistansSlider.Value && h.DistansToBeach <= SeaDistansSlider.Value)
+                {
+                    FilteredHotels.Add(h);
+                    HotelList.ItemsSource = FilteredHotels;
+                }
+            }
+
         }
 
         private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
         {
-            string test2;
-            Debug.WriteLine("Test");    
+            
+            //Tar bort alla hotel som inte stämmer med filtret(funkar)
             if (HasAllInclusive == false)
             {
+
                 HasAllInclusive = true;
                 AllInclusiveButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
 
-                var test = FilteredHotels.Where(h => h.HasAllInclusive == "");
-                ObservableCollection<Hotel> temp = new ObservableCollection<Hotel>(test);
-                foreach(Hotel h in temp)
+                foreach (Hotel h in FilteredHotels)
                 {
-                    FilteredHotels.Remove(h);
-                    GetHotels("");
+                    if (h.HasAllInclusive == "" && h.DistansToBeach <= SeaDistansSlider.Value && h.DistansToCenter <= CenterDistansSlider.Value)
+                        TempRemoveHotel.Add(h);
+
                 }
-               
+                foreach (Hotel ho in TempRemoveHotel)
+                    FilteredHotels.Remove(ho);
             }
             else
             {
-                GetHotelList();
+                ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
                 HasAllInclusive = false;
-                Debug.WriteLine(HasAllInclusive);
                 AllInclusiveButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-                GetHotels(test2 = "har");
+               
+                foreach (Hotel ho in TempRemoveHotel)
+                {
+                    if (HasFullBoard || HasHalfBoard == true )
+                    {
+                        if(ho.HasFullBoard == "har" || ho.HasHalfBoard == "har")
+                        {
+                            FilteredHotels.Add(ho);
+                            th.Add(ho);
+                        }
+                    }
+                    else {
+                        if (ho.DistansToBeach <= SeaDistansSlider.Value && ho.DistansToCenter <= CenterDistansSlider.Value)
+                        {
+                            FilteredHotels.Add(ho);
+                            th.Add(ho);
+                        }
+                    }
+                   
+                }
+
+                foreach(Hotel h in th)
+                {
+                    TempRemoveHotel.Remove(h);
+                }
+              
+                
+                
+
             }
+
         }
 
         private void FullBoardButton_Click(object sender, RoutedEventArgs e)
         {
-            string test2;
+            //Tar bort alla hotel som inte stämmer med filtret(funkar)
             if (HasFullBoard == false)
             {
-                FullBoardButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
-                var test = FilteredHotels.Where(h => h.HasFullBoard == "");
-                ObservableCollection<Hotel> temp = new ObservableCollection<Hotel>(test);
 
-                foreach (Hotel h in temp)
-                {
-                    FilteredHotels.Remove(h);
-                   GetHotels(test2 = "");
-                }
-                
                 HasFullBoard = true;
-                HotelList.ItemsSource = FilteredHotels;
+                FullBoardButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
+
+                foreach (Hotel h in FilteredHotels)
+                {
+                    if (h.HasFullBoard == "" && h.DistansToBeach <= SeaDistansSlider.Value && h.DistansToCenter <= CenterDistansSlider.Value)
+                        TempRemoveHotel.Add(h);
+
+                }
+                foreach (Hotel ho in TempRemoveHotel)
+                    FilteredHotels.Remove(ho);
             }
             else
             {
-                GetHotelList();
-                GetHotels(test2 = "har");
+                ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
                 HasFullBoard = false;
                 FullBoardButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-                HotelList.ItemsSource = FilteredHotels;
+
+                foreach (Hotel ho in TempRemoveHotel)
+                {
+                    if (HasAllInclusive || HasHalfBoard == true)
+                    {
+                        if (ho.HasAllInclusive == "har" || ho.HasHalfBoard == "har")
+                        {
+                            FilteredHotels.Add(ho);
+                            th.Add(ho);
+                        }
+                    }
+                    else
+                    {
+                        if (ho.DistansToBeach <= SeaDistansSlider.Value && ho.DistansToCenter <= CenterDistansSlider.Value)
+                        {
+                            FilteredHotels.Add(ho);
+                            th.Add(ho);
+                        }
+                    }
+
+                }
+
+                foreach (Hotel h in th)
+                {
+                    TempRemoveHotel.Remove(h);
+                }
             }
         }
 
         private void HalfBoardButton_Click(object sender, RoutedEventArgs e)
         {
+            //Tar bort alla hotel som inte stämmer med filtret(funkar)
             if (HasHalfBoard == false)
             {
+
                 HasHalfBoard = true;
                 HalfBoardButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
+
+                foreach (Hotel h in FilteredHotels)
+                {
+                    if (h.HasHalfBoard == "" && h.DistansToBeach <= SeaDistansSlider.Value && h.DistansToCenter <= CenterDistansSlider.Value)
+                        TempRemoveHotel.Add(h);
+
+                }
+                foreach (Hotel ho in TempRemoveHotel)
+                    FilteredHotels.Remove(ho);
             }
             else
             {
+                ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
                 HasHalfBoard = false;
                 HalfBoardButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
+
+                foreach (Hotel ho in TempRemoveHotel)
+                {
+                    if (HasAllInclusive || HasFullBoard == true)
+                    {
+                        if (ho.HasAllInclusive == "har" || ho.HasFullBoard == "har")
+                        {
+                            FilteredHotels.Add(ho);
+                            th.Add(ho);
+                        }
+                    }
+                    else
+                    {
+                        if (ho.DistansToBeach <= SeaDistansSlider.Value && ho.DistansToCenter <= CenterDistansSlider.Value)
+                        {
+                            FilteredHotels.Add(ho);
+                            th.Add(ho);
+                        }
+                    }
+
+                }
+
+                foreach (Hotel h in th)
+                {
+                    TempRemoveHotel.Remove(h);
+                }
             }
         }
 
@@ -222,9 +356,6 @@ namespace HolidayMakerUWP.Views
             }
         }
 
-        private void AllInclusiveButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            
-        }
+       
     }
 }

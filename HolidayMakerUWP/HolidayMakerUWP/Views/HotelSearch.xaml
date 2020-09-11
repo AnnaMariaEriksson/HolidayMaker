@@ -5,7 +5,8 @@
     xmlns:local="using:HolidayMakerUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+      xmlns:model="using:HolidayMakerUWP.Model"
+      mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -116,8 +117,13 @@
                    FontSize="40" />
         <ListView Grid.Column="1"
                   Grid.Row="1"
-                  ItemsSource="{Binding GetHotels}"
+                  ItemsSource="{x:Bind FilteredHotels}"
                   x:Name="HotelList">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Hotel">
+                    <TextBlock  Text="{x:Bind HotelID}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>

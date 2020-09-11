@@ -13,7 +13,7 @@ namespace HolidayMakerUWP.Model
         public  int DistansToCenter { get; set; }
         public string HasAllInclusive { get; set; }
         public  string HasFullBoard { get; set; }
-        public  bool HasHalfBoard { get; set; }
+        public  string HasHalfBoard { get; set; }
         public  bool HasRestaurant { get; set; }
         public  bool HasChildrensClub { get; set; }
         public  bool HasEntertainment { get; set; }
