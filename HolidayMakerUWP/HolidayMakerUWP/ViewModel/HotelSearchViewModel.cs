@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using HolidayMakerUWP.Model;
+using Newtonsoft.Json;
 
 namespace HolidayMakerUWP.ViewModel
 {
@@ -31,7 +32,7 @@ namespace HolidayMakerUWP.ViewModel
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            var rooms = JsonConvert.DeserializeObject < ObservableCollection<Room>(jsonRooms, settings);
+            var rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonRooms, settings);
 
             return rooms;
         }
