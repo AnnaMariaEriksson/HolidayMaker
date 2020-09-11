@@ -15,31 +15,31 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace HolidayMakerUWP.Views
+namespace HolidayMakerUWP
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HotelSearch : Page
+    public sealed partial class FrontPageSearch : Page
     {
-        public HotelSearch()
+        public FrontPageSearch()
         {
             this.InitializeComponent();
         }
 
-        private void Slider_Holding(object sender, HoldingRoutedEventArgs e)
+        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SeaDistansValue.Text = SeaDistansSlider.Value.ToString();
+            throw new NotImplementedException();
         }
 
-        private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void IncreaseOneButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SeaDistansValue.Text = SeaDistansSlider.Value.ToString() + "Km";
+            throw new NotImplementedException();
         }
 
-        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
-            CenterDistansValue.Text = CenterDistansSlider.Value.ToString() + "Km";
+            throw new NotImplementedException();
         }
     }
 }

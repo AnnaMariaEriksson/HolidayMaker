@@ -26,5 +26,10 @@ namespace HolidayMakerUWP
         {
             this.InitializeComponent();
         }
+
+        private void JustAButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
     }
 }
