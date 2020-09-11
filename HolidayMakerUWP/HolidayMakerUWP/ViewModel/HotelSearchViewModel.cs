@@ -16,6 +16,7 @@ namespace HolidayMakerUWP.ViewModel
 
         private HttpClient httpClient;
         private string roomURL = "";
+        //Just a comment.
 
         public HotelSearchViewModel()
         {
