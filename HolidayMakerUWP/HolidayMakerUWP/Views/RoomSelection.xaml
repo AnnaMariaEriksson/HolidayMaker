@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="HolidayMakerUWP.Views.RoomSelection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HolidayMakerUWP.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+<!--Main Grid-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition  Height="6*" />
+        </Grid.RowDefinitions>
+        <!--Grid TWO-->
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="HOTELL 1 BILD" HorizontalAlignment="Center" FontSize="100" FontWeight="Bold" Grid.Row="0"/>
+            <!--Grid THREE-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Grid FOUR bottom right-->
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="INFO TEXT" HorizontalAlignment="Left" FontSize="50" FontWeight="Bold" Grid.Row="0"/>
+                    <TextBlock Text="INFO TEXT 2" HorizontalAlignment="Left" FontSize="50" FontWeight="Bold" Grid.Row="1"/>
+                </Grid>
+                
+                <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
+                <ListView Grid.Column="0" Grid.RowSpan="2">
+
+                </ListView>
+            </Grid>
+        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="1*"/>
+            <ColumnDefinition  Width="8*"/>
+            <ColumnDefinition  Width="1*"/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</Page>
