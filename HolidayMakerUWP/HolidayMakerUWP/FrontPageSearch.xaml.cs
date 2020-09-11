@@ -13,23 +13,33 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace HolidayMakerUWP
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class FrontPageSearch : Page
     {
-        public MainPage()
+        public FrontPageSearch()
         {
             this.InitializeComponent();
         }
 
-        private void JustAButton_OnClick(object sender, RoutedEventArgs e)
+        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(FrontPageSearch));
+            throw new NotImplementedException();
+        }
+
+        private void IncreaseOneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
