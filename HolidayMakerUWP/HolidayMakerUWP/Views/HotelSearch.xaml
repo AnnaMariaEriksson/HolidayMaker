@@ -5,7 +5,8 @@
     xmlns:local="using:HolidayMakerUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+      xmlns:model="using:HolidayMakerUWP.Model"
+      mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -30,49 +31,63 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="AllInclusiveButton"
+                        Click="AllInclusiveButton_Click" />
                 <Button Content="Helpension"
                         FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="FullBoardButton"
+                        Click="FullBoardButton_Click" />
                 <Button Content="Halvpension"
                         FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="HalfBoardButton"
+                        Click="HalfBoardButton_Click" />
                 <Button Content="Pool"
                         FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="PoolButton"
+                        Click="PoolButton_Click" />
                 <Button Content="Underhållning"
                         FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="EntertainmentButton"
+                        Click="EntertainmentButton_Click" />
                 <Button Content="Restaurang"
                         FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="RestaurantButton"
+                        Click="RestaurantButton_Click" />
                 <Button Content="Barnklubb"
                         FontSize="20"
                         FontWeight="Bold"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Height="40"
-                        Margin="36,5,36,16" />
+                        Margin="36,5,36,16"
+                        x:Name="ChildrensClubButton"
+                        Click="ChildrensClubButton_Click" />
                 <TextBlock Text="Avstånd till havet:"
                            TextAlignment="Center"
                            FontWeight="Bold" />
@@ -82,7 +97,7 @@
                 <Slider Width="200"
                          x:Name="SeaDistansSlider"
                         ValueChanged="SeaDistansSlider_ValueChanged"
-                        Maximum="50"></Slider>
+                        Maximum="50" />
                 <TextBlock Text="Avstånd till centrum:"
                            TextAlignment="Center"
                            FontWeight="Bold" />
@@ -92,7 +107,7 @@
                 <Slider Width="200"
                         x:Name="CenterDistansSlider"
                         ValueChanged="CenterDistansSlider_ValueChanged"
-                        Maximum="50"></Slider>
+                        Maximum="50" />
             </StackPanel>
         </StackPanel>
         <TextBlock Text="Dina valmöjligheter:"
@@ -101,7 +116,14 @@
                    Grid.Row="1"
                    FontSize="40" />
         <ListView Grid.Column="1"
-                  Grid.Row="1">
+                  Grid.Row="1"
+                  ItemsSource="{x:Bind FilteredHotels}"
+                  x:Name="HotelList">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Hotel">
+                    <TextBlock  Text="{x:Bind HotelID}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>
