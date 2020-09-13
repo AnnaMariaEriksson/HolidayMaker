@@ -24,7 +24,10 @@ namespace HolidayMakerUWP.Viewmodel
 
         public System.Drawing.Color c1 = System.Drawing.Color.FromArgb(48, 179, 221);
         public System.Drawing.Color c2 = System.Drawing.Color.FromArgb(48, 179, 221);
-
+        public int _distansToCenter { get; set; }
+        public int _distansToBeach { get; set; }
+        public int DistansToBeach { get { return _distansToBeach; } set {  _distansToBeach = value; } }
+        public int DistansToCenter { get { return _distansToCenter; } set { _distansToCenter = value; } }
         public ObservableCollection<Hotel> _hotels { get; set; }
         public ObservableCollection<Hotel> TempHotel { get; set; }
 
@@ -32,6 +35,7 @@ namespace HolidayMakerUWP.Viewmodel
         {
             get
             {
+            
                 return _hotels;
             }
             set
@@ -50,6 +54,8 @@ namespace HolidayMakerUWP.Viewmodel
             TempHotel = _service.GetHotels();
         }
 
+     
+
         private void FilterToggle(string filter)
         {
             if (Filters.ContainsKey(filter))
@@ -66,8 +72,7 @@ namespace HolidayMakerUWP.Viewmodel
             {
                 Filters.Add("FilterReset", true);
             }
-           //test för filter till slidsen
-            Filters.Add("DistansToCenter", 50);
+
                 var test = new ObservableCollection<Hotel>(Filter(TempHotel, Filters));
 
             if (Filters.FirstOrDefault(f => f.Key == "FilterReset").Key != null)

@@ -104,7 +104,9 @@
                 <Slider Width="200"
                         x:Name="SeaDistansSlider"
                         ValueChanged="SeaDistansSlider_ValueChanged"
-                        Maximum="50" />
+                        Maximum="50" 
+                        Value="{x:Bind Vm._distansToBeach,Mode=TwoWay}" 
+                        />
                 <TextBlock Text="Avstånd till centrum:"
                            TextAlignment="Center"
                            FontWeight="Bold" />
@@ -114,7 +116,8 @@
                 <Slider Width="200"
                         x:Name="CenterDistansSlider"
                         ValueChanged="CenterDistansSlider_ValueChanged"
-                        Maximum="50" />
+                        Maximum="50" 
+                        Value="{x:Bind Vm._distansToCenter,Mode=TwoWay}"/>
             </StackPanel>
         </StackPanel>
         <Grid Grid.Column="1"
