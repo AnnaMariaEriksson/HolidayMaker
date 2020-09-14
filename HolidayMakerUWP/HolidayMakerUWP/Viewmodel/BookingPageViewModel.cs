@@ -44,6 +44,7 @@ namespace HolidayMakerUWP.Viewmodel
                 CloseButtonText = "Ok"
             };
             await errorDialog.ShowAsync();
+
         }
     }
 }
