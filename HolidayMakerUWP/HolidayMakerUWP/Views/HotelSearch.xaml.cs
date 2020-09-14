@@ -14,7 +14,12 @@ using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using HolidayMakerUWP.Model;
+using HolidayMakerUWP.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -51,7 +56,7 @@ namespace HolidayMakerUWP.Views
             
     }
 
-        private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
+        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
         {
             ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
             SeaDistansValue.Text = SeaDistansSlider.Value.ToString() + "Km";
@@ -59,64 +64,7 @@ namespace HolidayMakerUWP.Views
 
         }
 
-        private void PoolButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (HasPool == false)
-            {
-                HasPool = true;
-                PoolButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
-            }
-            else
-            {
-                HasPool = false;
-                PoolButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-            }
-        }
-
-        private void EntertainmentButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (HasEntertainment == false)
-            {
-                HasEntertainment = true;
-                EntertainmentButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
-            }
-            else
-            {
-                HasEntertainment = false;
-                EntertainmentButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-            }
-        }
-
-        private void RestaurantButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (HasRestaurant == false)
-            {
-                HasRestaurant = true;
-                RestaurantButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
-            }
-            else
-            {
-                HasRestaurant = false;
-                RestaurantButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-            }
-        }
-
-        private void ChildrensClubButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (HasChildrensClub == false)
-            {
-                HasChildrensClub = true;
-                ChildrensClubButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
-            }
-            else
-            {
-                HasChildrensClub = false;
-                ChildrensClubButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-            }
-        }
-
-
-        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
             ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
             CenterDistansValue.Text = CenterDistansSlider.Value.ToString() + "Km";

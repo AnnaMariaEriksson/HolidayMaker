@@ -31,6 +31,11 @@
                 FontSize="80"
                 Text="Filter"
                 TextAlignment="Center" />
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1">
+            <TextBlock Text="Filter"
+                       TextAlignment="Center"
+                       FontSize="80" />
             <StackPanel MaxWidth="320">
                 <Button Content="All inclusive"
                         FontSize="20"
@@ -122,6 +127,24 @@
                         x:Name="CenterDistansSlider"
                         ValueChanged="CenterDistansSlider_ValueChanged"
                         Maximum="50" />
+
+        <TextBox x:Name="SearchField" PlaceholderText="Enter something here.." Width="164" Height="50" Grid.Column="1" Margin="39,101,847,44"/>
+        <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="256,105,0,0" VerticalAlignment="Top"/>
+        <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="403,105,0,0" VerticalAlignment="Top"/>
+
+        <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="1" Margin="572,0,0,0" VerticalAlignment="Center">
+
+            <StackPanel>
+                <TextBlock Text="Antal rum" HorizontalAlignment="Left"/>
+                <RepeatButton x:Name="DecreaseOneButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="NumberOfRoomsLabel" Text="0"/>
+                <RepeatButton x:Name="IncreaseOneButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Antal vuxna" HorizontalAlignment="Left"/>
+                <RepeatButton x:Name="DecreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="NumberOfAdultsLabel" Text="0"/>
+                <RepeatButton x:Name="IncreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
             </StackPanel>
         </StackPanel>
         <Grid Grid.Column="1"
