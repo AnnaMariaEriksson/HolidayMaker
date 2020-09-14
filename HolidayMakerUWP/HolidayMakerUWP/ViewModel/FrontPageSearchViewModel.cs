@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using HolidayMakerUWP.Model;
 using Newtonsoft.Json;
 
-namespace HolidayMakerUWP.ViewModel
+namespace HolidayMakerUWP.Viewmodel
 {
-    public class HotelSearchViewModel
+    public class FrontPageSearchViewModel
     {
         public ObservableCollection<Room> Rooms { get; set; }
 
@@ -19,7 +18,7 @@ namespace HolidayMakerUWP.ViewModel
         private string roomURL = "";
         //Just a comment.
 
-        public HotelSearchViewModel()
+        public FrontPageSearchViewModel()
         {
             Rooms = new ObservableCollection<Room>();
             httpClient = new HttpClient();

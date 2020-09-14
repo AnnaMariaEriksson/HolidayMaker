@@ -5,6 +5,7 @@
     xmlns:local="using:HolidayMakerUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:HolidayMakerUWP.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -19,11 +20,11 @@
             <ColumnDefinition  Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="SearchField" PlaceholderText="Enter something here.." Width="164" Grid.Column="1" Margin="59,83,1121,98"/>
-        <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="300,86,0,0" VerticalAlignment="Top"/>
-        <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="515,86,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="SearchField" PlaceholderText="Enter something here.." Grid.Column="1" Margin="59,91,808,59"/>
+        <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="297,100,0,0" VerticalAlignment="Top"/>
+        <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="0,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
-        <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="1" Margin="750,68,0,0">
+        <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="1" Margin="655,75,0,0">
 
             <StackPanel>
                 <TextBlock Text="Antal rum" HorizontalAlignment="Left"/>
@@ -46,10 +47,19 @@
             </StackPanel>
         </ComboBox>
 
-        <Button x:Name="SearchButton" Content="Sök" Grid.Column="1" Margin="993,0,0,0" Height="79" Width="145" FontSize="24" Click="SearchButton_OnClick"/>
+        <Button x:Name="SearchButton" Content="Sök" Grid.Column="1" Margin="879,80,0,0" Height="45" Width="110" FontSize="24" Click="SearchButton_OnClick" VerticalAlignment="Top"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
             <TextBox Text="Insert ObservableCollection here." FontSize="60"/>
+            <ListView x:Name="GetAllRoomsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Rooms}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Hotel">
+                        <TextBlock x:Name="HotelLabelInfo" Text="{x:Bind Rooms}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            <TextBox x:Name="WhenSearchButtonHasBeenPressedLabel" PlaceholderText="Väntar på att nån trycker på sökknappen" FontSize="40"/>
         </StackPanel>
     </Grid>
 </Page>

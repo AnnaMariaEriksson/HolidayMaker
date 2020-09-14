@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Viewmodel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +24,13 @@ namespace HolidayMakerUWP
     /// </summary>
     public sealed partial class FrontPageSearch : Page
     {
+        public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
+
         public FrontPageSearch()
         {
             this.InitializeComponent();
+            FrontPageSearchViewModel = new FrontPageSearchViewModel();
+            this.DataContext = FrontPageSearchViewModel.Rooms;
         }
 
         private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
@@ -39,7 +45,12 @@ namespace HolidayMakerUWP
 
         private void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var rooms = GetAllRoomsListView
+
+            foreach (Room room in rooms)
+            { 
+                
+            }
         }
     }
 }
