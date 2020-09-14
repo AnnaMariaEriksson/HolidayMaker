@@ -25,10 +25,13 @@ namespace HolidayMakerUWP.Views
     public sealed partial class BookingPage : Page
     {
         BookingPageViewModel bookingPageViewModel;
+        public RoomSelectionVm roomSelectionVm;
         public BookingPage()
         {
             this.InitializeComponent();
-            bookingPageViewModel = new BookingPageViewModel();
+            this.bookingPageViewModel = new BookingPageViewModel();
+            this.roomSelectionVm = new RoomSelectionVm();
+
         }
 
         private void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)

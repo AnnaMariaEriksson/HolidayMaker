@@ -4,6 +4,7 @@
       xmlns:local="using:HolidayMakerUWP.Views"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:model="using:HolidayMakerUWP.Model"
       mc:Ignorable="d"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -46,15 +47,42 @@
                     Height="70"
                     FontSize="40"
                     CornerRadius="25" />
-            <ListView Grid.Row="1"
-                      Grid.Column="0"
-                      BorderThickness="3"
-                      BorderBrush="Black"
-                      Width="700"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Stretch"
-                      Margin="5">
-            </ListView>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Orientation="Vertical"
+                        Width="710">
+                <ListView x:Name="RoomListView"
+                          ItemsSource="{x:Bind roomSelectionVm.Rooms}"
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          BorderThickness="3"
+                          BorderBrush="Black"
+                          Width="700"
+                          Height="563"
+                          HorizontalAlignment="Left"
+                          Margin="5">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Room">
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind Price}" />
+                                    <TextBlock Text="{x:Bind RoomName}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Has allinclusive: " />
+                                        <TextBlock Text="{x:Bind HasAllInclusive}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="Tabort"
+                        Content="Ta bort rum"
+                        HorizontalAlignment="Right"
+                        FontSize="22" />
+            </StackPanel>
+
+
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
                         Grid.Column="1"
@@ -94,8 +122,8 @@
                                FontSize="24" />
                     <TextBox x:Name="TeleNummer"
                              PlaceholderText="Ange telefonmummer"
-                             Margin="0,75,0,0" 
-                             BeforeTextChanging="TeleNummer_BeforeTextChanging"/>
+                             Margin="0,75,0,0"
+                             BeforeTextChanging="TeleNummer_BeforeTextChanging" />
                     <TextBox x:Name="Adress"
                              PlaceholderText="Ange adress" />
                 </StackPanel>
