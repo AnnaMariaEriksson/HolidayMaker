@@ -13,6 +13,7 @@ namespace HolidayMakerUWP.Model
         public  int DistansToBeach { get; set; }
         public  int DistansToCenter { get; set; }
         public bool HasAllInclusive { get; set; }
+
         public  bool HasFullBoard { get; set; }
         public  bool HasHalfBoard { get; set; }
         public  bool HasRestaurant { get; set; }
@@ -20,7 +21,8 @@ namespace HolidayMakerUWP.Model
         public  bool HasEntertainment { get; set; }
         public  bool HasPool { get; set; }
         public bool FilterReset { get; set; }
-
+        public bool Test { get; set; }
+        public bool Test2 { get; set; }
         public Hotel()
         {
         }
