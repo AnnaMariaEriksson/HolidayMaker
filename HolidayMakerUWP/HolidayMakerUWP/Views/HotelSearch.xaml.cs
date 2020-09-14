@@ -1,7 +1,16 @@
 ﻿using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,7 +51,7 @@ namespace HolidayMakerUWP.Views
             
     }
 
-        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
+        private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
         {
             ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
             SeaDistansValue.Text = SeaDistansSlider.Value.ToString() + "Km";
@@ -50,7 +59,64 @@ namespace HolidayMakerUWP.Views
 
         }
 
-        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        private void PoolButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (HasPool == false)
+            {
+                HasPool = true;
+                PoolButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
+            }
+            else
+            {
+                HasPool = false;
+                PoolButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
+            }
+        }
+
+        private void EntertainmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (HasEntertainment == false)
+            {
+                HasEntertainment = true;
+                EntertainmentButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
+            }
+            else
+            {
+                HasEntertainment = false;
+                EntertainmentButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
+            }
+        }
+
+        private void RestaurantButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (HasRestaurant == false)
+            {
+                HasRestaurant = true;
+                RestaurantButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
+            }
+            else
+            {
+                HasRestaurant = false;
+                RestaurantButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
+            }
+        }
+
+        private void ChildrensClubButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (HasChildrensClub == false)
+            {
+                HasChildrensClub = true;
+                ChildrensClubButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
+            }
+            else
+            {
+                HasChildrensClub = false;
+                ChildrensClubButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
+            }
+        }
+
+
+        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
             CenterDistansValue.Text = CenterDistansSlider.Value.ToString() + "Km";
@@ -162,15 +228,7 @@ namespace HolidayMakerUWP.Views
             }
         }
 
+       
 
-        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
