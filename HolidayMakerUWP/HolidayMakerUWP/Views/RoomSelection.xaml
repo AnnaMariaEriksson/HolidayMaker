@@ -14,6 +14,9 @@
             <RowDefinition  Height="6*" />
         </Grid.RowDefinitions>
         <!--Grid TWO-->
+        <Button  Grid.Column="2" Grid.Row="0" Background="White" HorizontalAlignment="Stretch">
+            <Image Source="../Images/ProfileIcon.png"/>
+        </Button>
         <Grid Grid.Column="1" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -63,11 +66,13 @@
                 <ListView Grid.Column="0" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:Room">
-                            <StackPanel>
+                            <Grid>
+                                <StackPanel>
                                 <TextBlock Text="{x:Bind Price}"/>
                                 <TextBlock Text="{x:Bind RoomName}"/>
                                 <Button Content="Allinclusive 900kr" IsEnabled="{x:Bind HasAllInclusive}"/>
-                            </StackPanel>
+                                </StackPanel>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
