@@ -11,12 +11,21 @@
     <Grid>
         <Button
             Name="NavigateToHotelSearchButton"
-            Width="400"
-            Height="300"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            Width="521"
+            Height="90"
+            VerticalAlignment="Top"
             Click="NavigateToHotelSearchButton_OnClick"
-            Content="Click me!"
-            FontSize="60" />
+            Content="Hotel search"
+            FontSize="60" Margin="83,67,0,0" />
+
+        <Button
+            Name="NavigateToFrontPageSearch"
+            Width="521"
+            Height="125"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Click="NavigateToFrontPageSearch_OnClick"
+            Content="Front Page search!"
+            FontSize="60" Margin="0,200,896,0" />
     </Grid>
 </Page>

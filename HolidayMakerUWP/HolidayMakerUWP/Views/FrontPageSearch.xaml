@@ -20,7 +20,7 @@
             <ColumnDefinition  Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="SearchField" PlaceholderText="Enter something here.." Grid.Column="1" Margin="59,91,808,59"/>
+        <TextBox x:Name="SearchField" PlaceholderText="Enter something here.." Grid.Column="1" Margin="59,91,808,40"/>
         <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="297,100,0,0" VerticalAlignment="Top"/>
         <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="0,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
 
@@ -53,13 +53,16 @@
             <TextBox Text="Insert ObservableCollection here." FontSize="60"/>
             <ListView x:Name="GetAllRoomsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Rooms}">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Hotel">
-                        <TextBlock x:Name="HotelLabelInfo" Text="{x:Bind Rooms}"/>
+                    <DataTemplate x:DataType="model:Room">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="NumberOfBedsLabel" Text="Antal sängar: "/>
+                            <TextBlock Text="{x:Bind NumberOfBeds}"/>
+                        </StackPanel>
+                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
             </ListView>
-            <TextBox x:Name="WhenSearchButtonHasBeenPressedLabel" PlaceholderText="Väntar på att nån trycker på sökknappen" FontSize="40"/>
         </StackPanel>
     </Grid>
 </Page>

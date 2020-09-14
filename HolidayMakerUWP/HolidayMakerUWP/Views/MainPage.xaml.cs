@@ -32,5 +32,10 @@ namespace HolidayMakerUWP
         {
             this.Frame.Navigate(typeof(HotelSearch));
         }
+
+        private void NavigateToFrontPageSearch_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
     }
 }

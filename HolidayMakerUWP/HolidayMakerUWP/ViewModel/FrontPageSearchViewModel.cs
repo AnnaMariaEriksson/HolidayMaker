@@ -39,7 +39,8 @@ namespace HolidayMakerUWP.Viewmodel
         public ObservableCollection<Regions> GetRegions()
         {
             ObservableCollection<Regions> Regions = new ObservableCollection<Regions>();
-            //List<Hotel> hotels = GetHotels().ToList();
+            // todo fix the list below so it's accessible.
+            // List<Hotel> hotels = GetHotels().ToList();
             var cities = new List<City>
             {
                 new City { NameOfCity = "Malmö", CityID = 1, RegionID = 1},
@@ -60,7 +61,7 @@ namespace HolidayMakerUWP.Viewmodel
 
         public ObservableCollection<Room> GetRooms()
         {
-            ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
+            ObservableCollection<Room> roomsObservableCollection = Rooms;
 
             Room room1 = new Room { HotelID = 1, IsAllInclusive = false, NumberOfBeds = 3, RoomID = 1 };
 
