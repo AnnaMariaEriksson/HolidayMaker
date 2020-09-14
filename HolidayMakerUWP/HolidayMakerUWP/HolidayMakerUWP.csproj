@@ -127,6 +127,7 @@
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
+    <Compile Include="Viewmodel\RoomSelectionVm.cs" />
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\MalmoImage.png" />
+    <Content Include="Images\ProfileIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

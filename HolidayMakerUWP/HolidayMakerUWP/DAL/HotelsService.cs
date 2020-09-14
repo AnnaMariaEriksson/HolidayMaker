@@ -22,5 +22,17 @@ namespace HolidayMakerUWP.DAL
 
             return Hotels;
         }
+        public ObservableCollection<Room> GetRooms()
+        {
+            ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
+            Room r1 = new Room() { Price = 1999, ExtraBed = false, HasAllInclusive = true, IsAllInclusive = false, HasFullBoard = true, HasHalfBoard = true, RoomName ="Deluxe rum, utsikt över havet"};
+            Room r2 = new Room() { Price = 50, ExtraBed = false, HasAllInclusive = true, IsAllInclusive = false, HasFullBoard = false, HasHalfBoard = true, RoomName ="Basic rum, Källare"};
+            Room r3 = new Room() { Price = 3999, ExtraBed = false, HasAllInclusive = false, IsAllInclusive = false, HasFullBoard = true, HasHalfBoard = false, RoomName ="Suite rum"};
+            Rooms.Add(r1);
+            Rooms.Add(r2);
+            Rooms.Add(r3);
+
+            return Rooms;
+        }
     }
 }
