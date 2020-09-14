@@ -14,9 +14,28 @@
             <RowDefinition  Height="6*" />
         </Grid.RowDefinitions>
         <!--Grid TWO-->
-        <Button  Grid.Column="2" Grid.Row="0" Background="White" HorizontalAlignment="Stretch">
-            <Image Source="../Images/ProfileIcon.png"/>
+        <Button  Grid.Column="2"
+                 Grid.Row="0"
+                 Background="White"
+                 HorizontalAlignment="Stretch"
+                 >
+            <Image Source="../Images/ProfileIcon.png" />
+            <Button.Flyout>
+                <Flyout Placement="TopEdgeAlignedRight" x:Name="MenuFlyout"
+                        Opening="MenuFlyout_Opening">
+                    <StackPanel Width="170" Height="140">
+                        <TextBlock Text="Meny" TextAlignment="Center" FontWeight="Bold" FontSize="18"/>
+                        <Button Content="Logga in" Width="150" HorizontalAlignment="Center" x:Name="LogInButton"
+                                Click="LogInButton_Click" />
+                        <Button Content="Registrera dig" Width="150"  HorizontalAlignment="Center" x:Name="RegisterButton" Margin="0,5,0,0"
+                                Click="RegisterButton_Click" />
+                        <Button Content="Mina bokningar" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,5,0,0" x:Name="MyBookingsButton"/>
+                        <Button Content="Logga ut" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,5,0,0" x:Name="LogoutButton"/>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
         </Button>
+
         <Grid Grid.Column="1" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

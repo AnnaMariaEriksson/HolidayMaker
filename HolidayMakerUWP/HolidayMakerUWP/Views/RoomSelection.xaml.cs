@@ -29,5 +29,25 @@ namespace HolidayMakerUWP.Views
             this.InitializeComponent();
             this.Vm = new RoomSelectionVm();
         }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            //temporärt det ska lägga i MenuFlyout_Opening
+            LogInButton.Visibility = Visibility.Collapsed;
+            RegisterButton.Visibility = Visibility.Collapsed;
+            MyBookingsButton.Visibility = Visibility.Visible;
+            LogoutButton.Visibility = Visibility.Visible;
+            /////////////////////////////////////////////
+        }
+
+        private void MenuFlyout_Opening(object sender, object e)
+        {
+            //kolla om användaren är inloggad och lägg rätt knappar
+        }
     }
 }
