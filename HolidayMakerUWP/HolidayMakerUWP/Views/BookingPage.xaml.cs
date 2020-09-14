@@ -31,22 +31,15 @@ namespace HolidayMakerUWP.Views
             bookingPageViewModel = new BookingPageViewModel();
         }
 
-        private async void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
+        private void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
         {
-            Regex obj = new Regex(TeleNummer.Text);
-            if (TeleNummer.Text == "" || Adress.Text == "")
-            {
-                ContentDialog errorDialog = new ContentDialog()
-                {
-                    Title = "Error",
-                    Content = "Please fill in all fields",
-                    CloseButtonText = "Ok"
-                };
-                await errorDialog.ShowAsync();
-            }
+            if (TeleNummer.Text == "" || Adress.Text == "")           
+                bookingPageViewModel.ErrorFillAllFields();
+            
             else
                 bookingPageViewModel.BookingMessageDialog();               
         }
+
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {
                 args.Cancel = args.NewText.Any(c => !char.IsDigit(c));            

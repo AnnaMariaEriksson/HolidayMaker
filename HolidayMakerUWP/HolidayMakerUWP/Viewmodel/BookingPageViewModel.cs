@@ -20,5 +20,15 @@ namespace HolidayMakerUWP.Viewmodel
 
             await endBookingDialog.ShowAsync();
         }
+        public async void ErrorFillAllFields()
+        {
+            ContentDialog errorDialog = new ContentDialog()
+            {
+                Title = "Error",
+                Content = "Please fill in all fields",
+                CloseButtonText = "Ok"
+            };
+            await errorDialog.ShowAsync();
+        }
     }
 }
