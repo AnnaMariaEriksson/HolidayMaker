@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HolidayMakerUWP.Viewmodel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,11 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class RoomSelection : Page
     {
+        public RoomSelectionVm Vm;
         public RoomSelection()
         {
             this.InitializeComponent();
+            this.Vm = new RoomSelectionVm();
         }
     }
 }
