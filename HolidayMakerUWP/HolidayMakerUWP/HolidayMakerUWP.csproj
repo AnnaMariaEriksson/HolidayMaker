@@ -126,6 +126,7 @@
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Viewmodel\BookingPageViewModel.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
