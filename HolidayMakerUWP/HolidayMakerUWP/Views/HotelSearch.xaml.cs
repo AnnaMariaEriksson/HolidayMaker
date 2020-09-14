@@ -1,25 +1,11 @@
 ﻿using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using HolidayMakerUWP.Model;
-using HolidayMakerUWP.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -176,7 +162,15 @@ namespace HolidayMakerUWP.Views
             }
         }
 
-       
 
+        private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            
+        }
+
+        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            
+        }
     }
 }

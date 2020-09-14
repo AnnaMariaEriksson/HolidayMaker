@@ -9,9 +9,6 @@
     xmlns:model="using:HolidayMakerUWP.Model"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
-      xmlns:model="using:HolidayMakerUWP.Model"
-      mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -128,35 +125,10 @@
                         ValueChanged="CenterDistansSlider_ValueChanged"
                         Maximum="50" />
 
-        <TextBox x:Name="SearchField" PlaceholderText="Enter something here.." Width="164" Height="50" Grid.Column="1" Margin="39,101,847,44"/>
-        <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="256,105,0,0" VerticalAlignment="Top"/>
-        <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="403,105,0,0" VerticalAlignment="Top"/>
-
-        <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="1" Margin="572,0,0,0" VerticalAlignment="Center">
-
-            <StackPanel>
-                <TextBlock Text="Antal rum" HorizontalAlignment="Left"/>
-                <RepeatButton x:Name="DecreaseOneButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="NumberOfRoomsLabel" Text="0"/>
-                <RepeatButton x:Name="IncreaseOneButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Antal vuxna" HorizontalAlignment="Left"/>
-                <RepeatButton x:Name="DecreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="NumberOfAdultsLabel" Text="0"/>
-                <RepeatButton x:Name="IncreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-            </StackPanel>
-        </StackPanel>
-        <Grid Grid.Column="1"
-                     Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="14*" />
-            </Grid.RowDefinitions>
-            <TextBlock Text="Dina valmöjligheter:"
-                   TextAlignment="Center"
-                   FontSize="40"
-                   Grid.Row="0"/>
+                <TextBlock Text="Dina valmöjligheter:"
+                           TextAlignment="Center"
+                           FontSize="40"
+                           Grid.Row="0"/>
         <ListView Grid.Row="1"
                   ItemsSource="{x:Bind Vm.Hotels}"
                   x:Name="HotelList">
@@ -167,7 +139,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Hotel">
+                <DataTemplate x:DataType="data:Hotel">
                         <StackPanel  Orientation="Horizontal" Margin="0,0,0,30">
                             <Grid  >
                                 
@@ -208,7 +180,6 @@
                         </StackPanel>
                     </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-        </Grid>
+        </ListView></StackPanel></StackPanel></StackPanel>
     </Grid>
 </Page>

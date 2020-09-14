@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HolidayMakerUWP.DAL;
 using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 
@@ -43,13 +44,14 @@ namespace HolidayMakerUWP
             throw new NotImplementedException();
         }
 
-        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var rooms = GetAllRoomsListView
+            var rooms = FrontPageSearchViewModel.GetRooms();
+            var lw = GetAllRoomsListView.Items;
 
             foreach (Room room in rooms)
             { 
-                
+                lw.Add(room);
             }
         }
     }
