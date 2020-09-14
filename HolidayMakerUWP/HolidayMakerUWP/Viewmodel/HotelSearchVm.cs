@@ -24,7 +24,10 @@ namespace HolidayMakerUWP.Viewmodel
 
         public System.Drawing.Color c1 = System.Drawing.Color.FromArgb(48, 179, 221);
         public System.Drawing.Color c2 = System.Drawing.Color.FromArgb(48, 179, 221);
-
+        public int _distansToCenter { get; set; }
+        public int _distansToBeach { get; set; }
+        public int DistansToBeach { get { return _distansToBeach;  } set { FilterToggle("Test"); _distansToBeach = value; } }
+        public int DistansToCenter { get {  return _distansToCenter; } set { FilterToggle("Test2"); _distansToCenter = value;  } }
         public ObservableCollection<Hotel> _hotels { get; set; }
         public ObservableCollection<Hotel> TempHotel { get; set; }
 
@@ -32,6 +35,7 @@ namespace HolidayMakerUWP.Viewmodel
         {
             get
             {
+            
                 return _hotels;
             }
             set
@@ -43,11 +47,18 @@ namespace HolidayMakerUWP.Viewmodel
         HotelsService _service;
         public HotelSearchVm()
         {
+
             FilterBtn = new RelayCommand<string>(FilterToggle);
             Filters = new Dictionary<string, object>();
             this._service = new HotelsService();
             _hotels = _service.GetHotels();
             TempHotel = _service.GetHotels();
+        }
+
+         public void RemoveFilteredHotels(ObservableCollection<Hotel> hotels)
+        {
+            
+
         }
 
         private void FilterToggle(string filter)
@@ -66,8 +77,7 @@ namespace HolidayMakerUWP.Viewmodel
             {
                 Filters.Add("FilterReset", true);
             }
-           //test för filter till slidsen
-            Filters.Add("DistansToCenter", 50);
+
                 var test = new ObservableCollection<Hotel>(Filter(TempHotel, Filters));
 
             if (Filters.FirstOrDefault(f => f.Key == "FilterReset").Key != null)
@@ -78,7 +88,11 @@ namespace HolidayMakerUWP.Viewmodel
             _hotels.Clear();
            foreach(Hotel h in test)
             {
-                _hotels.Add(h);
+                if(h.DistansToBeach >= DistansToBeach && h.DistansToCenter >= DistansToCenter)
+                {
+                    _hotels.Add(h);
+                }
+                
             }
             
             
