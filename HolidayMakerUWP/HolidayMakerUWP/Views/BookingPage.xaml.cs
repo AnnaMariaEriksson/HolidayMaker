@@ -1,8 +1,10 @@
-﻿using System;
+﻿using HolidayMakerUWP.Viewmodel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +24,32 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class BookingPage : Page
     {
+        BookingPageViewModel bookingPageViewModel;
         public BookingPage()
         {
             this.InitializeComponent();
+            bookingPageViewModel = new BookingPageViewModel();
+        }
+
+        private async void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Regex obj = new Regex(TeleNummer.Text);
+            if (TeleNummer.Text == "" || Adress.Text == "")
+            {
+                ContentDialog errorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = "Please fill in all fields",
+                    CloseButtonText = "Ok"
+                };
+                await errorDialog.ShowAsync();
+            }
+            else
+                bookingPageViewModel.BookingMessageDialog();               
+        }
+        private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+                args.Cancel = args.NewText.Any(c => !char.IsDigit(c));            
         }
     }
 }

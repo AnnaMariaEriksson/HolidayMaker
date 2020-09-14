@@ -35,7 +35,9 @@
                        VerticalAlignment="Top"
                        FontSize="56" />
 
-            <Button Grid.Row="2"
+            <Button x:Name="ConfirmBookingBtn"
+                    Click="ConfirmBookingBtn_Click"
+                    Grid.Row="2"
                     Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -90,16 +92,19 @@
                                FontSize="24" />
                     <TextBlock Text="Johan.Svensson@gmail.com"
                                FontSize="24" />
-                    <TextBox PlaceholderText="Ange telefonmummer"
-                             Margin="0,75,0,0" />
-                    <TextBox PlaceholderText="Ange adress" />
+                    <TextBox x:Name="TeleNummer"
+                             PlaceholderText="Ange telefonmummer"
+                             Margin="0,75,0,0" 
+                             BeforeTextChanging="TeleNummer_BeforeTextChanging"/>
+                    <TextBox x:Name="Adress"
+                             PlaceholderText="Ange adress" />
                 </StackPanel>
             </StackPanel>
             <TextBlock Grid.Row="1"
                        Grid.Column="2"
                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                       VerticalAlignment="Center" 
-                       TextWrapping="Wrap"/>
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap" />
         </Grid>
     </Grid>
 </Page>
