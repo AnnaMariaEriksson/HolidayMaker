@@ -1,18 +1,13 @@
-﻿using GalaSoft.MvvmLight.Command;
-using HolidayMakerUWP.DAL;
+﻿using HolidayMakerUWP.DAL;
 using HolidayMakerUWP.Model;
-using HolidayMakerUWP.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace HolidayMakerUWP.Viewmodel
 {

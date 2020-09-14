@@ -23,38 +23,7 @@ namespace HolidayMakerUWP.DAL
             return Hotels;
         }
 
-        public ObservableCollection<Regions> GetRegions()
-        {
-            ObservableCollection<Regions> Regions = new ObservableCollection<Regions>();
-            List<Hotel> hotels = GetHotels().ToList();
-            var cities = new List<City>
-            {
-                new City { NameOfCity = "Malmö", CityID = 1, RegionID = 1, Hotels = hotels},
-                new City {NameOfCity = "Lund", CityID = 2, RegionID = 1},
-                new City {NameOfCity = "Kristianstad", CityID = 3, RegionID = 1}
-            };
-            Regions r1 = new Regions
-            {
-                NameOfRegion = "Skåne",
-                RegionID = 1,
-                Cities = cities
-            };
-
-            Regions.Add(r1);
-
-            return Regions;
-        }
-
-        public ObservableCollection<Room> GetRooms()
-        {
-            ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
-
-            Room room1 = new Room {HotelID = 1, IsAllInclusive = false, NumberOfBeds = 3, RoomID = 1};
-
-            Rooms.Add(room1);
-
-            return Rooms;
-        }
+        
 
     }
 }
