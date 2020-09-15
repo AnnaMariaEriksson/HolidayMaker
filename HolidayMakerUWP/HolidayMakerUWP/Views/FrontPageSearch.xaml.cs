@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using HolidayMakerUWP.DAL;
 using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
+using HolidayMakerUWP.Views;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,12 +28,13 @@ namespace HolidayMakerUWP
     {
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public HotelsService HotelsService { get; set; }
+        public City City { get; set; }
 
         public FrontPageSearch()
         {
             this.InitializeComponent();
             FrontPageSearchViewModel = new FrontPageSearchViewModel();
-            this.DataContext = FrontPageSearchViewModel.Rooms;
+            this.DataContext = FrontPageSearchViewModel.Regions;
             GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.Regions;
         }
 
@@ -48,22 +50,38 @@ namespace HolidayMakerUWP
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var region = HotelsService.GetRegions();
-            var lw = GetAllRegionsListView.Items;
+            var region = FrontPageSearchViewModel.Regions;
+            var cities = FrontPageSearchViewModel.Cities;
+            GetAllRegionsListView.ItemsSource = region;
+            var lw = GetAllRegionsListView;
             var searchString = SearchField.Text;
             var endDate = EndDate.MaxDate;
             var startDate = StartDate.MinDate;
+            var notFoundLabel = IfNotFoundLabel.Text;
+            int i = 0;
 
             foreach (Regions r in region)
             {
                 if (searchString == r.NameOfRegion)
                 {
-                    lw.Add(r.Cities);
+                    foreach (City city in cities)
+                    {
+                        city.NameOfCity.ToList();
+                    }
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }
+                else
+                {
+                    IfNotFoundLabel.Text = "Tyvärr, vi hittade inget som matchade din sökning.";
+                }
             }
 
+        }
+
+        private void ChooseCityButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HotelSearch));
         }
     }
 }

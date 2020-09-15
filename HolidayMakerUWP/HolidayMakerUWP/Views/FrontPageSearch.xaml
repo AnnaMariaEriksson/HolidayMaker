@@ -68,7 +68,7 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
-            <TextBox Text="Insert ObservableCollection here." FontSize="60"/>
+            <TextBox x:Name="IfNotFoundLabel" Text="Väntar på sökresultat..." FontSize="40"/>
             <ListView x:Name="GetAllRegionsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Regions}">
 
                 <ListView.ItemTemplate>
@@ -81,7 +81,7 @@
                 </ListView.ItemTemplate>
 
             </ListView>
-            <Button/>
+            <Button x:Name="ChooseCityButton" Click="ChooseCityButton_OnClick" Height="65" Width="366" Content="Ta mig vidare!" FontSize="30" HorizontalAlignment="Right"/>
         </StackPanel>
     </Grid>
 </Page>

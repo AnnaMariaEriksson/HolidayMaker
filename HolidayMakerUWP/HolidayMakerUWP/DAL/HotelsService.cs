@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 
 namespace HolidayMakerUWP.DAL
@@ -20,6 +21,8 @@ namespace HolidayMakerUWP.DAL
         private string regionURL = "";
 
         private string cityURL = "";
+
+        public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public ObservableCollection<Hotel> GetHotels()
         {
             ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
@@ -97,7 +100,7 @@ namespace HolidayMakerUWP.DAL
 
         public ObservableCollection<Regions> GetRegions()
         {
-            ObservableCollection<Regions> Regions = new ObservableCollection<Regions>();
+            ObservableCollection<Regions> Regions = FrontPageSearchViewModel.Regions;
             // todo fix the list below so it's accessible.
             List<Hotel> hotels = GetHotels().ToList();
             var cities = new List<City>
