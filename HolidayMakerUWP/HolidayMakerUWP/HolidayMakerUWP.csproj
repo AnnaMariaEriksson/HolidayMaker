@@ -126,8 +126,10 @@
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Viewmodel\BookingPageViewModel.cs" />
     <Compile Include="Viewmodel\FrontPageSearchViewModel.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
+    <Compile Include="Viewmodel\RoomSelectionVm.cs" />
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\MalmoImage.png" />
+    <Content Include="Images\ProfileIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -195,7 +198,7 @@
       <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>8.0.3</Version>
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

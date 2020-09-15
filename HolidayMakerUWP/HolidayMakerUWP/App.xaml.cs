@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
