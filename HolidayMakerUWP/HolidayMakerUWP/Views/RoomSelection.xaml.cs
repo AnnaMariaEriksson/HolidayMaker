@@ -55,5 +55,10 @@ namespace HolidayMakerUWP.Views
         {
             //kolla om användaren är inloggad och lägg rätt knappar
         }
+
+        private void Skander()
+        {
+            Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
+        }
     }
 }
