@@ -51,7 +51,7 @@ namespace HolidayMakerUWP.Views
 
         private void RemoveRoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            roomSelectionVm.Rooms.Remove((Room)RoomListView.SelectedItem);
+            roomSelectionVm.selectedRooms.Remove((Room)RoomListView.SelectedItem);
         }
     }
 }
