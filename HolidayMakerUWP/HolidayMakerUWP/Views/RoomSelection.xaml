@@ -43,7 +43,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="HOTELL 1 BILD" HorizontalAlignment="Center" FontSize="100" FontWeight="Bold" Grid.Row="0"/>
+            <TextBlock Text="{x:Bind Vm.SelectedHotel.Name}" HorizontalAlignment="Center" FontSize="100" FontWeight="Bold" Grid.Row="0"/>
             <!--Grid THREE-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
