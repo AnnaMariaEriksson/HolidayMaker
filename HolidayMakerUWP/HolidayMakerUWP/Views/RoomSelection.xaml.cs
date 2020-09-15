@@ -25,7 +25,7 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class RoomSelection : Page
     {
-        public RoomSelectionVm Vm;
+        public RoomSelectionVm Vm { get; set; }
         public RoomSelection()
         {
             this.InitializeComponent();
@@ -60,6 +60,13 @@ namespace HolidayMakerUWP.Views
         private void Skander()
         {
             Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
+        }
+
+        private void roomToBasket_Click(object sender, RoutedEventArgs e)
+        {
+            Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
+            Vm.AddRoomToBasket(TempRoom);
+            Vm.Rooms.Remove(TempRoom);
         }
     }
 }
