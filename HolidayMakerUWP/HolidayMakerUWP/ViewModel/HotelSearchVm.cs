@@ -38,11 +38,18 @@ namespace HolidayMakerUWP.Viewmodel
         HotelsService _service;
         public HotelSearchVm()
         {
+
             FilterBtn = new RelayCommand<string>(FilterToggle);
             Filters = new Dictionary<string, object>();
             this._service = new HotelsService();
             _hotels = _service.GetHotels();
             TempHotel = _service.GetHotels();
+        }
+
+         public void RemoveFilteredHotels(ObservableCollection<Hotel> hotels)
+        {
+            
+
         }
 
         private void FilterToggle(string filter)
