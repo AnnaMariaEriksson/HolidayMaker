@@ -1,4 +1,6 @@
-﻿using HolidayMakerUWP.Viewmodel;
+﻿using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Viewmodel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +32,10 @@ namespace HolidayMakerUWP.Views
             this.Vm = new RoomSelectionVm();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Vm._selectedhotel = (Hotel)e.Parameter;
+        }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
 
