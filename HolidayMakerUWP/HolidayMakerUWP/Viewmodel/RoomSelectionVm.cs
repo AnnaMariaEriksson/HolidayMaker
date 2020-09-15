@@ -11,8 +11,20 @@ namespace HolidayMakerUWP.Viewmodel
 {
     public class RoomSelectionVm
     {
-
         public HotelsService Vm;
+        public ObservableCollection<Room> _selectedRooms { get; set; }
+        public ObservableCollection<Room> selectedRooms
+        {
+            get
+            {
+                return _selectedRooms;
+            }
+            set
+            {
+                _selectedRooms = value;
+            }
+        }
+
         public ObservableCollection<Room> _rooms { get; set; }
         public ObservableCollection<Room> Rooms
         {

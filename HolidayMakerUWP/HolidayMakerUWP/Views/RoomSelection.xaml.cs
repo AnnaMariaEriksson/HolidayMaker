@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.Viewmodel;
+﻿using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Printing3D;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,6 +50,10 @@ namespace HolidayMakerUWP.Views
         private void MenuFlyout_Opening(object sender, object e)
         {
             //kolla om användaren är inloggad och lägg rätt knappar
+        }
+        private void Skander()
+        {
+            Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
         }
     }
 }
