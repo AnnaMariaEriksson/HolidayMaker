@@ -49,17 +49,15 @@ namespace HolidayMakerUWP
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var rooms = FrontPageSearchViewModel.GetRooms();
+
+            
+
             var lw = GetAllRoomsListView.Items;
             var searchString = SearchField.Text;
             var endDate = EndDate.MaxDate;
             var startDate = StartDate.MinDate;
 
-            foreach (Room room in rooms)
-            {
-                
-                lw.Add(room);
-            }
+
         }
     }
 }
