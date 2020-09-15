@@ -19,51 +19,69 @@
             <ColumnDefinition  Width="7*"/>
             <ColumnDefinition  Width="1*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="SearchField" PlaceholderText="Sök efter region..." Grid.Column="1" Margin="59,91,808,40"/>
-        <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="287,93,0,0" VerticalAlignment="Top"/>
-        <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="0,94,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <TextBox x:Name="SearchField" PlaceholderText="Sök efter region..." Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Width="189"/>
+            <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+            <CalendarDatePicker x:Name="EndDate" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
 
 
-        <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="1" Margin="655,75,0,0">
+            <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center">
 
-            <StackPanel>
-                <TextBlock Text="Antal rum" HorizontalAlignment="Left"/>
-                <RepeatButton x:Name="DecreaseOneButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="NumberOfRoomsLabel" Text="0"/>
-                <RepeatButton x:Name="IncreaseOneButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Antal vuxna" HorizontalAlignment="Left"/>
-                <RepeatButton x:Name="DecreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="NumberOfAdultsLabel" Text="0"/>
-                <RepeatButton x:Name="IncreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-            </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Antal rum"/>
+                    <RepeatButton x:Name="DecreaseOneButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick"/>
+                    <TextBlock x:Name="NumberOfRoomsLabel" Text="0"/>
+                    <RepeatButton x:Name="IncreaseOneButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Antal vuxna"/>
+                    <RepeatButton x:Name="DecreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick"/>
+                    <TextBlock x:Name="NumberOfAdultsLabel" Text="0"/>
+                    <RepeatButton x:Name="IncreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick"/>
+                </StackPanel>
 
-            <StackPanel>
-                <TextBlock Text="Antal barn" HorizontalAlignment="Left"/>
-                <RepeatButton x:Name="DecreaseOneChildButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="NumberOfChildrenLabel" Text="0"/>
-                <RepeatButton x:Name="IncreaseOneChildButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
-            </StackPanel>
-        </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Antal barn"/>
+                    <RepeatButton x:Name="DecreaseOneChildButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick"/>
+                    <TextBlock x:Name="NumberOfChildrenLabel" Text="0"/>
+                    <RepeatButton x:Name="IncreaseOneChildButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick"/>
+                </StackPanel>
+            </ComboBox>
 
-        <Button x:Name="SearchButton" Content="Sök" Grid.Column="1" Margin="879,80,0,0" Height="45" Width="110" FontSize="24" Click="SearchButton_OnClick" VerticalAlignment="Top"/>
+            <Button x:Name="SearchButton" Content="Sök" Grid.Column="4" Grid.Row="1" FontSize="24" Click="SearchButton_OnClick" Width="231"/>
+
+        </Grid>
+
+
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
             <TextBox Text="Insert ObservableCollection here." FontSize="60"/>
-            <ListView x:Name="GetAllRoomsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Rooms}">
+            <ListView x:Name="GetAllRegionsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Regions}">
+
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Room">
+                    <DataTemplate x:DataType="model:Regions">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="NumberOfBedsLabel" Text="Antal sängar: "/>
-                            <TextBlock Text="{x:Bind NumberOfBeds}"/>
+                            <TextBlock Text="{x:Bind Cities[0].NameOfCity}"/>
                         </StackPanel>
 
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
             </ListView>
+            <Button/>
         </StackPanel>
     </Grid>
 </Page>
