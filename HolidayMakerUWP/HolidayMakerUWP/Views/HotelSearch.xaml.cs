@@ -204,7 +204,15 @@ namespace HolidayMakerUWP.Views
             }
         }
 
-       
+        private void HotelList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            
+        }
 
+        private void HotelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Hotel SelectedHotel = (Hotel)HotelList.SelectedItem;
+            Frame.Navigate(typeof(RoomSelection), SelectedHotel);
+        }
     }
 }

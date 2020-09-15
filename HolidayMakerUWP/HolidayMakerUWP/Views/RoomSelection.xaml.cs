@@ -1,5 +1,6 @@
 ﻿using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Graphics.Printing3D;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,6 +32,10 @@ namespace HolidayMakerUWP.Views
             this.Vm = new RoomSelectionVm();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Vm._selectedhotel = (Hotel)e.Parameter;
+        }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -50,10 +54,6 @@ namespace HolidayMakerUWP.Views
         private void MenuFlyout_Opening(object sender, object e)
         {
             //kolla om användaren är inloggad och lägg rätt knappar
-        }
-        private void Skander()
-        {
-            Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
         }
     }
 }

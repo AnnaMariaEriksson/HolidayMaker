@@ -133,7 +133,8 @@
                    Grid.Row="0"/>
         <ListView Grid.Row="1"
                   ItemsSource="{x:Bind Vm.Hotels}"
-                  x:Name="HotelList">
+                  x:Name="HotelList"
+                      SelectionChanged="HotelList_SelectionChanged">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
