@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.Viewmodel;
+﻿using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,6 +47,11 @@ namespace HolidayMakerUWP.Views
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {
                 args.Cancel = args.NewText.Any(c => !char.IsDigit(c));            
+        }
+
+        private void RemoveRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            roomSelectionVm.Rooms.Remove((Room)RoomListView.SelectedItem);
         }
     }
 }

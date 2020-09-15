@@ -68,20 +68,22 @@
                                     <TextBlock Text="{x:Bind Price}" />
                                     <TextBlock Text="{x:Bind RoomName}" />
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Has allinclusive: " />
-                                        <TextBlock Text="{x:Bind HasAllInclusive}" />
+                                        <TextBlock Text="All inclusive" VerticalAlignment="Center"/>
+                                        <CheckBox IsChecked="{x:Bind HasAllInclusive}"
+                                                  IsHitTestVisible="False"
+                                                  Margin="3,0,0,0"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button x:Name="Tabort"
+                <Button x:Name="RemoveRoomBtn"
+                        Click="RemoveRoomBtn_Click"
                         Content="Ta bort rum"
                         HorizontalAlignment="Right"
                         FontSize="22" />
             </StackPanel>
-
 
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
