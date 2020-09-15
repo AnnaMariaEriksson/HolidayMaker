@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.Model;
+﻿using HolidayMakerUWP.DAL;
+using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,7 @@ namespace HolidayMakerUWP.Views
         public bool HasEntertainment;
         public bool HasPool;
         public HotelSearchVm Vm { get; set; }
+        public HotelsService _service;
         public HotelSearch()
         {
             this.InitializeComponent();
@@ -48,30 +50,60 @@ namespace HolidayMakerUWP.Views
             HasChildrensClub = false;
             HasEntertainment = false;
             HasPool = false;
-            CenterDistansSlider.Value = 50;
-            SeaDistansSlider.Value = 50;
             this.Vm = new HotelSearchVm();
-            
-    }
+            this._service = new HotelsService();
+            SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
+            CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
+
+        }
 
         private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
-            SeaDistansValue.Text = SeaDistansSlider.Value.ToString() + "Km";
-
-
+            FilterSlides();
+            if (Vm.DistansToBeach == 50)
+            {
+                SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
+            }
+            else
+            {
+                SeaDistansValue.Text = Vm.DistansToBeach + "Km";
+            }
+          
         }
 
         private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
-            CenterDistansValue.Text = CenterDistansSlider.Value.ToString() + "Km";
-        
+            FilterSlides();
+            if (CenterDistansSlider.Value == 50)
+            {
+                CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
+            }
+            else
+            {
+                CenterDistansValue.Text = Vm.DistansToCenter + "Km";
+            }
+            
+        }
+
+        public void FilterSlides()
+        {
+          //  ObservableCollection<Hotel> te = new ObservableCollection<Hotel>();
+          //  ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
+          //  foreach (Hotel h in _service.GetHotels())
+          //  {
+          //      if ( h.DistansToBeach >= Vm.DistansToBeach)
+          //      {
+          //          te.Add(h);
+          //      }
+          //  }
+
+          //Vm.RemoveFilteredHotels(te);
+
+           
         }
 
         private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {   
             //Tar bort alla hotel som inte stämmer med filtret(funkar)
             if (HasAllInclusive == false)
             {
@@ -82,9 +114,7 @@ namespace HolidayMakerUWP.Views
             {
                 HasAllInclusive = false;
                 AllInclusiveButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-          
             }
-
         }
 
         private void FullBoardButton_Click(object sender, RoutedEventArgs e)
@@ -174,7 +204,15 @@ namespace HolidayMakerUWP.Views
             }
         }
 
-       
+        private void HotelList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            
+        }
 
+        private void HotelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Hotel SelectedHotel = (Hotel)HotelList.SelectedItem;
+            Frame.Navigate(typeof(RoomSelection), SelectedHotel);
+        }
     }
 }

@@ -104,7 +104,9 @@
                 <Slider Width="200"
                         x:Name="SeaDistansSlider"
                         ValueChanged="SeaDistansSlider_ValueChanged"
-                        Maximum="50" />
+                        Maximum="51" 
+                        Value="{x:Bind Vm._distansToBeach,Mode=TwoWay}"
+                        IsThumbToolTipEnabled="False" />
                 <TextBlock Text="Avstånd till centrum:"
                            TextAlignment="Center"
                            FontWeight="Bold" />
@@ -114,7 +116,9 @@
                 <Slider Width="200"
                         x:Name="CenterDistansSlider"
                         ValueChanged="CenterDistansSlider_ValueChanged"
-                        Maximum="50" />
+                        Maximum="51" 
+                        Value="{x:Bind Vm._distansToCenter,Mode=TwoWay}"
+                        IsThumbToolTipEnabled="False" />
             </StackPanel>
         </StackPanel>
         <Grid Grid.Column="1"
@@ -129,7 +133,8 @@
                    Grid.Row="0"/>
         <ListView Grid.Row="1"
                   ItemsSource="{x:Bind Vm.Hotels}"
-                  x:Name="HotelList">
+                  x:Name="HotelList"
+                      SelectionChanged="HotelList_SelectionChanged">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"

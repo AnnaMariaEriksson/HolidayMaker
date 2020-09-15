@@ -126,6 +126,7 @@
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Viewmodel\BookingPageViewModel.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
     <Compile Include="Viewmodel\RoomSelectionVm.cs" />
     <Compile Include="Views\BookingPage.xaml.cs">
@@ -187,6 +188,9 @@
     </PackageReference>
     <PackageReference Include="MvvmLightLibs">
       <Version>5.4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
