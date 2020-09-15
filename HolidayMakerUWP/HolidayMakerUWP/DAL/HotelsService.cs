@@ -42,7 +42,9 @@ namespace HolidayMakerUWP.DAL
             Rooms.Add(r2);
             Rooms.Add(r3);
 
-        public async Task<ObservableCollection<Room>> GetAllRoomsAsync()
+            return Rooms;
+
+            async Task<ObservableCollection<Room>> GetAllRoomsAsync()
         {
             var jsonRooms = await httpClient.GetStringAsync(roomURL);
 
@@ -54,7 +56,7 @@ namespace HolidayMakerUWP.DAL
             return rooms;
         }
 
-        public async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
+            async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
         {
             var jsonRegions = await httpClient.GetStringAsync(regionURL);
 
@@ -66,9 +68,9 @@ namespace HolidayMakerUWP.DAL
             return regions;
         }
 
-        public async Task<ObservableCollection<Regions>> GetAllCitiesAsync()
+            async Task<ObservableCollection<Regions>> GetAllCitiesAsync()
         {
-            var jsonCities = await httpClient.GetStringAsync(regionURL);
+            var jsonCities = await httpClient.GetStringAsync(cityURL);
 
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.MissingMemberHandling = MissingMemberHandling.Error;
@@ -79,7 +81,7 @@ namespace HolidayMakerUWP.DAL
         }
 
 
-        public ObservableCollection<Regions> GetRegions()
+            ObservableCollection<Regions> GetRegions()
         {
             ObservableCollection<Regions> Regions = new ObservableCollection<Regions>();
             // todo fix the list below so it's accessible.
@@ -90,27 +92,16 @@ namespace HolidayMakerUWP.DAL
                 new City {NameOfCity = "Lund", CityID = 2, RegionID = 1},
                 new City {NameOfCity = "Kristianstad", CityID = 3, RegionID = 1}
             };
-            Regions r1 = new Regions
+            Regions region1 = new Regions
             {
                 NameOfRegion = "Skåne",
                 RegionID = 1,
                 Cities = cities
             };
 
-            Regions.Add(r1);
+            Regions.Add(region1);
 
             return Regions;
-        }
-
-        public ObservableCollection<Room> GetRooms()
-        {
-            ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
-
-            Room room1 = new Room { HotelID = 1, IsAllInclusive = false, NumberOfBeds = 3, RoomID = 1 };
-
-            Rooms.Add(room1);
-
-            return Rooms;
         }
     }
 
