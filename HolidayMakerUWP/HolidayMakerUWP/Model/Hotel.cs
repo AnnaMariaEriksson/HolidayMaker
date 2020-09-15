@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,13 @@ namespace HolidayMakerUWP.Model
         public bool Test2 { get; set; }
         public Hotel()
         {
+        }
+
+        public List<Room> Rooms { get; set; }
+
+        public Hotel( List<Room> rooms)
+        {
+            rooms = Rooms;
         }
     }
 }

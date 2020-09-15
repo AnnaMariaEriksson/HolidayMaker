@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace HolidayMakerUWP.Model
 {
-    class Regions
+    public class Regions
     {
+        public int RegionID { get; set; }
+        public string NameOfRegion { get; set; }
+        public List<City> Cities { get; set; }
+
+        public Regions()
+        {
+
+        }
+
     }
 }
