@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using HolidayMakerUWP.Views;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,6 +26,16 @@ namespace HolidayMakerUWP
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void NavigateToHotelSearchButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HotelSearch));
+        }
+
+        private void NavigateToFrontPageSearch_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
         }
     }
 }

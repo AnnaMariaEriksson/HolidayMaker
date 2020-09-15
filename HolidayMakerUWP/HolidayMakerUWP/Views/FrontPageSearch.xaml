@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="HolidayMakerUWP.FrontPageSearch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HolidayMakerUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:HolidayMakerUWP.Model"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition  Height="4*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="2*"/>
+            <ColumnDefinition  Width="7*"/>
+            <ColumnDefinition  Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="SearchField" PlaceholderText="Sök efter region..." Grid.Column="1" Margin="59,91,808,40"/>
+        <CalendarDatePicker x:Name="StartDate" Grid.Column="1" Margin="287,93,0,0" VerticalAlignment="Top"/>
+        <CalendarDatePicker x:Name="EndDate" Grid.Column="1" Margin="0,94,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+
+        <ComboBox Header="Resultat:" PlaceholderText="Välj vad du vill ha" Grid.Column="1" Margin="655,75,0,0">
+
+            <StackPanel>
+                <TextBlock Text="Antal rum" HorizontalAlignment="Left"/>
+                <RepeatButton x:Name="DecreaseOneButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="NumberOfRoomsLabel" Text="0"/>
+                <RepeatButton x:Name="IncreaseOneButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Antal vuxna" HorizontalAlignment="Left"/>
+                <RepeatButton x:Name="DecreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="NumberOfAdultsLabel" Text="0"/>
+                <RepeatButton x:Name="IncreaseOneAdultButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Antal barn" HorizontalAlignment="Left"/>
+                <RepeatButton x:Name="DecreaseOneChildButton" Width="30" Delay="500" Interval="1" Content="-" Click="DecreaseOneButton_OnClick" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="NumberOfChildrenLabel" Text="0"/>
+                <RepeatButton x:Name="IncreaseOneChildButton" Width="30" Delay="500" Interval="1" Content="+" Click="IncreaseOneButton_OnClick" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </ComboBox>
+
+        <Button x:Name="SearchButton" Content="Sök" Grid.Column="1" Margin="879,80,0,0" Height="45" Width="110" FontSize="24" Click="SearchButton_OnClick" VerticalAlignment="Top"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
+            <TextBox Text="Insert ObservableCollection here." FontSize="60"/>
+            <ListView x:Name="GetAllRoomsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Rooms}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Room">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="NumberOfBedsLabel" Text="Antal sängar: "/>
+                            <TextBlock Text="{x:Bind NumberOfBeds}"/>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

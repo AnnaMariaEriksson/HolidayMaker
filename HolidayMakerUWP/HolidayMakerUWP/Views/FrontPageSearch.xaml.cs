@@ -49,11 +49,14 @@ namespace HolidayMakerUWP
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
+
             
+
             var lw = GetAllRoomsListView.Items;
             var searchString = SearchField.Text;
             var endDate = EndDate.MaxDate;
             var startDate = StartDate.MinDate;
+
 
         }
     }
