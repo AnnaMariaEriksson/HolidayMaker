@@ -15,19 +15,18 @@ namespace HolidayMakerUWP.Viewmodel
         public ObservableCollection<Room> Rooms { get; set; }
         public ObservableCollection<Regions> Regions { get; set; }
         public ObservableCollection<City> Cities { get; set; }
+
         public HttpClient httpClient;
 
         //Just a comment.
 
         public FrontPageSearchViewModel()
         {
-           
             Regions = new ObservableCollection<Regions>();
             Cities = new ObservableCollection<City>();
             httpClient = new HttpClient();
         }
 
-       
-
     }
+
 }
