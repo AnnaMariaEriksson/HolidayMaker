@@ -68,7 +68,9 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
-            <TextBox x:Name="IfNotFoundLabel" Text="Väntar på sökresultat..." FontSize="40"/>
+            <TextBox x:Name="IfNotFoundLabel" Text="Väntar på sökresultat..." FontSize="40"
+                     IsReadOnly="True"
+                     IsEnabled="False" />
             <ListView x:Name="GetAllRegionsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}">
 
                 <ListView.ItemTemplate>

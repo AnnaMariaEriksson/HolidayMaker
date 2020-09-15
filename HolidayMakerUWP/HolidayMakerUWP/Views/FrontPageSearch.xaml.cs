@@ -60,9 +60,9 @@ namespace HolidayMakerUWP
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
+            FrontPageSearchViewModel.TempCity.Clear();
             var region = FrontPageSearchViewModel.Regions;
             var cities = FrontPageSearchViewModel.Cities;
-            var tempCity = FrontPageSearchViewModel.TempCity;
             var searchString = SearchField.Text;
             var endDate = EndDate.MaxDate;
             var startDate = StartDate.MinDate;
@@ -77,15 +77,21 @@ namespace HolidayMakerUWP
                         if (city.RegionID == r.RegionID)
                         {
                             //TODO do something...
-                            tempCity.Add(city);
+                           FrontPageSearchViewModel.TempCity.Add(city);
                         }
                     }
+                   
+                    
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }
-                else
+                if (FrontPageSearchViewModel.TempCity.Count() == 0)
                 {
                     IfNotFoundLabel.Text = "Tyvärr, vi hittade inget som matchade din sökning.";
+                }
+                else
+                {
+                    IfNotFoundLabel.Text = ($"Vi hittade ({FrontPageSearchViewModel.TempCity.Count()}) hotell.");
                 }
             }
 
