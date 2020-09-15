@@ -15,6 +15,7 @@ namespace HolidayMakerUWP.Viewmodel
     {
         public ObservableCollection<Regions> Regions { get; set; }
         public ObservableCollection<City> Cities { get; set; }
+        public ObservableCollection<City> TempCity { get; set; }
 
         public HotelsService HotelsService { get; set; }
 
@@ -29,14 +30,8 @@ namespace HolidayMakerUWP.Viewmodel
                 new City {NameOfCity = "Lund", CityID = 2, RegionID = 1},
                 new City {NameOfCity = "Kristianstad", CityID = 3, RegionID = 1}
             };
-            Regions region1 = new Regions
-            {
-                NameOfRegion = "Skåne",
-                RegionID = 1,
-                Cities = cities
-            };
 
-            Regions.Add(region1);
+            Regions.Add(new Regions{NameOfRegion = "Skåne", RegionID = 1, Cities = cities});
             Cities.Add(new City{NameOfCity = "Nån stad i Skåne", RegionID = 1});
             Cities.Add(new City { NameOfCity = "En till stad i Skåne", RegionID = 1 });
 

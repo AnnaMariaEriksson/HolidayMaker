@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace HolidayMakerUWP.DAL
 {
-   public class HotelsService
+    public class HotelsService
     {
 
         private HttpClient httpClient;
@@ -41,61 +41,77 @@ namespace HolidayMakerUWP.DAL
             ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
             Room r1 = new Room()
             {
-                Price = 1999, ExtraBed = false, HasAllInclusive = true, IsAllInclusive = false, HasFullBoard = true,
-                HasHalfBoard = true, RoomName = "Deluxe rum, utsikt över havet"
+                Price = 1999,
+                ExtraBed = false,
+                HasAllInclusive = true,
+                IsAllInclusive = false,
+                HasFullBoard = true,
+                HasHalfBoard = true,
+                RoomName = "Deluxe rum, utsikt över havet"
             };
             Room r2 = new Room()
             {
-                Price = 50, ExtraBed = false, HasAllInclusive = true, IsAllInclusive = false, HasFullBoard = false,
-                HasHalfBoard = true, RoomName = "Basic rum, Källare"
+                Price = 50,
+                ExtraBed = false,
+                HasAllInclusive = true,
+                IsAllInclusive = false,
+                HasFullBoard = false,
+                HasHalfBoard = true,
+                RoomName = "Basic rum, Källare"
             };
             Room r3 = new Room()
             {
-                Price = 3999, ExtraBed = false, HasAllInclusive = false, IsAllInclusive = false, HasFullBoard = true,
-                HasHalfBoard = false, RoomName = "Suite rum"
+                Price = 3999,
+                ExtraBed = false,
+                HasAllInclusive = false,
+                IsAllInclusive = false,
+                HasFullBoard = true,
+                HasHalfBoard = false,
+                RoomName = "Suite rum"
             };
             Rooms.Add(r1);
             Rooms.Add(r2);
             Rooms.Add(r3);
 
             return Rooms;
-
-            async Task<ObservableCollection<Room>> GetAllRoomsAsync()
-            {
-                var jsonRooms = await httpClient.GetStringAsync(roomURL);
-
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.MissingMemberHandling = MissingMemberHandling.Error;
-
-                var rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonRooms, settings);
-
-                return rooms;
-            }
-
-            async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
-            {
-                var jsonRegions = await httpClient.GetStringAsync(regionURL);
-
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.MissingMemberHandling = MissingMemberHandling.Error;
-
-                var regions = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonRegions, settings);
-
-                return regions;
-            }
-
-            async Task<ObservableCollection<Regions>> GetAllCitiesAsync()
-            {
-                var jsonCities = await httpClient.GetStringAsync(cityURL);
-
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.MissingMemberHandling = MissingMemberHandling.Error;
-
-                var cities = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonCities, settings);
-
-                return cities;
-            }
         }
+
+        public async Task<ObservableCollection<Room>> GetAllRoomsAsync()
+        {
+            var jsonRooms = await httpClient.GetStringAsync(roomURL);
+
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+
+            var rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonRooms, settings);
+
+            return rooms;
+        }
+
+        public async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
+        {
+            var jsonRegions = await httpClient.GetStringAsync(regionURL);
+
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+
+            var regions = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonRegions, settings);
+
+            return regions;
+        }
+
+        public async Task<ObservableCollection<City>> GetAllCitiesAsync()
+        {
+            var jsonCities = await httpClient.GetStringAsync(cityURL);
+
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.MissingMemberHandling = MissingMemberHandling.Error;
+
+            var cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonCities, settings);
+
+            return cities;
+        }
+
 
 
         public ObservableCollection<Regions> GetRegions()

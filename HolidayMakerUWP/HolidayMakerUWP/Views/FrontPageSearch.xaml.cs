@@ -34,8 +34,8 @@ namespace HolidayMakerUWP
         {
             this.InitializeComponent();
             FrontPageSearchViewModel = new FrontPageSearchViewModel();
-            this.DataContext = FrontPageSearchViewModel.Regions;
-            GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.Regions;
+            this.DataContext = FrontPageSearchViewModel.TempCity;
+            GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.TempCity;
         }
 
         private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
@@ -48,25 +48,36 @@ namespace HolidayMakerUWP
             throw new NotImplementedException();
         }
 
+        public async void GetAllCitiesInRegion()
+        {
+            var cities = await HotelsService.GetAllCitiesAsync();
+
+            foreach (City city in cities)
+            {
+                FrontPageSearchViewModel.Cities.Add(city);
+            }
+        }
+
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
             var region = FrontPageSearchViewModel.Regions;
             var cities = FrontPageSearchViewModel.Cities;
-            GetAllRegionsListView.ItemsSource = region;
-            var lw = GetAllRegionsListView;
+            var tempCity = FrontPageSearchViewModel.TempCity;
             var searchString = SearchField.Text;
             var endDate = EndDate.MaxDate;
             var startDate = StartDate.MinDate;
-            var notFoundLabel = IfNotFoundLabel.Text;
-            int i = 0;
 
             foreach (Regions r in region)
             {
+                
                 if (searchString == r.NameOfRegion)
                 {
                     foreach (City city in cities)
                     {
-                        city.NameOfCity.ToList();
+                        if (city.RegionID == r.RegionID)
+                        {
+                            //TODO do something...
+                        }
                     }
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show

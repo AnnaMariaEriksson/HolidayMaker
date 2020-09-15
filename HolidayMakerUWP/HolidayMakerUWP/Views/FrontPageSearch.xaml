@@ -69,12 +69,12 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Background="Bisque">
             <TextBox x:Name="IfNotFoundLabel" Text="Väntar på sökresultat..." FontSize="40"/>
-            <ListView x:Name="GetAllRegionsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.Regions}">
+            <ListView x:Name="GetAllRegionsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}">
 
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Regions">
+                    <DataTemplate x:DataType="model:City">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Bind Cities[0].NameOfCity}"/>
+                            <TextBlock Text="{x:Bind NameOfCity}"/>
                         </StackPanel>
 
                     </DataTemplate>
