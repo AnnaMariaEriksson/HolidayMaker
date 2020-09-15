@@ -10,6 +10,7 @@ namespace HolidayMakerUWP.Model
    public class Hotel
     {
         public  int HotelID { get; set; }
+        public string HotelDescription { get; set; }
         public string Name { get; set; }
         public  int DistansToBeach { get; set; }
         public  int DistansToCenter { get; set; }

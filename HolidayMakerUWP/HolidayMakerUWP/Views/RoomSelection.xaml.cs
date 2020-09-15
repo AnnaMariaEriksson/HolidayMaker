@@ -29,12 +29,13 @@ namespace HolidayMakerUWP.Views
         public RoomSelection()
         {
             this.InitializeComponent();
-            this.Vm = new RoomSelectionVm();
+            this.Vm = new RoomSelectionVm();    
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Vm._selectedhotel = (Hotel)e.Parameter;
+            Vm.GetFascilities();
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {

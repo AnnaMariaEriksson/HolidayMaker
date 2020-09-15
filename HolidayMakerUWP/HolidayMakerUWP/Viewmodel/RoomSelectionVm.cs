@@ -13,6 +13,18 @@ namespace HolidayMakerUWP.Viewmodel
     {
 
         public HotelsService Vm;
+        public ObservableCollection<string> _listOfFascilities { get; set; }
+        public ObservableCollection<string> ListOfFascilities
+        {
+            get
+            {
+                return _listOfFascilities;
+            }
+            set
+            {
+                _listOfFascilities = value;
+            }
+        }
         public Hotel _selectedhotel { get; set; }
         public Hotel SelectedHotel
         {
@@ -41,6 +53,59 @@ namespace HolidayMakerUWP.Viewmodel
         {
             this.Vm = new HotelsService();
             _rooms = Vm.GetRooms();
+        }
+        public void GetFascilities()
+        {
+            ObservableCollection<string> listoffascilities = new ObservableCollection<string>();
+            if (SelectedHotel.HasAllInclusive == true)
+            {
+                listoffascilities.Add(" Allinclusive är tillgängligt, ");
+            }
+            else
+            {
+                listoffascilities.Add("");
+            }
+            if (SelectedHotel.HasChildrensClub == true)
+            {
+                listoffascilities.Add(" Det finns barnklubb på hotellet, ");
+            }
+            else
+            {
+                listoffascilities.Add("");
+            }
+            if (SelectedHotel.HasFullBoard == true)
+            {
+                listoffascilities.Add(" Hotellet erbjuder Helpension, ");
+            }
+            else
+            {
+                listoffascilities.Add("");
+            }
+            if (SelectedHotel.HasHalfBoard == true)
+            {
+                listoffascilities.Add(" Hotellet erbjuder Halvpension, ");
+            }
+            else
+            {
+                listoffascilities.Add("");
+            }
+            if (SelectedHotel.HasPool == true)
+            {
+                listoffascilities.Add(" Det finns pool på hotellet, ");
+            }
+            else
+            {
+                listoffascilities.Add("");
+            }
+            if (SelectedHotel.HasRestaurant == true)
+            {
+                listoffascilities.Add(" Det finns restaurang/er på hotellet, ");
+            }
+            else
+            {
+                listoffascilities.Add("");
+            }
+            _listOfFascilities = listoffascilities;
         }
     }
 }
