@@ -34,7 +34,7 @@ namespace HolidayMakerUWP
         {
             this.InitializeComponent();
             FrontPageSearchViewModel = new FrontPageSearchViewModel();
-            this.DataContext = FrontPageSearchViewModel.TempCity;
+            this.DataContext = FrontPageSearchViewModel.Regions;
             GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.TempCity;
         }
 
@@ -77,6 +77,7 @@ namespace HolidayMakerUWP
                         if (city.RegionID == r.RegionID)
                         {
                             //TODO do something...
+                            tempCity.Add(city);
                         }
                     }
                     //TODO add get method for cities and dates

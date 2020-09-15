@@ -23,6 +23,7 @@ namespace HolidayMakerUWP.Viewmodel
         {
             Regions = new ObservableCollection<Regions>();
             Cities = new ObservableCollection<City>();
+            TempCity = new ObservableCollection<City>();
 
             var cities = new List<City>
             {
@@ -32,8 +33,10 @@ namespace HolidayMakerUWP.Viewmodel
             };
 
             Regions.Add(new Regions{NameOfRegion = "Skåne", RegionID = 1, Cities = cities});
+            Regions.Add(new Regions{NameOfRegion = "Stockholm", RegionID = 2});
             Cities.Add(new City{NameOfCity = "Nån stad i Skåne", RegionID = 1});
             Cities.Add(new City { NameOfCity = "En till stad i Skåne", RegionID = 1 });
+            Cities.Add(new City{NameOfCity = "Nån stad i Sthlm", RegionID = 2, CityID = 4});
 
         }
 
