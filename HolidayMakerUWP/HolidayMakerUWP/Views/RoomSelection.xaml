@@ -4,14 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:HolidayMakerUWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:HolidayMakerUWP.Model" xmlns:converters1="using:HolidayMakerUWP.BoolConverter"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:HolidayMakerUWP.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-        <converters1:BooleanToVisibilityConverter x:Key="bool2vis"/>
-        <converters1:BooleanToVisibilityConverter x:Key="bool2visInverse" OnTrue="Collapsed" OnFalse="Visible"/>
-    </Page.Resources>
-    <!--Main Grid-->
+<!--Main Grid-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -65,6 +61,15 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="{x:Bind Vm.SelectedHotel.HotelDescription}" TextWrapping="Wrap"/>
+                       <!--<ListView Grid.Row="1" ItemsSource="{x:Bind Vm.ListOfFascilities}" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
                     <StackPanel Grid.Row="2" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[0]}" Grid.Row="1"/>
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[1]}" Grid.Row="1"/>
@@ -74,8 +79,11 @@
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[5]}" Grid.Row="1"/>
                     </StackPanel>
                 </Grid>
+                
                 <Button x:Name="ConfirmChoosenRooms" Click="ConfirmChoosenRooms_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
+
                 <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
+
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:Room">
                             <Grid>
@@ -90,7 +98,7 @@
                                 <StackPanel Grid.Row="0" Grid.Column="0">
                                     <TextBlock Text="{x:Bind Price}"/>
                                     <TextBlock Text="{x:Bind RoomName}"/>
-                                    <Button x:Name="Allinclusive" Width="40" Height="40" Grid.Column="1"  Grid.Row="1" Tag="{Binding HasAllInclusive}" Visibility="{Binding IsVisible, Converter={StaticResource bool2vis}}"/>
+                                    <Button Content="Allinclusive 900kr" IsEnabled="{x:Bind HasAllInclusive}" Margin="0,0,65,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1">
                                     <TextBlock Text=""/>

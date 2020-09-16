@@ -11,16 +11,17 @@ namespace HolidayMakerUWP.Viewmodel
 {
     public class BookingPageViewModel
     {
-        public ObservableCollection<Room> _rooms { get; set; }
-        public ObservableCollection<Room> Rooms
+        public double totalPrice;
+        public ObservableCollection<Room> _selectedRooms { get; set; }
+        public ObservableCollection<Room> SelectedRooms
         {
             get
             {
-                return _rooms;
+                return _selectedRooms;
             }
             set
             {
-                _rooms = value;
+                _selectedRooms = value;
             }
         }
 
@@ -35,6 +36,7 @@ namespace HolidayMakerUWP.Viewmodel
 
             await endBookingDialog.ShowAsync();
         }
+
         public async void ErrorFillAllFields()
         {
             ContentDialog errorDialog = new ContentDialog()
@@ -44,7 +46,15 @@ namespace HolidayMakerUWP.Viewmodel
                 CloseButtonText = "Ok"
             };
             await errorDialog.ShowAsync();
+        }
 
+        public void updateTotalPrice()
+        {
+            totalPrice = 0;
+            foreach (Room i in SelectedRooms)
+            {
+                totalPrice += i.Price; 
+            }
         }
     }
 }
