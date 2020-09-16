@@ -11,11 +11,13 @@ using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Documents;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace HolidayMakerUWP.Viewmodel
 {
-    
-  public class HotelSearchVm : INotifyPropertyChanged
+
+    public class HotelSearchVm : INotifyPropertyChanged
     {
         public ICommand FilterBtn { get; set; }
         public Dictionary<string, object> Filters;
@@ -24,27 +26,12 @@ namespace HolidayMakerUWP.Viewmodel
         public System.Drawing.Color c2 = System.Drawing.Color.FromArgb(48, 179, 221);
         public int _distansToCenter { get; set; }
         public int _distansToBeach { get; set; }
-
-        public string _distanceToBeachTxt { get; set; }
-        public string DistanceToBeachTxt {
-            get => DistansToBeach.ToString() + "km";
-            set {
-                _distanceToBeachTxt = DistansToBeach.ToString() + "km";
-            } 
-        }
-        public int DistansToBeach { 
-            get { return _distansToBeach;  } 
-            set { 
-                _distansToBeach = value; 
-                FilterToggle("slider");
-               
-
-
-            } 
-        }
-
-
-        public int DistansToCenter { get {  return _distansToCenter; } set { _distansToCenter = value; FilterToggle("slider"); } }
+        public int DistansToCenter { get { return _distansToCenter; } set {
+                _distansToCenter = value; FilterToggle("slider");
+              /*  RaisePropertyChanged("DistansToCenterText"); */ } }
+        public int DistansToBeach{ get { return _distansToBeach; } set { _distansToBeach = value; FilterToggle("slider");} }
+      
+     
         public ObservableCollection<Hotel> _hotels { get; set; }
         public ObservableCollection<Hotel> TempHotel { get; set; }
 
@@ -52,7 +39,7 @@ namespace HolidayMakerUWP.Viewmodel
         {
             get
             {
-            
+
                 return _hotels;
             }
             set
@@ -79,6 +66,7 @@ namespace HolidayMakerUWP.Viewmodel
         {
             try
             {
+               
                 if (Filters.ContainsKey(filter))
                 {
                     Filters.Remove(filter);
@@ -112,31 +100,13 @@ namespace HolidayMakerUWP.Viewmodel
                     {
                         _hotels.Add(h);
                     }
-                   
-
-
                 }
+              
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            //if(filter == "slider") {
-            //    var getList = new ObservableCollection<Hotel>(Filter(TempHotel, Filters));
-            //    _hotels.Clear();
-            //    foreach (Hotel h in getList)
-            //    {
-            //        if (h.DistansToBeach >= DistansToBeach && h.DistansToCenter >= DistansToCenter)
-            //        {
-            //            _hotels.Add(h);
-            //        }
-
-            //    }
-            //}
-           
-            
-            
-            
         }
 
         public static IEnumerable<T> Filter<T>(IEnumerable<T> collection, Dictionary<string, object> filters)
@@ -190,7 +160,6 @@ namespace HolidayMakerUWP.Viewmodel
             return queryable.Provider.CreateQuery<T>(whereCallExpression);
         }
 
-
-
+       
     }
 }

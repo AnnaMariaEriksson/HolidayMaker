@@ -57,49 +57,30 @@ namespace HolidayMakerUWP.Views
 
         }
 
-        //private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        //{
-        //    FilterSlides();
-        //    if (Vm.DistansToBeach == 50)
-        //    {
-        //        SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
-        //    }
-        //    else
-        //    {
-        //        SeaDistansValue.Text = Vm.DistansToBeach + "Km";
-        //    }
-          
-        //}
-
-        //private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        //{
-        //    FilterSlides();
-        //    if (CenterDistansSlider.Value == 50)
-        //    {
-        //        CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
-        //    }
-        //    else
-        //    {
-        //        CenterDistansValue.Text = Vm.DistansToCenter + "Km";
-        //    }
-            
-        //}
-
-        public void FilterSlides()
+        private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-          //  ObservableCollection<Hotel> te = new ObservableCollection<Hotel>();
-          //  ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
-          //  foreach (Hotel h in _service.GetHotels())
-          //  {
-          //      if ( h.DistansToBeach >= Vm.DistansToBeach)
-          //      {
-          //          te.Add(h);
-          //      }
-          //  }
+            if (Vm.DistansToBeach == 50)
+            {
+                SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
+            }
+            else
+            {
+                SeaDistansValue.Text = Vm.DistansToBeach + "Km";
+            }
 
-          //Vm.RemoveFilteredHotels(te);
+        }
 
-           
+        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (CenterDistansSlider.Value == 50)
+            {
+                CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
+            }
+            else
+            {
+                CenterDistansValue.Text = Vm.DistansToCenter + "Km";
+            }
+
         }
 
         private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
