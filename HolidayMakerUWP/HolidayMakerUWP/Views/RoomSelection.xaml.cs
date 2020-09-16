@@ -68,5 +68,11 @@ namespace HolidayMakerUWP.Views
             Vm.AddRoomToBasket(TempRoom);
             Vm.Rooms.Remove(TempRoom);
         }
+
+        private void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
+        {
+            var SelectedRooms = Vm.RoomBasket;
+            Frame.Navigate(typeof(BookingPage), SelectedRooms);
+        }
     }
 }
