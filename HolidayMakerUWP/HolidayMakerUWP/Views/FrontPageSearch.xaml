@@ -62,8 +62,6 @@
 
         </Grid>
 
-
-
         <StackPanel
             Grid.Row="1"
             Grid.Column="1"
@@ -74,26 +72,22 @@
                 IsEnabled="False"
                 IsReadOnly="True"
                 Text="Väntar på sökresultat..." />
-            <ListView x:Name="GetAllRegionsListView" ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}">
+            <ListView
+                x:Name="GetAllRegionsListView"
+                IsItemClickEnabled="True"
+                ItemClick="GetAllRegionsListView_OnItemClick"
+                ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}">
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:City">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Bind NameOfCity}" />
+                            <TextBlock x:Name="NameOfCityLabel" Text="{x:Bind NameOfCity}" />
                         </StackPanel>
 
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
             </ListView>
-            <Button
-                x:Name="ChooseCityButton"
-                Width="366"
-                Height="65"
-                HorizontalAlignment="Right"
-                Click="ChooseCityButton_OnClick"
-                Content="Ta mig vidare!"
-                FontSize="30" />
         </StackPanel>
     </Grid>
 </Page>

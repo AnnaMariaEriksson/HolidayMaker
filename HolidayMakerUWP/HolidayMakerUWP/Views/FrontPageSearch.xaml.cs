@@ -71,7 +71,7 @@ namespace HolidayMakerUWP
                         }
                     }
                    
-                    
+                    //TODO add use for start and end dates.
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }
@@ -86,9 +86,10 @@ namespace HolidayMakerUWP
             }
 
         }
-
-        private void ChooseCityButton_OnClick(object sender, RoutedEventArgs e)
+        private void GetAllRegionsListView_OnItemClick(object sender, ItemClickEventArgs e)
         {
+            //TODO make sure the dates and all other info comes with to the other page with this click.
+            
             this.Frame.Navigate(typeof(HotelSearch));
         }
     }
