@@ -98,26 +98,26 @@
                 <TextBlock Text="Avstånd till havet:"
                            TextAlignment="Center"
                            FontWeight="Bold" />
-                <TextBlock Text="0km"
+                <TextBlock Text="{x:Bind Vm.DistansToBeach, Mode=TwoWay}"
                            TextAlignment="Center"
                            x:Name="SeaDistansValue" />
                 <Slider Width="200"
                         x:Name="SeaDistansSlider"
-                        ValueChanged="SeaDistansSlider_ValueChanged"
+                        
                         Maximum="51" 
                         Value="{x:Bind Vm._distansToBeach,Mode=TwoWay}"
                         IsThumbToolTipEnabled="False" />
                 <TextBlock Text="Avstånd till centrum:"
                            TextAlignment="Center"
                            FontWeight="Bold" />
-                <TextBlock Text="0km"
+                <TextBlock Text="{x:Bind Vm._distansToCenter,Mode=TwoWay}"
                            x:Name="CenterDistansValue"
                            TextAlignment="Center" />
                 <Slider Width="200"
                         x:Name="CenterDistansSlider"
-                        ValueChanged="CenterDistansSlider_ValueChanged"
+                        
                         Maximum="51" 
-                        Value="{x:Bind Vm._distansToCenter,Mode=TwoWay}"
+                        Value="{x:Bind Vm.DistansToCenter,Mode=TwoWay}"
                         IsThumbToolTipEnabled="False" />
             </StackPanel>
         </StackPanel>

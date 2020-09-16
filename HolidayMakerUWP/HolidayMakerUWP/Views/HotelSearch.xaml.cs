@@ -57,33 +57,33 @@ namespace HolidayMakerUWP.Views
 
         }
 
-        private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            FilterSlides();
-            if (Vm.DistansToBeach == 50)
-            {
-                SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
-            }
-            else
-            {
-                SeaDistansValue.Text = Vm.DistansToBeach + "Km";
-            }
+        //private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        //{
+        //    FilterSlides();
+        //    if (Vm.DistansToBeach == 50)
+        //    {
+        //        SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
+        //    }
+        //    else
+        //    {
+        //        SeaDistansValue.Text = Vm.DistansToBeach + "Km";
+        //    }
           
-        }
+        //}
 
-        private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            FilterSlides();
-            if (CenterDistansSlider.Value == 50)
-            {
-                CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
-            }
-            else
-            {
-                CenterDistansValue.Text = Vm.DistansToCenter + "Km";
-            }
+        //private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        //{
+        //    FilterSlides();
+        //    if (CenterDistansSlider.Value == 50)
+        //    {
+        //        CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
+        //    }
+        //    else
+        //    {
+        //        CenterDistansValue.Text = Vm.DistansToCenter + "Km";
+        //    }
             
-        }
+        //}
 
         public void FilterSlides()
         {
@@ -214,5 +214,7 @@ namespace HolidayMakerUWP.Views
             Hotel SelectedHotel = (Hotel)HotelList.SelectedItem;
             Frame.Navigate(typeof(RoomSelection), SelectedHotel);
         }
+
+       
     }
 }
