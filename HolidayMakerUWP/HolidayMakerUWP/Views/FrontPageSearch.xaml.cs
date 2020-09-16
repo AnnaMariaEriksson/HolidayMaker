@@ -38,16 +38,6 @@ namespace HolidayMakerUWP
             GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.TempCity;
         }
 
-        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void IncreaseOneButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         public async void GetAllCitiesInRegion()
         {
             var cities = await HotelsService.GetAllCitiesAsync();
