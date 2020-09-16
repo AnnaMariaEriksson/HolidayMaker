@@ -25,7 +25,26 @@
                     <RowDefinition />
                     <RowDefinition Height="14*" />
                 </Grid.RowDefinitions>
+                <TextBlock Text="Vald bokning"
+                           FontSize="40" 
+                           HorizontalAlignment="Center"/>
 
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                </Grid>
             </Grid>
             <StackPanel Grid.Row="1"
                         Orientation="Vertical">
