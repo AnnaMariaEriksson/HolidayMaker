@@ -8,33 +8,24 @@ using System.Threading.Tasks;
 
 namespace HolidayMakerUWP.BoolConverter
 {
-    public class BooleanToVisibilityConverter
+    public class BooleanToVisibilityConverter : IValueConverter
     {
-        public Visibility OnTrue { get; set; }
-        public Visibility OnFalse { get; set; }
-
         public BooleanToVisibilityConverter()
         {
-            OnFalse = Visibility.Collapsed;
-            OnTrue = Visibility.Visible;
         }
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var v = (bool)value;
-
-            return v ? OnTrue : OnFalse;
+            if (value is bool && (bool)value)
+            {
+                return Visibility.Visible;
+            }
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            if (value is Visibility == false)
-                return DependencyProperty.UnsetValue;
-
-            if ((Visibility)value == OnTrue)
-                return true;
-            else
-                return false;
+            return (value is Visibility && (Visibility)value == Visibility.Visible);
         }
     }
 }

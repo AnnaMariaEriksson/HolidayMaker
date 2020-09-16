@@ -15,6 +15,7 @@ namespace HolidayMakerUWP.Viewmodel
     {
         public HotelsService Vm;
         public ICommand AddRoomBtn { get; set; }
+        public ICommand AddAllInclusive { get; set; }
         public ObservableCollection<Room> _roomBasket { get; set; }
         public ObservableCollection<Room> RoomBasket
         {
