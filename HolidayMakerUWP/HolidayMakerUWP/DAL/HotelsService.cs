@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 
 namespace HolidayMakerUWP.DAL
 {
-   public class HotelsService
+    public class HotelsService
     {
 
         private HttpClient httpClient;
@@ -20,6 +21,8 @@ namespace HolidayMakerUWP.DAL
         private string regionURL = "";
 
         private string cityURL = "";
+
+        public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public ObservableCollection<Hotel> GetHotels()
         {
             ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
@@ -32,19 +35,48 @@ namespace HolidayMakerUWP.DAL
 
             return Hotels;
         }
+
         public ObservableCollection<Room> GetRooms()
         {
             ObservableCollection<Room> Rooms = new ObservableCollection<Room>();
-            Room r1 = new Room() { Price = 1999, ExtraBed = false, HasAllInclusive = true, IsAllInclusive = false, HasFullBoard = true, HasHalfBoard = true, RoomName ="Deluxe rum, utsikt över havet"};
-            Room r2 = new Room() { Price = 50, ExtraBed = false, HasAllInclusive = true, IsAllInclusive = false, HasFullBoard = false, HasHalfBoard = true, RoomName ="Basic rum, Källare"};
-            Room r3 = new Room() { Price = 3999, ExtraBed = false, HasAllInclusive = false, IsAllInclusive = false, HasFullBoard = true, HasHalfBoard = false, RoomName ="Suite rum"};
+            Room r1 = new Room()
+            {
+                Price = 1999,
+                ExtraBed = false,
+                HasAllInclusive = true,
+                IsAllInclusive = false,
+                HasFullBoard = true,
+                HasHalfBoard = true,
+                RoomName = "Deluxe rum, utsikt över havet"
+            };
+            Room r2 = new Room()
+            {
+                Price = 50,
+                ExtraBed = false,
+                HasAllInclusive = true,
+                IsAllInclusive = false,
+                HasFullBoard = false,
+                HasHalfBoard = true,
+                RoomName = "Basic rum, Källare"
+            };
+            Room r3 = new Room()
+            {
+                Price = 3999,
+                ExtraBed = false,
+                HasAllInclusive = false,
+                IsAllInclusive = false,
+                HasFullBoard = true,
+                HasHalfBoard = false,
+                RoomName = "Suite rum"
+            };
             Rooms.Add(r1);
             Rooms.Add(r2);
             Rooms.Add(r3);
 
             return Rooms;
+        }
 
-            async Task<ObservableCollection<Room>> GetAllRoomsAsync()
+        public async Task<ObservableCollection<Room>> GetAllRoomsAsync()
         {
             var jsonRooms = await httpClient.GetStringAsync(roomURL);
 
@@ -56,7 +88,7 @@ namespace HolidayMakerUWP.DAL
             return rooms;
         }
 
-            async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
+        public async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
         {
             var jsonRegions = await httpClient.GetStringAsync(regionURL);
 
@@ -68,29 +100,30 @@ namespace HolidayMakerUWP.DAL
             return regions;
         }
 
-            async Task<ObservableCollection<Regions>> GetAllCitiesAsync()
+        public async Task<ObservableCollection<City>> GetAllCitiesAsync()
         {
             var jsonCities = await httpClient.GetStringAsync(cityURL);
 
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            var cities = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonCities, settings);
+            var cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonCities, settings);
 
             return cities;
         }
 
 
-            ObservableCollection<Regions> GetRegions()
+
+        public ObservableCollection<Regions> GetRegions()
         {
-            ObservableCollection<Regions> Regions = new ObservableCollection<Regions>();
+            ObservableCollection<Regions> Regions = FrontPageSearchViewModel.Regions;
             // todo fix the list below so it's accessible.
-            // List<Hotel> hotels = GetHotels().ToList();
+            List<Hotel> hotels = GetHotels().ToList();
             var cities = new List<City>
             {
-                new City { NameOfCity = "Malmö", CityID = 1, RegionID = 1},
-                new City {NameOfCity = "Lund", CityID = 2, RegionID = 1},
-                new City {NameOfCity = "Kristianstad", CityID = 3, RegionID = 1}
+                new City { NameOfCity = "Malmö", CityID = 1, RegionID = 1, Hotels = hotels},
+                new City {NameOfCity = "Lund", CityID = 2, RegionID = 1, Hotels = hotels},
+                new City {NameOfCity = "Kristianstad", CityID = 3, RegionID = 1, Hotels = hotels}
             };
             Regions region1 = new Regions
             {
@@ -105,5 +138,4 @@ namespace HolidayMakerUWP.DAL
         }
     }
 
-}
 }
