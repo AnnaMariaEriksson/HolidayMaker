@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.DAL;
+﻿using GalaSoft.MvvmLight.Command;
+using HolidayMakerUWP.DAL;
 using HolidayMakerUWP.Model;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,26 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HolidayMakerUWP.Viewmodel
 {
     public class RoomSelectionVm
     {
-
         public HotelsService Vm;
-
+        public ICommand AddRoomBtn { get; set; }
+        public ObservableCollection<Room> _roomBasket { get; set; }
+        public ObservableCollection<Room> RoomBasket
+        {
+            get
+            {
+                return _roomBasket;
+            }
+            set
+            {
+                _roomBasket = value;
+            }
+        }
         public ObservableCollection<Room> _selectedRooms { get; set; }
         public ObservableCollection<Room> selectedRooms
         {
@@ -67,6 +80,10 @@ namespace HolidayMakerUWP.Viewmodel
         {
             this.Vm = new HotelsService();
             _rooms = Vm.GetRooms();
+        }
+        public void AddRoomToBasket(Room selectedRoom)
+        {
+            //RoomBasket.Add(selectedRoom);
         }
         public void GetFascilities()
         {
