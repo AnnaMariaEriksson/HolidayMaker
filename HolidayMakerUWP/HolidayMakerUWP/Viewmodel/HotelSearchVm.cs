@@ -60,6 +60,8 @@ namespace HolidayMakerUWP.Viewmodel
             this._service = new HotelsService();
             _hotels = _service.GetHotels();
             TempHotel = _service.GetHotels();
+            DistansToBeach = 50;
+            DistansToCenter = 50;
         }
 
         private void FilterToggle(string filter)
