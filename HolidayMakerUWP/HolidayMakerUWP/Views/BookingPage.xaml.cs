@@ -54,7 +54,13 @@ namespace HolidayMakerUWP.Views
         {
             bookingPageViewModel.SelectedRooms.Remove((Room)RoomListView.SelectedItem);
             bookingPageViewModel.updateTotalPrice();
-            totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
+
+            if (bookingPageViewModel.totalPrice != 0)
+                totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
+
+            else
+                totalSumman.Text = "";
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
