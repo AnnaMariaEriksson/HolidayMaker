@@ -57,16 +57,17 @@ namespace HolidayMakerUWP.Views
             //kolla om användaren är inloggad och lägg rätt knappar
         }
 
-        private void Skander()
-        {
-            Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
-        }
-
         private void roomToBasket_Click(object sender, RoutedEventArgs e)
         {
             Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
             Vm.AddRoomToBasket(TempRoom);
             Vm.Rooms.Remove(TempRoom);
+        }
+
+        private void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
+        {
+            var SelectedRooms = Vm.RoomBasket;
+            Frame.Navigate(typeof(BookingPage), SelectedRooms);
         }
     }
 }

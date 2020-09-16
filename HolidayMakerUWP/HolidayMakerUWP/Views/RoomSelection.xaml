@@ -90,11 +90,7 @@
                                 <StackPanel Grid.Row="0" Grid.Column="0">
                                     <TextBlock Text="{x:Bind Price}"/>
                                     <TextBlock Text="{x:Bind RoomName}"/>
-                                    <Button x:Name="warningButton" Width="40" Height="40" Grid.Column="1"  Grid.Row="1" Tag="{Binding HasAllInclusive}" Foreground="{StaticResource procedure_app_orange_text }" Visibility="{Binding IsVisible, Converter={StaticResource bool2vis}}"/>
-                                    <Button Content="Allinclusive" IsEnabled="{x:Bind HasAllInclusive}" Margin="0,0,65,0"/>
-                                    <Button Content="Extra säng" IsEnabled="{x:Bind HasAllInclusive}" Margin="0,0,65,0"/>
-                                    <Button Content="Halfboard" IsEnabled="{x:Bind HasFullBoard}" Margin="0,0,65,0"/>
-                                    <Button Content="Halfboard" IsEnabled="{x:Bind HasHalfBoard}" Margin="0,0,65,0"/>
+                                    <Button x:Name="Allinclusive" Width="40" Height="40" Grid.Column="1"  Grid.Row="1" Tag="{Binding HasAllInclusive}" Visibility="{Binding IsVisible, Converter={StaticResource bool2vis}}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1">
                                     <TextBlock Text=""/>
