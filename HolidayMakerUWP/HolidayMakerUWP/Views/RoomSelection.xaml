@@ -96,7 +96,7 @@
                 
                 <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
 
-                <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
+                <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:Room">
@@ -117,7 +117,7 @@
                                 <StackPanel Grid.Row="0" Grid.Column="1">
                                     <TextBlock Text=""/>
                                     <TextBlock Text=""/>
-                                    <Button Content="Välj" Margin="150,0,0,0"/>
+                                    <Button x:Name="roomToBasket" Command="{Binding ElementName= RoomListView, Path=DataContext.AddRoomBtn}" CommandParameter="{Binding}" Click="roomToBasket_Click" Content="Välj" Margin="150,0,0,0"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
