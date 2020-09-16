@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -27,34 +29,40 @@ namespace HolidayMakerUWP.Views
     public sealed partial class BookingPage : Page
     {
         BookingPageViewModel bookingPageViewModel;
-        public RoomSelectionVm roomSelectionVm;
-        public ObservableCollection<Room> tempRoom = new ObservableCollection<Room>();
         public BookingPage()
         {
             this.InitializeComponent();
             this.bookingPageViewModel = new BookingPageViewModel();
-            this.roomSelectionVm = new RoomSelectionVm();
-            tempRoom = roomSelectionVm.RoomBasket;
 
         }
 
         private void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (TeleNummer.Text == "" || Adress.Text == "")           
+            if (TeleNummer.Text == "" || Adress.Text == "")
                 bookingPageViewModel.ErrorFillAllFields();
-            
+
             else
-                bookingPageViewModel.BookingMessageDialog();               
+                bookingPageViewModel.BookingMessageDialog();
         }
 
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {
-                args.Cancel = args.NewText.Any(c => !char.IsDigit(c));            
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
         }
 
         private void RemoveRoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            roomSelectionVm.RoomBasket.Remove((Room)RoomListView.SelectedItem);
+            bookingPageViewModel.SelectedRooms.Remove((Room)RoomListView.SelectedItem);
+            bookingPageViewModel.updateTotalPrice();
+            totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            bookingPageViewModel._selectedRooms = (ObservableCollection<Room>)e.Parameter;
+
+            bookingPageViewModel.updateTotalPrice();
+            totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
         }
     }
 }

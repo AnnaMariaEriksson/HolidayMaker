@@ -71,7 +71,8 @@ namespace HolidayMakerUWP.Views
 
         private void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BookingPage));
+            var SelectedRooms = Vm.RoomBasket;
+            Frame.Navigate(typeof(BookingPage), SelectedRooms);
         }
     }
 }
