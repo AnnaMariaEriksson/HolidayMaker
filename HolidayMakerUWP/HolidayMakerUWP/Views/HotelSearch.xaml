@@ -109,7 +109,7 @@
                            x:Name="SeaDistansValue" />
                 <Slider Width="200"
                         x:Name="SeaDistansSlider"
-                        Maximum="51"
+                        Maximum="50"
                         Value="{x:Bind Vm.DistansToBeach,Mode=TwoWay}"
                         IsThumbToolTipEnabled="False"
                         ValueChanged="SeaDistansSlider_ValueChanged"/>
@@ -121,7 +121,7 @@
                            TextAlignment="Center" />
                 <Slider Width="200"
                         x:Name="CenterDistansSlider"
-                        Maximum="51"
+                        Maximum="50"
                         Value="{x:Bind Vm.DistansToCenter,Mode=TwoWay}"
                         IsThumbToolTipEnabled="False"
                         ValueChanged="CenterDistansSlider_ValueChanged"/>
