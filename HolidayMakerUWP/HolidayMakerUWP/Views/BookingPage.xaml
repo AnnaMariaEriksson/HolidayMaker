@@ -52,7 +52,7 @@
                         Orientation="Vertical"
                         Width="710">
                 <ListView x:Name="RoomListView"
-                          ItemsSource="{x:Bind roomSelectionVm.Rooms}"
+                          ItemsSource="{x:Bind tempRoom}"
                           Grid.Row="1"
                           Grid.Column="0"
                           BorderThickness="3"

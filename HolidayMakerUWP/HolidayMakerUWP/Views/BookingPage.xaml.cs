@@ -2,6 +2,7 @@
 using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,11 +28,13 @@ namespace HolidayMakerUWP.Views
     {
         BookingPageViewModel bookingPageViewModel;
         public RoomSelectionVm roomSelectionVm;
+        public ObservableCollection<Room> tempRoom = new ObservableCollection<Room>();
         public BookingPage()
         {
             this.InitializeComponent();
             this.bookingPageViewModel = new BookingPageViewModel();
             this.roomSelectionVm = new RoomSelectionVm();
+            tempRoom = roomSelectionVm.RoomBasket;
 
         }
 
@@ -51,7 +54,7 @@ namespace HolidayMakerUWP.Views
 
         private void RemoveRoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            roomSelectionVm.selectedRooms.Remove((Room)RoomListView.SelectedItem);
+            roomSelectionVm.RoomBasket.Remove((Room)RoomListView.SelectedItem);
         }
     }
 }

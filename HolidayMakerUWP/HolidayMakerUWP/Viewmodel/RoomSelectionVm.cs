@@ -79,11 +79,12 @@ namespace HolidayMakerUWP.Viewmodel
         public RoomSelectionVm()
         {
             this.Vm = new HotelsService();
+            _roomBasket = new ObservableCollection<Room>();
             _rooms = Vm.GetRooms();
         }
         public void AddRoomToBasket(Room selectedRoom)
         {
-            //RoomBasket.Add(selectedRoom);
+            RoomBasket.Add(selectedRoom);
         }
         public void GetFascilities()
         {
