@@ -28,6 +28,7 @@ namespace HolidayMakerUWP
     {
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public HotelsService HotelsService { get; set; }
+        public Search Search { get; set; }
         public City City { get; set; }
 
         public FrontPageSearch()

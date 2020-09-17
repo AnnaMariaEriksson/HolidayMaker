@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HolidayMakerUWP.Model
 {
-    class Search
+    public class Search
     {
         public List<Regions> Regions { get; set; }
         public List<City> Cities { get; set; }
@@ -18,5 +18,7 @@ namespace HolidayMakerUWP.Model
         public bool HasChildrensClub { get; set; }
         public bool HasEntertainment { get; set; }
         public bool HasPool { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
     }
 }

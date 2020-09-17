@@ -44,18 +44,20 @@
                 x:Name="StartDate"
                 Grid.Row="1"
                 Grid.Column="1"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center"
+                Date="{x:Bind Search.StartDate, Mode=TwoWay}" />
             <CalendarDatePicker
                 x:Name="EndDate"
                 Grid.Row="1"
                 Grid.Column="2"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center"
+                Date="{x:Bind Search.EndDate, Mode=TwoWay}" />
 
             <Button
                 x:Name="SearchButton"
                 Grid.Row="1"
                 Grid.Column="3"
-                Width="231"
+                Width="auto"
                 Click="SearchButton_OnClick"
                 Content="Sök"
                 FontSize="24" />
