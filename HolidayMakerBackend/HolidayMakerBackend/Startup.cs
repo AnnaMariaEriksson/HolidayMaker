@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using HolidayMakerBackend.Data;
 
 namespace HolidayMakerBackend
 {
@@ -26,6 +28,9 @@ namespace HolidayMakerBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<HolidayMakerBackendContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("HolidayMakerBackendContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
