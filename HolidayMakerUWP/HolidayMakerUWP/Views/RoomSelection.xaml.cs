@@ -73,17 +73,16 @@ namespace HolidayMakerUWP.Views
 
         private void Allinclusive_Click(object sender, RoutedEventArgs e)
         {
-            Room AllInclusiveRoom = (Room)((FrameworkElement)sender).DataContext;
-            Vm.Rooms.Remove(AllInclusiveRoom);
-            if (AllInclusiveRoom.IsAllInclusive == false)
+            if (((Room)((FrameworkElement)sender).DataContext).IsAllInclusive == false)
             {
-                AllInclusiveRoom.IsAllInclusive = true;
+                ((Room)((FrameworkElement)sender).DataContext).IsAllInclusive = true;
+                Debug.WriteLine(((Room)((FrameworkElement)sender).DataContext).IsAllInclusive);
             }
             else
             {
-                AllInclusiveRoom.IsAllInclusive = false;
+                ((Room)((FrameworkElement)sender).DataContext).IsAllInclusive = false;
+                Debug.WriteLine(((Room)((FrameworkElement)sender).DataContext).IsAllInclusive);
             }
-            Vm.Rooms.Add(AllInclusiveRoom);
         }
     }
 }

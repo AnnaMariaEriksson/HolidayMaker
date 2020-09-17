@@ -93,7 +93,7 @@
                                     <TextBlock Text="{x:Bind Price}"/>
                                     <TextBlock Text="{x:Bind RoomName}"/>
                                     <StackPanel Margin="0,0,0,10">
-                                        <Button x:Name="Allinclusive" Command="{Binding ElementName= RoomListView, Path=DataContext.AddAllInclusive}" Content="Allinclusive 900kr" Click="Allinclusive_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=HasAllInclusive, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasAllInclusive, Converter={StaticResource bool2vis}}"/>
+                                        <Button x:Name="Allinclusive" Command="{Binding ElementName= RoomListView, Path=DataContext.AddAllInclusive}" Content="Allinclusive 900kr" Click="Allinclusive_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsAllInclusive, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasAllInclusive, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
                                         <Button x:Name="FullBoard" Content="Fullboard 150kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= HasFullBoard, Converter={StaticResource bool2vis}}"/>
