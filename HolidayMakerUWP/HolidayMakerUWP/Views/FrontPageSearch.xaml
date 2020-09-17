@@ -38,6 +38,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Width="189"
+                Height="50"
                 HorizontalAlignment="Center"
                 PlaceholderText="Sök efter region..." />
             <CalendarDatePicker
@@ -53,8 +54,6 @@
                 VerticalAlignment="Center"
                 Date="{x:Bind FrontPageSearchViewModel.EndDate, Mode=TwoWay}" />
 
-
-
             <Button
                 x:Name="SearchButton"
                 Grid.Row="1"
@@ -66,26 +65,28 @@
 
         </Grid>
 
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="1"
-            Background="Bisque">
-            <TextBox
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock
                 x:Name="IfNotFoundLabel"
                 FontSize="40"
-                IsEnabled="False"
-                IsReadOnly="True"
-                Text="Väntar på sökresultat..." />
+                Text="Väntar på sökresultat..."
+                TextAlignment="Center" />
             <ListView
                 x:Name="GetAllRegionsListView"
                 IsItemClickEnabled="True"
                 ItemClick="GetAllRegionsListView_OnItemClick"
                 ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="center" />
+                    </Style>
+                </ListView.ItemContainerStyle>
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:City">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Bind NameOfCity}" />
+                            <TextBlock FontWeight="Bold" Text="{x:Bind NameOfCity}" />
                         </StackPanel>
 
                     </DataTemplate>
