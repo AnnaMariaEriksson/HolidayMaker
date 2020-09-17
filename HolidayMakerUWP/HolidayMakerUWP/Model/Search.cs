@@ -18,7 +18,7 @@ namespace HolidayMakerUWP.Model
         public bool HasChildrensClub { get; set; }
         public bool HasEntertainment { get; set; }
         public bool HasPool { get; set; }
-        public DateTimeOffset StartDate { get; set; }
-        public DateTimeOffset EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
