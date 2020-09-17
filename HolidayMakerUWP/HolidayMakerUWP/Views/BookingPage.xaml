@@ -123,11 +123,11 @@
 
                         <StackPanel VerticalAlignment="Top"
                                     Height="250">
-                            <TextBlock Text="Johan"
+                            <TextBlock Text="{x:Bind bookingPageViewModel.user1.FirstName}"
                                        FontSize="24" />
-                            <TextBlock Text="Svensson"
+                            <TextBlock Text="{x:Bind bookingPageViewModel.user1.LastName}"
                                        FontSize="24" />
-                            <TextBlock Text="Johan.Svensson@gmail.com"
+                            <TextBlock Text="{x:Bind bookingPageViewModel.user1.Email}"
                                        FontSize="24" />
                             <TextBox x:Name="TeleNummer"
                                      PlaceholderText="Ange telefonmummer"

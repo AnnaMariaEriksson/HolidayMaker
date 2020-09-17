@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.Model;
+﻿using HolidayMakerUWP.DAL;
+using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;

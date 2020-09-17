@@ -136,6 +136,34 @@ namespace HolidayMakerUWP.DAL
 
             return Regions;
         }
-    }
 
+        public User GetUser()
+        {
+            User user1 = new User()
+            {
+                UserID = 1,
+                Password = "Skander123",
+                FirstName = "Skander",
+                LastName = "Damoussi",
+                Email = "Skander.Damoussi@gmail.com",
+                UserBookings = new ObservableCollection<Booking>
+                {
+                    new Booking()
+                    {
+                        BookingID = 1,
+                        EndDate = DateTime.Now,
+                        StartDate = DateTime.Now
+                    },
+                    new Booking()
+                    {
+                        BookingID = 2,
+                        EndDate = DateTime.Now,
+                        StartDate = DateTime.Now
+                    }
+                }
+            };
+            
+            return user1;
+        }
+    }
 }

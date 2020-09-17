@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.Model;
+﻿using HolidayMakerUWP.DAL;
+using HolidayMakerUWP.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,10 @@ namespace HolidayMakerUWP.Viewmodel
 {
     public class BookingPageViewModel
     {
+        HotelsService hotelServiceDal;
         public double totalPrice;
+        public User user1 { get { return hotelServiceDal.GetUser(); } set { user1 = value; } }
+
         public ObservableCollection<Room> _selectedRooms { get; set; }
         public ObservableCollection<Room> SelectedRooms
         {
@@ -23,6 +27,10 @@ namespace HolidayMakerUWP.Viewmodel
             {
                 _selectedRooms = value;
             }
+        }
+        public BookingPageViewModel()
+        {
+            this.hotelServiceDal = new HotelsService();
         }
 
         public async void BookingMessageDialog()
