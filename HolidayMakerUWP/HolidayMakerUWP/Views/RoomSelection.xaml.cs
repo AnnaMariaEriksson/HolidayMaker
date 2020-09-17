@@ -3,6 +3,7 @@ using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -68,6 +69,21 @@ namespace HolidayMakerUWP.Views
         {
             var SelectedRooms = Vm.RoomBasket;
             Frame.Navigate(typeof(BookingPage), SelectedRooms);
+        }
+
+        private void Allinclusive_Click(object sender, RoutedEventArgs e)
+        {
+            Room AllInclusiveRoom = (Room)((FrameworkElement)sender).DataContext;
+            Vm.Rooms.Remove(AllInclusiveRoom);
+            if (AllInclusiveRoom.IsAllInclusive == false)
+            {
+                AllInclusiveRoom.IsAllInclusive = true;
+            }
+            else
+            {
+                AllInclusiveRoom.IsAllInclusive = false;
+            }
+            Vm.Rooms.Add(AllInclusiveRoom);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace HolidayMakerUWP.DAL
                 Price = 3999,
                 ExtraBed = true,
                 HasAllInclusive = true,
-                IsAllInclusive = true,
+                IsAllInclusive = false,
                 HasFullBoard = true,
                 HasHalfBoard = true,
                 RoomName = "Suite rum"
