@@ -20,7 +20,7 @@ namespace HolidayMakerUWP.BoolConverter
         {
             Debug.WriteLine(value);
             SolidColorBrush color;
-            if (value is bool && (bool)value)
+            if ((bool)value)
             {
                 color = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
             }
