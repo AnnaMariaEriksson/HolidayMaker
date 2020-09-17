@@ -125,7 +125,6 @@
     <Compile Include="Model\Hotel.cs" />
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
-    <Compile Include="Model\Search.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Viewmodel\BookingPageViewModel.cs" />
     <Compile Include="Viewmodel\FrontPageSearchViewModel.cs" />
