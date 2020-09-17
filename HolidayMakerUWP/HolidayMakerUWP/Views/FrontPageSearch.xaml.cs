@@ -1,6 +1,17 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 using HolidayMakerUWP.DAL;
 using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
@@ -27,6 +38,16 @@ namespace HolidayMakerUWP
             GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.TempCity;
         }
 
+        private void DecreaseOneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void IncreaseOneButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         public async void GetAllCitiesInRegion()
         {
             var cities = await HotelsService.GetAllCitiesAsync();
@@ -42,10 +63,9 @@ namespace HolidayMakerUWP
             FrontPageSearchViewModel.TempCity.Clear();
             var region = FrontPageSearchViewModel.Regions;
             var cities = FrontPageSearchViewModel.Cities;
-            var tempCity = FrontPageSearchViewModel.TempCity;
-            var startDate = FrontPageSearchViewModel.StartDate;
-            var EndDate = FrontPageSearchViewModel.EndDate;
             var searchString = SearchField.Text;
+            var endDate = EndDate.MaxDate;
+            var startDate = StartDate.MinDate;
 
             foreach (Regions r in region)
             {
@@ -57,13 +77,15 @@ namespace HolidayMakerUWP
                         if (city.RegionID == r.RegionID)
                         {
                             //TODO do something...
-                           tempCity.Add(city);
+                           FrontPageSearchViewModel.TempCity.Add(city);
                         }
                     }
+                   
+                    
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }
-                if (tempCity.Count() == 0)
+                if (FrontPageSearchViewModel.TempCity.Count() == 0)
                 {
                     IfNotFoundLabel.Text = "Tyvärr, vi hittade inget som matchade din sökning.";
                 }
@@ -74,10 +96,9 @@ namespace HolidayMakerUWP
             }
 
         }
-        private void GetAllRegionsListView_OnItemClick(object sender, ItemClickEventArgs e)
+
+        private void ChooseCityButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO make sure the dates and all other info comes with to the other page with this click.
-            
             this.Frame.Navigate(typeof(HotelSearch));
         }
     }
