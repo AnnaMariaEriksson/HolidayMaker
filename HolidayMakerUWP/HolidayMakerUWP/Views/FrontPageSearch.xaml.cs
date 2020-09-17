@@ -28,7 +28,6 @@ namespace HolidayMakerUWP
     {
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public HotelsService HotelsService { get; set; }
-        public Search Search { get; set; }
         public City City { get; set; }
 
         public FrontPageSearch()
@@ -54,9 +53,10 @@ namespace HolidayMakerUWP
             FrontPageSearchViewModel.TempCity.Clear();
             var region = FrontPageSearchViewModel.Regions;
             var cities = FrontPageSearchViewModel.Cities;
+            var tempCity = FrontPageSearchViewModel.TempCity;
+            var startDate = FrontPageSearchViewModel.StartDate;
+            var EndDate = FrontPageSearchViewModel.EndDate;
             var searchString = SearchField.Text;
-            var endDate = EndDate.MaxDate;
-            var startDate = StartDate.MinDate;
 
             foreach (Regions r in region)
             {
@@ -68,15 +68,13 @@ namespace HolidayMakerUWP
                         if (city.RegionID == r.RegionID)
                         {
                             //TODO do something...
-                           FrontPageSearchViewModel.TempCity.Add(city);
+                           tempCity.Add(city);
                         }
                     }
-                   
-                    //TODO add use for start and end dates.
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }
-                if (FrontPageSearchViewModel.TempCity.Count() == 0)
+                if (tempCity.Count() == 0)
                 {
                     IfNotFoundLabel.Text = "Tyvärr, vi hittade inget som matchade din sökning.";
                 }
