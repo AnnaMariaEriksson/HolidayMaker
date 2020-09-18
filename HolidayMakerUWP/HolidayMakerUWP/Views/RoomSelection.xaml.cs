@@ -103,5 +103,33 @@ namespace HolidayMakerUWP.Views
             }
         }
 
+        private void FullBoard_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Room)((FrameworkElement)sender).DataContext).IsFullBoard == false)
+            {
+
+                Room test1 = (Room)((FrameworkElement)sender).DataContext;
+                test1.IsFullBoard = true;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test1)
+                    {
+                        Vm.Rooms[i] = test1;
+                    }
+                }
+            }
+            else
+            {
+                Room test1 = (Room)((FrameworkElement)sender).DataContext;
+                test1.IsFullBoard = false;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test1)
+                    {
+                        Vm.Rooms[i] = test1;
+                    }
+                }
+            }
+        }
     }
 }

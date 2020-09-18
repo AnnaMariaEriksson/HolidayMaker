@@ -108,10 +108,9 @@
                                     <TextBlock Text="{x:Bind RoomName}"/>
                                     <StackPanel Margin="0,0,0,10">
                                         <Button x:Name="Allinclusive" Command="{Binding ElementName= RoomListView, Path=DataContext.AddAllInclusiveBtn}" CommandParameter="{Binding}" Content="Allinclusive 900kr" Click="Allinclusive_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsAllInclusive, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasAllInclusive, Converter={StaticResource bool2vis}}"/>
-                                        <TextBlock Text="{x:Bind IsAllInclusive,Mode=TwoWay}" />
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
-                                        <Button x:Name="FullBoard" Content="Fullboard 150kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= HasFullBoard, Converter={StaticResource bool2vis}}"/>
+                                        <Button x:Name="FullBoard" Command="{Binding ElementName= RoomListView, Path=DataContext.AddFullBoardBtn}" CommandParameter="{Binding}" Content="Fullboard 150kr" Click="FullBoard_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsFullBoard, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasFullBoard, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
                                         <Button x:Name="HalfBoard" Content="Halfboard 200kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= HasHalfBoard, Converter={StaticResource bool2vis}}"/>
