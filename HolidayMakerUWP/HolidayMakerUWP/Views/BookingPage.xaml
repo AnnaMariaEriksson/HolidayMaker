@@ -46,6 +46,15 @@
                     FontSize="24"
                     Background="CornflowerBlue"
                     FontWeight="SemiBold" />
+            <Button 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Avbryt bokning"
+                    FontSize="24"
+                    Background="CornflowerBlue"
+                    FontWeight="SemiBold" />
             <StackPanel Grid.Row="1"
                         Grid.Column="0"
                         Orientation="Vertical"
