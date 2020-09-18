@@ -71,5 +71,22 @@ namespace HolidayMakerUWP.Views
             bookingPageViewModel.updateTotalPrice();
             totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
         }
+
+        private void CancelBookingBtn_Click(object sender, RoutedEventArgs e)
+        {
+        //    ContentDialog cancelOrderDialog = new ContentDialog()
+        //    {
+        //        Title = "Avbryt bokning",
+        //        Content = "Vill du verkligen avbryta bokningen!",
+        //        CloseButtonText = "Nej",
+        //        PrimaryButtonText = "Ja"
+
+        //    };
+
+
+
+
+        //    await cancelOrderDialog.ShowAsync();
+        }
     }
 }

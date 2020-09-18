@@ -46,7 +46,8 @@
                     FontSize="24"
                     Background="CornflowerBlue"
                     FontWeight="SemiBold" />
-            <Button 
+            <Button x:Name="CancelBookingBtn"
+                    Click="CancelBookingBtn_Click"
                     Grid.Row="2"
                     Grid.Column="0"
                     HorizontalAlignment="Left"
@@ -54,7 +55,17 @@
                     Content="Avbryt bokning"
                     FontSize="24"
                     Background="CornflowerBlue"
-                    FontWeight="SemiBold" />
+                    FontWeight="SemiBold">
+                <Button.Flyout>
+                    <Flyout Placement="Auto" x:Name="cancelBookingFlyOut">
+                        <StackPanel>
+                            <Button Content="Ja"/>
+                            <Button Content="Nej" />
+                        </StackPanel> 
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            
             <StackPanel Grid.Row="1"
                         Grid.Column="0"
                         Orientation="Vertical"
