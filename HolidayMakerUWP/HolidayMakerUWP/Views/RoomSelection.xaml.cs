@@ -4,6 +4,8 @@ using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -59,11 +61,6 @@ namespace HolidayMakerUWP.Views
             //kolla om användaren är inloggad och lägg rätt knappar
         }
 
-        private void Skander()
-        {
-            Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
-        }
-
         private void roomToBasket_Click(object sender, RoutedEventArgs e)
         {
             Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
@@ -76,5 +73,35 @@ namespace HolidayMakerUWP.Views
             var SelectedRooms = Vm.RoomBasket;
             Frame.Navigate(typeof(BookingPage), SelectedRooms);
         }
+
+        private void Allinclusive_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Room)((FrameworkElement)sender).DataContext).IsAllInclusive == false)
+            {
+
+              Room test = (Room)((FrameworkElement)sender).DataContext;
+                test.IsAllInclusive = true;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test)
+                    {
+                        Vm.Rooms[i] = test;
+                    }
+                }
+            }
+            else
+            {
+                Room test = (Room)((FrameworkElement)sender).DataContext;
+                test.IsAllInclusive = false;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test)
+                    {
+                        Vm.Rooms[i] = test;
+                    }
+                }
+            }
+        }
+
     }
 }
