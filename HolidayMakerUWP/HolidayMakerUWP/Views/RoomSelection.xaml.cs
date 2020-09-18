@@ -1,8 +1,11 @@
-﻿using HolidayMakerUWP.Model;
+﻿using HolidayMakerUWP.DAL;
+using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,15 +29,16 @@ namespace HolidayMakerUWP.Views
     public sealed partial class RoomSelection : Page
     {
         public RoomSelectionVm Vm { get; set; }
+        public HotelsService ServiceVm;
         public RoomSelection()
         {
             this.InitializeComponent();
-            this.Vm = new RoomSelectionVm();    
+            this.Vm = new RoomSelectionVm();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Vm._selectedhotel = (Hotel)e.Parameter;
+            Vm._selectedhotel = HotelsService.SelectedHotel;
             Vm.GetFascilities();
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -57,11 +61,6 @@ namespace HolidayMakerUWP.Views
             //kolla om användaren är inloggad och lägg rätt knappar
         }
 
-        private void Skander()
-        {
-            Vm.selectedRooms.Add((Room)RoomListView.SelectedItem);
-        }
-
         private void roomToBasket_Click(object sender, RoutedEventArgs e)
         {
             Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
@@ -74,5 +73,35 @@ namespace HolidayMakerUWP.Views
             var SelectedRooms = Vm.RoomBasket;
             Frame.Navigate(typeof(BookingPage), SelectedRooms);
         }
+
+        private void Allinclusive_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Room)((FrameworkElement)sender).DataContext).IsAllInclusive == false)
+            {
+
+              Room test = (Room)((FrameworkElement)sender).DataContext;
+                test.IsAllInclusive = true;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test)
+                    {
+                        Vm.Rooms[i] = test;
+                    }
+                }
+            }
+            else
+            {
+                Room test = (Room)((FrameworkElement)sender).DataContext;
+                test.IsAllInclusive = false;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test)
+                    {
+                        Vm.Rooms[i] = test;
+                    }
+                }
+            }
+        }
+
     }
 }

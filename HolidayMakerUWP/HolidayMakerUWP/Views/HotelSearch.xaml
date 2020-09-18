@@ -138,7 +138,7 @@
                        FontSize="40"
                        Grid.Row="0" />
             <ListView Grid.Row="1"
-                      ItemsSource="{x:Bind Vm.Hotels}"
+                      ItemsSource="{x:Bind Vm.Hotels,Mode=TwoWay}"
                       x:Name="HotelList"
                       SelectionChanged="HotelList_SelectionChanged">
                 <ListView.ItemContainerStyle>

@@ -13,6 +13,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Documents;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace HolidayMakerUWP.Viewmodel
 {
@@ -58,8 +59,8 @@ namespace HolidayMakerUWP.Viewmodel
             FilterBtn = new RelayCommand<string>(FilterToggle);
             Filters = new Dictionary<string, object>();
             this._service = new HotelsService();
-            _hotels = _service.GetHotels();
-            TempHotel = _service.GetHotels();
+            _hotels = Task.Run(() => HotelsService.GetHotels()).Result;
+            TempHotel = Task.Run(() => HotelsService.GetHotels()).Result;
             DistansToBeach = 50;
             DistansToCenter = 50;
         }
