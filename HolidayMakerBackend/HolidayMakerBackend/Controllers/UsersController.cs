@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace HolidayMakerBackend.Controllers
 {
@@ -29,14 +30,14 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Users/Email
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(Login login)
+        [HttpGet("{email}/{password}")]
+        public async Task<ActionResult<User>> GetUser(string password, string email)
         {
-            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == login.Email);
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email);
 
-            if(user.Password == login.Password)
+            if(user.Password == password)
             {
-                return Ok();
+                return Ok(user);
             }
 
             return NotFound("Password or email is wrong.");
@@ -80,7 +81,8 @@ namespace HolidayMakerBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            if (_context.User.FirstOrDefaultAsync(u => u.Email == user.Email) != null)
+            var tempUser = _context.User.FirstOrDefaultAsync(u => u.Email == user.Email).Result;
+            if ( tempUser == null)
             {
                 _context.User.Add(user);
                 await _context.SaveChangesAsync();
