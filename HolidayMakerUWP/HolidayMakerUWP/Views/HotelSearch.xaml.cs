@@ -51,7 +51,6 @@ namespace HolidayMakerUWP.Views
             HasEntertainment = false;
             HasPool = false;
             this.Vm = new HotelSearchVm();
-            this._service = new HotelsService();
             SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
             CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
 
@@ -193,7 +192,8 @@ namespace HolidayMakerUWP.Views
         private void HotelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Hotel SelectedHotel = (Hotel)HotelList.SelectedItem;
-            Frame.Navigate(typeof(RoomSelection), SelectedHotel);
+            HotelsService.SelectedHotel = SelectedHotel;
+            Frame.Navigate(typeof(RoomSelection));
         }
 
        

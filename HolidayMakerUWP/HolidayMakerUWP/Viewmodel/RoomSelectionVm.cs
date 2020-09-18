@@ -14,6 +14,7 @@ namespace HolidayMakerUWP.Viewmodel
     public class RoomSelectionVm
     {
         public HotelsService Vm;
+        public HotelsService ServiceVm;
         public ICommand AddRoomBtn { get; set; }
         public ObservableCollection<Room> _roomBasket { get; set; }
         public ObservableCollection<Room> RoomBasket
@@ -80,7 +81,8 @@ namespace HolidayMakerUWP.Viewmodel
         {
             this.Vm = new HotelsService();
             _roomBasket = new ObservableCollection<Room>();
-            _rooms = Vm.GetRooms();
+            _rooms = Task.Run(() => HotelsService.GetRooms(HotelsService.SelectedHotel.HotelID)).Result;
+            
         }
         public void AddRoomToBasket(Room selectedRoom)
         {
