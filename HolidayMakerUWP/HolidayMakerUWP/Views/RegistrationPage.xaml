@@ -30,23 +30,24 @@
             Grid.Column="1"
             Width="250">
 
-            <TextBlock Text="Förnamn" />
+            <TextBlock x:Name="FirstNameField" Text="Förnamn" />
             <TextBox />
 
-            <TextBlock Text="Efternamn" />
+            <TextBlock x:Name="LastNameField" Text="Efternamn" />
             <TextBox />
 
-            <TextBlock Text="Email" />
+            <TextBlock x:Name="EmailField" Text="Email" />
             <TextBox />
 
-            <TextBlock Text="Lösenord" />
+            <TextBlock x:Name="PasswordField" Text="Lösenord" />
             <TextBox />
 
-            <TextBlock Text="Repetera lösenord" />
+            <TextBlock x:Name="RepeatPasswordField" Text="Repetera lösenord" />
             <TextBox />
             <Button
                 x:Name="AddUserButton"
                 HorizontalAlignment="Right"
+                Click="AddUserButton_OnClick"
                 Content="Register" />
         </StackPanel>
 

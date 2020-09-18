@@ -42,5 +42,10 @@ namespace HolidayMakerUWP
         {
             this.Frame.Navigate(typeof(MyBookingPage));
         }
+
+        private void RegistrationPage_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RegistrationPage));
+        }
     }
 }
