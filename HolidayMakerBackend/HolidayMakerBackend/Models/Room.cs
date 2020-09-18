@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace HolidayMakerUWP.Model
+namespace HolidayMakerBackend.Models
 {
     public class Room
     {
@@ -17,6 +16,10 @@ namespace HolidayMakerUWP.Model
         public bool HasFullBoard { get; set; }
         public bool HasHalfBoard { get; set; }
         public string RoomName { get; set; }
-        public int BookingID { get; set; }
+
+        public Room()
+        {
+
+        }
     }
 }
