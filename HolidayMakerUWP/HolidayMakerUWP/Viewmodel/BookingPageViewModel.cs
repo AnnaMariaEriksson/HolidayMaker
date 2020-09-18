@@ -14,7 +14,7 @@ namespace HolidayMakerUWP.Viewmodel
     {
         HotelsService hotelServiceDal;
         public double totalPrice;
-        public User user1 { get { return hotelServiceDal.GetUser(); } set { user1 = value; } }
+       
 
         public ObservableCollection<Room> _selectedRooms { get; set; }
         public ObservableCollection<Room> SelectedRooms
