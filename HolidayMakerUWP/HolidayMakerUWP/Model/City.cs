@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,9 @@ namespace HolidayMakerUWP.Model
         public int CityID { get; set; }
         public int RegionID { get; set; }
         public string NameOfCity { get; set; }
-        public List<Hotel> Hotels { get; set; }
+        public ObservableCollection<Hotel> Hotels { get; set; }
 
-        public City(int cityId, int regionId, string nameOfCity, List<Hotel> hotels)
+        public City(int cityId, int regionId, string nameOfCity, ObservableCollection<Hotel> hotels)
         {
             this.CityID = cityId;
             this.RegionID = regionId;

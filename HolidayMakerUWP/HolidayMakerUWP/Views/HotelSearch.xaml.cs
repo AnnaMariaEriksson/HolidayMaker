@@ -51,7 +51,6 @@ namespace HolidayMakerUWP.Views
             HasEntertainment = false;
             HasPool = false;
             this.Vm = new HotelSearchVm();
-            this._service = new HotelsService();
             SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
             CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
 
@@ -59,7 +58,6 @@ namespace HolidayMakerUWP.Views
 
         private void SeaDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            FilterSlides();
             if (Vm.DistansToBeach == 50)
             {
                 SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
@@ -68,12 +66,11 @@ namespace HolidayMakerUWP.Views
             {
                 SeaDistansValue.Text = Vm.DistansToBeach + "Km";
             }
-          
+
         }
 
         private void CenterDistansSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            FilterSlides();
             if (CenterDistansSlider.Value == 50)
             {
                 CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
@@ -82,24 +79,7 @@ namespace HolidayMakerUWP.Views
             {
                 CenterDistansValue.Text = Vm.DistansToCenter + "Km";
             }
-            
-        }
 
-        public void FilterSlides()
-        {
-          //  ObservableCollection<Hotel> te = new ObservableCollection<Hotel>();
-          //  ObservableCollection<Hotel> th = new ObservableCollection<Hotel>();
-          //  foreach (Hotel h in _service.GetHotels())
-          //  {
-          //      if ( h.DistansToBeach >= Vm.DistansToBeach)
-          //      {
-          //          te.Add(h);
-          //      }
-          //  }
-
-          //Vm.RemoveFilteredHotels(te);
-
-           
         }
 
         private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
@@ -212,7 +192,10 @@ namespace HolidayMakerUWP.Views
         private void HotelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Hotel SelectedHotel = (Hotel)HotelList.SelectedItem;
-            Frame.Navigate(typeof(RoomSelection), SelectedHotel);
+            HotelsService.SelectedHotel = SelectedHotel;
+            Frame.Navigate(typeof(RoomSelection));
         }
+
+       
     }
 }

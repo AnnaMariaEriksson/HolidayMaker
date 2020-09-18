@@ -27,5 +27,11 @@
             Click="NavigateToFrontPageSearch_OnClick"
             Content="Front Page search!"
             FontSize="60" Margin="0,200,896,0" />
+        <Button VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Content="My Booking page"
+                FontSize="60"
+                x:Name="MyBookingPage"
+                Click="MyBookingPage_Click"/>
     </Grid>
 </Page>
