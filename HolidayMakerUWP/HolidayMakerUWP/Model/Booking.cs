@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HolidayMakerUWP.Model
 {
-    class Booking
+    public class Booking
     {
     }
 }

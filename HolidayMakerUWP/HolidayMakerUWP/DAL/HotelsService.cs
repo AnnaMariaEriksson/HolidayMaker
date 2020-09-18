@@ -15,14 +15,10 @@ namespace HolidayMakerUWP.DAL
 {
     public class HotelsService
     {
-
-        private HttpClient httpClient;
-
         private string roomURL = "";
-
         private string regionURL = "";
-
         private string cityURL = "";
+        private static string userURL = "";
 
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
 
@@ -64,44 +60,85 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.Dispose();
                 return Rooms;
             }
-
-
         }
 
         public async Task<ObservableCollection<Room>> GetAllRoomsAsync()
         {
-            var jsonRooms = await httpClient.GetStringAsync(roomURL);
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                var jsonRooms = await httpClient1.GetStringAsync(roomURL);
 
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.MissingMemberHandling = MissingMemberHandling.Error;
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            var rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonRooms, settings);
+                var rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonRooms, settings);
 
-            return rooms;
+                return rooms;
+            }
         }
 
         public async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
         {
-            var jsonRegions = await httpClient.GetStringAsync(regionURL);
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                var jsonRegions = await httpClient1.GetStringAsync(regionURL);
 
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.MissingMemberHandling = MissingMemberHandling.Error;
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            var regions = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonRegions, settings);
+                var regions = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonRegions, settings);
 
-            return regions;
+                return regions;
+            }
+            
         }
 
         public async Task<ObservableCollection<City>> GetAllCitiesAsync()
         {
-            var jsonCities = await httpClient.GetStringAsync(cityURL);
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                var jsonCities = await httpClient1.GetStringAsync(cityURL);
 
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.MissingMemberHandling = MissingMemberHandling.Error;
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.MissingMemberHandling = MissingMemberHandling.Error;
 
-            var cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonCities, settings);
+                var cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonCities, settings);
 
-            return cities;
+                return cities;
+            }
+            
+        }
+
+        public async Task<ObservableCollection<User>> GetAllUsersAsync()
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                var jsonUsers = await httpClient1.GetStringAsync(userURL);
+
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.MissingMemberHandling = MissingMemberHandling.Error;
+
+                var users = JsonConvert.DeserializeObject<ObservableCollection<User>>(userURL, settings);
+
+                return users;
+            }
+            
+        }
+
+        public static async Task<User> AddUsersAsync(User user)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                var users = JsonConvert.SerializeObject(user);
+                HttpContent httpContent = new StringContent(users);
+
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var response = await httpClient1.PostAsync(userURL, httpContent);
+                var content = await response.Content.ReadAsStringAsync();
+                user = JsonConvert.DeserializeObject<User>(content);
+
+                return user;
+            }
         }
 
 
