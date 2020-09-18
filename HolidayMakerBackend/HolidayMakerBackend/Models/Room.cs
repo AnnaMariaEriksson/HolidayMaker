@@ -16,7 +16,6 @@ namespace HolidayMakerBackend.Models
         public bool HasFullBoard { get; set; }
         public bool HasHalfBoard { get; set; }
         public string RoomName { get; set; }
-        public int NumberOfBeds { get; set; }
 
         public Room()
         {

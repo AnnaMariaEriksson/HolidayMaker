@@ -1,4 +1,5 @@
-﻿using HolidayMakerUWP.Model;
+﻿using HolidayMakerUWP.DAL;
+using HolidayMakerUWP.Model;
 using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System;
@@ -26,15 +27,16 @@ namespace HolidayMakerUWP.Views
     public sealed partial class RoomSelection : Page
     {
         public RoomSelectionVm Vm { get; set; }
+        public HotelsService ServiceVm;
         public RoomSelection()
         {
             this.InitializeComponent();
-            this.Vm = new RoomSelectionVm();    
+            this.Vm = new RoomSelectionVm();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Vm._selectedhotel = (Hotel)e.Parameter;
+            Vm._selectedhotel = HotelsService.SelectedHotel;
             Vm.GetFascilities();
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)

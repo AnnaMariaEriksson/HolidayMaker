@@ -13,6 +13,7 @@ namespace HolidayMakerBackend.Models
         public int DistansToBeach { get; set; }
         public int DistansToCenter { get; set; }
         public bool HasAllInclusive { get; set; }
+
         public bool HasFullBoard { get; set; }
         public bool HasHalfBoard { get; set; }
         public bool HasRestaurant { get; set; }

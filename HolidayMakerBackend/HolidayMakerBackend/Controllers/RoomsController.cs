@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
 using System.Collections.ObjectModel;
+using Microsoft.AspNetCore.Routing;
 
 namespace HolidayMakerBackend.Controllers
 {
@@ -22,45 +23,34 @@ namespace HolidayMakerBackend.Controllers
             _context = context;
         }
 
-        // GET: api/Rooms
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRoom(DateTime start,DateTime end,int HotelId)
+        // GET: api/Rooms/HotelId
+        [HttpGet("{HotelId}")]
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId)
         {
           ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
-          await foreach(Booking b in _context.Booking)
-            {
-               if(b.StartDate < start && b.EndDate < end)
-                {
-                    foreach(Room r in b.BookingRooms)
+
+              
+                  await foreach(Room r in _context.Room)
                     {
+                        if(r.HotelID == HotelId)
                         TempRooms.Add(r);
                     }
-                }
-            }
-
-          foreach(Room r in TempRooms)
-            {
-                if(r.HotelID != HotelId)
-                {
-                    TempRooms.Remove(r);
-                }
-            }
             return TempRooms;
         }
 
-        // GET: api/Rooms/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
-        {
-            var room = await _context.Room.FindAsync(id);
+        //// GET: api/Rooms/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Room>> GetRoom(int id)
+        //{
+        //    var room = await _context.Room.FindAsync(id);
 
-            if (room == null)
-            {
-                return NotFound();
-            }
+        //    if (room == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return room;
-        }
+        //    return room;
+        //}
 
         // PUT: api/Rooms/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
