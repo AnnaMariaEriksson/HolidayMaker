@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -22,10 +23,24 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Cities
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<City>>> GetCity()
+    [HttpGet("{RegionID}")]
+
+    public async Task<ActionResult<IEnumerable<City>>> GetCity(int regionID, DateTimeOffset startDate, DateTimeOffset endDate)
         {
-            return await _context.City.ToListAsync();
+            ObservableCollection<City> tempCities = new ObservableCollection<City>();
+            //TODO add dates
+
+            await foreach (City city in _context.City)
+            {
+                if (city.CityID == regionID)
+                {
+                    tempCities.Add(city);
+                }
+            }
+            
+            return tempCities;
+
+            //return await _context.City.ToListAsync();
         }
 
         // GET: api/Cities/5
