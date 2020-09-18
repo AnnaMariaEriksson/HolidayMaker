@@ -80,7 +80,7 @@ namespace HolidayMakerBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            if (_context.User.FirstOrDefaultAsync(u => u.Email == user.Email) == null)
+            if (_context.User.FirstOrDefaultAsync(u => u.Email == user.Email) != null)
             {
                 _context.User.Add(user);
                 await _context.SaveChangesAsync();
