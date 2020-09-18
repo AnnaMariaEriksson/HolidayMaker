@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
-using HolidayMakerBackend.Model;
+using HolidayMakerBackend.Models;
 
 namespace HolidayMakerBackend.Controllers
 {

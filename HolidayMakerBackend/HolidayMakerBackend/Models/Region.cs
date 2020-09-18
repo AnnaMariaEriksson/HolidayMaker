@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HolidayMakerBackend.Model
+namespace HolidayMakerBackend.Models
 {
     public class Region
     {
