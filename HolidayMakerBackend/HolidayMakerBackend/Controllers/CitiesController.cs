@@ -37,7 +37,7 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Cities
-        [HttpGet("{RegionID}")]
+        /*[HttpGet("{RegionID}")]
 
     public async Task<ActionResult<IEnumerable<City>>> GetCity(int regionID, DateTimeOffset startDate, DateTimeOffset endDate)
         {
@@ -56,7 +56,7 @@ namespace HolidayMakerBackend.Controllers
             return tempCities;
 
             //return await _context.City.ToListAsync();
-        }
+        }*/
 
         // GET: api/Cities/5
         [HttpGet("{id}")]

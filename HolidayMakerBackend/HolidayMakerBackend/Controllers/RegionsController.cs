@@ -28,12 +28,12 @@ namespace HolidayMakerBackend.Controllers
         {
             var regions = await _context.Region
                 .Include(r => r.Cities)
-                .ThenInclude(c => c.Hotels)
+                //.ThenInclude(c => c.Hotels)
                 .ToListAsync();
 
             return Ok(regions);
 
-            //return await _context.Region.ToListAsync();
+            return await _context.Region.ToListAsync();
         }
 
         // GET: api/Regions/5

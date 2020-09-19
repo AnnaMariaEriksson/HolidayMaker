@@ -23,8 +23,16 @@ namespace HolidayMakerBackend.Controllers
             _context = context;
         }
 
+        // GET: api/Rooms
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        {
+
+            return await _context.Room.ToListAsync();
+        }
+
         // GET: api/Rooms/HotelId
-        [HttpGet("{HotelId}")]
+        /*[HttpGet("{HotelId}")]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId)
         {
           ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
@@ -36,7 +44,7 @@ namespace HolidayMakerBackend.Controllers
                         TempRooms.Add(r);
                     }
             return TempRooms;
-        }
+        }*/
 
         //// GET: api/Rooms/5
         //[HttpGet("{id}")]

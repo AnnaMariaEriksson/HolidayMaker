@@ -19,6 +19,7 @@ namespace HolidayMakerUWP
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public HotelsService HotelsService { get; set; }
         public City City { get; set; }
+        public Regions Region { get; set; }
 
         public FrontPageSearch()
         {
@@ -28,7 +29,7 @@ namespace HolidayMakerUWP
             GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.TempCity;
         }
 
-        public async void GetAllCitiesInRegion()
+        public async void GetAllCitiesInRegions()
         {
             var cities = await HotelsService.GetAllCitiesAsync();
 
@@ -40,6 +41,7 @@ namespace HolidayMakerUWP
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
+            //GetAllCitiesInRegions();
             FrontPageSearchViewModel.TempCity.Clear();
             var region = FrontPageSearchViewModel.Regions;
             var cities = FrontPageSearchViewModel.Cities;
