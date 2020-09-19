@@ -31,19 +31,17 @@
             Width="250">
 
             <TextBlock x:Name="FirstNameField" Text="Förnamn" />
-            <TextBox />
+            <TextBox Text="{x:Bind User.FirstName}" />
 
             <TextBlock x:Name="LastNameField" Text="Efternamn" />
-            <TextBox />
+            <TextBox Text="{x:Bind User.LastName}" />
 
             <TextBlock x:Name="EmailField" Text="Email" />
-            <TextBox />
+            <TextBox Text="{x:Bind User.Email}" />
 
             <TextBlock x:Name="PasswordField" Text="Lösenord" />
-            <TextBox />
+            <TextBox Text="{x:Bind User.Password}" />
 
-            <TextBlock x:Name="RepeatPasswordField" Text="Repetera lösenord" />
-            <TextBox />
             <Button
                 x:Name="AddUserButton"
                 HorizontalAlignment="Right"

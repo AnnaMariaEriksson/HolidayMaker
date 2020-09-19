@@ -18,7 +18,7 @@ namespace HolidayMakerUWP.DAL
         private string roomURL = "https://localhost:44368/api/rooms";
         private static string regionURL = "https://localhost:44368/api/regions";
         private static string cityURL = "https://localhost:44368/api/cities";
-        private static string userURL = "";
+        private static string userURL = "https://localhost:44368/api/users";
         
         public static Hotel SelectedHotel { get; set; }
 
