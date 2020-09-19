@@ -21,5 +21,7 @@ namespace HolidayMakerBackend.Data
         public DbSet<HolidayMakerBackend.Models.Room> Room { get; set; }
 
         public DbSet<HolidayMakerBackend.Models.Hotel> Hotel { get; set; }
+
+        public DbSet<HolidayMakerBackend.Models.City> City { get; set; }
     }
 }

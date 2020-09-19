@@ -46,6 +46,15 @@
                     FontSize="24"
                     Background="CornflowerBlue"
                     FontWeight="SemiBold" />
+            <Button 
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Avbryt bokning"
+                    FontSize="24"
+                    Background="CornflowerBlue"
+                    FontWeight="SemiBold" />
             <StackPanel Grid.Row="1"
                         Grid.Column="0"
                         Orientation="Vertical"
@@ -68,7 +77,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="All inclusive"
                                                    VerticalAlignment="Center" />
-                                        <CheckBox IsChecked="{x:Bind HasAllInclusive}"
+                                        <CheckBox IsChecked="{x:Bind IsAllInclusive}"
                                                   IsHitTestVisible="False"
                                                   Margin="3,0,0,0" />
                                     </StackPanel>
@@ -123,11 +132,11 @@
 
                         <StackPanel VerticalAlignment="Top"
                                     Height="250">
-                            <TextBlock Text="Johan"
+                            <TextBlock Text="{}"
                                        FontSize="24" />
-                            <TextBlock Text="Svensson"
+                            <TextBlock Text="{}"
                                        FontSize="24" />
-                            <TextBlock Text="Johan.Svensson@gmail.com"
+                            <TextBlock Text="{}"
                                        FontSize="24" />
                             <TextBox x:Name="TeleNummer"
                                      PlaceholderText="Ange telefonmummer"

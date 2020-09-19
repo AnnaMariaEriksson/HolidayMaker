@@ -23,6 +23,8 @@ namespace HolidayMakerBackend.Models
         public bool FilterReset { get; set; }
         public bool Test { get; set; }
         public bool Test2 { get; set; }
+
+        public int CityID { get; set; }
         public Hotel()
         {
         }

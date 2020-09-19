@@ -74,8 +74,8 @@
             <ListView
                 x:Name="GetAllRegionsListView"
                 IsItemClickEnabled="True"
-                ItemClick="GetAllRegionsListView_OnItemClick"
-                ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}">
+                ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}"
+                      SelectionChanged="GetAllRegionsListView_SelectionChanged">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"

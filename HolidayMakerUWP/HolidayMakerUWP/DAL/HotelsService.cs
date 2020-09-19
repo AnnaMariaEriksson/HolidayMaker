@@ -40,7 +40,7 @@ namespace HolidayMakerUWP.DAL
                     httpClient1.DefaultRequestHeaders.Accept.Clear();
                     httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels");
+                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels" + "/" + FrontPageSearchViewModel.Search.Cities.CityID);
 
                     Hotels = JsonConvert.DeserializeObject<ObservableCollection<Hotel>>(jsonResult);
 
@@ -130,6 +130,23 @@ namespace HolidayMakerUWP.DAL
 
         //    return Regions;
         //}
+        public static async Task<User> GetUser(string email, string password)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                User user = new User();
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpClient1.DefaultRequestHeaders.Accept.Clear();
+                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "users/" + email + "/" + password);
+
+                user = JsonConvert.DeserializeObject<User>(jsonResult);
+
+                httpClient1.Dispose();
+                return user;
+            }
+        }
     }
 
 }

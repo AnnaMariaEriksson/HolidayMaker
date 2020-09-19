@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200917235107_Initial")]
+    [Migration("20200918202847_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,12 +39,33 @@ namespace HolidayMakerBackend.Migrations
                     b.ToTable("Booking");
                 });
 
+            modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>
+                {
+                    b.Property<int>("CityID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NameOfCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegionID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CityID");
+
+                    b.ToTable("City");
+                });
+
             modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
                 {
                     b.Property<int>("HotelID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
 
                     b.Property<int>("DistansToBeach")
                         .HasColumnType("int");
