@@ -27,6 +27,7 @@ namespace HolidayMakerUWP.DAL
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
 
         public static Hotel SelectedHotel { get; set; }
+        public static int SortByInt { get; set; }
 
         private const string WebServiceUrl = "https://localhost:44368/api/";
         private static string TempOrderId = null;
@@ -57,11 +58,12 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + HotelId);
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + HotelId + "/" + SortByInt);
 
                 Rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonResult);
 
                 httpClient1.Dispose();
+                RoomSelectionVm.TempRooms = Rooms;
                 return Rooms;
             }
 

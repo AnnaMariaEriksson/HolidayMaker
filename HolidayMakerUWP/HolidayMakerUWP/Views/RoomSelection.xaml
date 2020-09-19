@@ -90,6 +90,7 @@
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[5]}" Grid.Row="1"/>
                     </StackPanel>
                 </Grid>
+                <Button x:Name="FilterRoomsByPrice" Click="FilterRoomsByPrice_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="!!!" Width="70" CornerRadius="25"/>
                 <Button x:Name="ConfirmChoosenRooms" Click="ConfirmChoosenRooms_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
                 <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
                     <ListView.ItemTemplate>
@@ -113,10 +114,10 @@
                                         <Button x:Name="FullBoard" Command="{Binding ElementName= RoomListView, Path=DataContext.AddFullBoardBtn}" CommandParameter="{Binding}" Content="Fullboard 150kr" Click="FullBoard_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsFullBoard, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasFullBoard, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
-                                        <Button x:Name="HalfBoard" Content="Halfboard 200kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= HasHalfBoard, Converter={StaticResource bool2vis}}"/>
+                                        <Button x:Name="HalfBoard" Command="{Binding ElementName=RoomListView, Path=DataContext.AddHalfBoard}" CommandParameter="{Binding}" Content="Halfboard 200kr" Click="HalfBoard_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsHalfBoard,Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasHalfBoard, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
-                                            <Button x:Name="ExtraBed" Content="Extra Bed 100kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= ExtraBed, Converter={StaticResource bool2vis}}"/>
+                                            <Button x:Name="ExtraBed" Command="{Binding ElementName=RoomListView, Path=DataContext.AddExtraBed}" CommandParameter="{Binding}" Content="Extra Bed 100kr" Click="ExtraBed_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsExtraBed, Converter={StaticResource bool2color}}" Visibility="{Binding Path= ExtraBed, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1">

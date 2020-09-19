@@ -21,6 +21,9 @@ namespace HolidayMakerUWP.Viewmodel
         public ICommand AddRoomBtn { get; set; }
         public ICommand AddAllInclusiveBtn { get; set; }
         public ICommand AddFullBoardBtn { get; set; }
+        public ICommand AddHalfBoardBtn { get; set; }
+        public ICommand AddExtraBedBtn { get; set; }
+        public static ObservableCollection<Room> TempRooms { get; set; }
         public ObservableCollection<Room> _roomBasket { get; set; }
         public ObservableCollection<Room> RoomBasket
         {
@@ -74,17 +77,13 @@ namespace HolidayMakerUWP.Viewmodel
         public ObservableCollection<Room> Rooms
         {
             get
-            {
-                foreach (Room r in _rooms)
-                {
-                    Debug.WriteLine("test" + r.IsAllInclusive);
-                }
+            {             
                     return _rooms;
             }
             set
             {
                 _rooms = value;
-                NotifyPropertyChanged("Rooms");
+                //NotifyPropertyChanged("Rooms");
                
             }
         }
@@ -98,6 +97,31 @@ namespace HolidayMakerUWP.Viewmodel
         public void AddRoomToBasket(Room selectedRoom)
         {
             RoomBasket.Add(selectedRoom);
+        }
+        public ObservableCollection<Room> SortByPrice(int SortByInt)
+        {
+            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+            ObservableCollection<Room> test = new ObservableCollection<Room>();
+            {               
+                    for (int i = 0; i < TempRooms.Count()+1; i++)
+                    {
+                        if (i < TempRooms.Count())
+                        {
+                            //Funkar typ, oklart error måste fixa sen :(
+                            if (TempRooms[i].Price > TempRooms[i + 1].Price)
+                            {
+                                rooms.Add(TempRooms[i]);
+                                rooms.Add(TempRooms[i + 1]);
+                            }
+                            else
+                            {
+                                rooms.Add(TempRooms[i + 1]);
+                                rooms.Add(TempRooms[i]);
+                            }
+                        }
+                    }               
+            }
+            return test;
         }
         public void GetFascilities()
         {

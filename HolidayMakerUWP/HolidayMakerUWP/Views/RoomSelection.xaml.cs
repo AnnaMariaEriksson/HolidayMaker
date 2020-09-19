@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,6 +29,7 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class RoomSelection : Page
     {
+        public bool BtnClicked = true;
         public RoomSelectionVm Vm { get; set; }
         public HotelsService ServiceVm;
         public RoomSelection()
@@ -130,6 +132,83 @@ namespace HolidayMakerUWP.Views
                     }
                 }
             }
+        }
+
+        private void HalfBoard_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Room)((FrameworkElement)sender).DataContext).IsHalfBoard == false)
+            {
+
+                Room test1 = (Room)((FrameworkElement)sender).DataContext;
+                test1.IsHalfBoard = true;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test1)
+                    {
+                        Vm.Rooms[i] = test1;
+                    }
+                }
+            }
+            else
+            {
+                Room test1 = (Room)((FrameworkElement)sender).DataContext;
+                test1.IsHalfBoard = false;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test1)
+                    {
+                        Vm.Rooms[i] = test1;
+                    }
+                }
+            }
+        }
+
+        private void ExtraBed_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Room)((FrameworkElement)sender).DataContext).IsExtraBed == false)
+            {
+
+                Room test1 = (Room)((FrameworkElement)sender).DataContext;
+                test1.IsExtraBed = true;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test1)
+                    {
+                        Vm.Rooms[i] = test1;
+                    }
+                }
+            }
+            else
+            {
+                Room test1 = (Room)((FrameworkElement)sender).DataContext;
+                test1.IsExtraBed = false;
+                for (int i = 0; i < Vm.Rooms.Count; i++)
+                {
+                    if (Vm.Rooms[i] == test1)
+                    {
+                        Vm.Rooms[i] = test1;
+                    }
+                }
+            }
+        }
+
+        private void FilterRoomsByPrice_Click(object sender, RoutedEventArgs e)
+        {
+                if (BtnClicked == false)
+                {
+                    BtnClicked = true;
+                    HotelsService.SortByInt = 1;
+                Vm._rooms = Vm.SortByPrice(1);
+                RoomListView.ItemsSource = Vm.Rooms;
+                }
+
+                else
+                {
+                    BtnClicked = false;
+                    HotelsService.SortByInt = 2;
+                Vm._rooms = Vm.SortByPrice(2);
+                RoomListView.ItemsSource = Vm.Rooms;
+            }           
         }
     }
 }
