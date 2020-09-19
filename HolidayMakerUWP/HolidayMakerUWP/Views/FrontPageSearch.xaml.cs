@@ -41,12 +41,12 @@ namespace HolidayMakerUWP
 
         public async void GetAllCitiesInRegion()
         {
-            var cities = await HotelsService.GetAllCitiesAsync();
+            //var cities = await HotelsService.GetAllCitiesAsync();
 
-            foreach (City city in cities)
-            {
-                FrontPageSearchViewModel.Cities.Add(city);
-            }
+            //foreach (City city in cities)
+            //{
+            //    FrontPageSearchViewModel.Cities.Add(city);
+            //}
         }
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
