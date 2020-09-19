@@ -12,16 +12,13 @@ namespace HolidayMakerUWP.Viewmodel
     public class LogInViewModel
     {        
         public User User { get; set; }
-        HotelsService hotelsService;
         public LogInViewModel()
-        {
-            this.hotelsService = new HotelsService();
-            //User = Task.Run(() => hotelsService.GetUser()).Result;
-
-        }
-        public void GetUser()
-        {
+        {       
             
+        }
+        public void GetUser(string email, string password)
+        {
+            User = Task.Run(() => HotelsService.GetUser(email, password)).Result;
         }
     }
 }
