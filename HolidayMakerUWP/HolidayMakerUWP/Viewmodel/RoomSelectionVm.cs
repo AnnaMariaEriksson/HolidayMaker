@@ -100,26 +100,12 @@ namespace HolidayMakerUWP.Viewmodel
         }
         public ObservableCollection<Room> SortByPrice(int SortByInt)
         {
-            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
             ObservableCollection<Room> test = new ObservableCollection<Room>();
-            {               
-                    for (int i = 0; i < TempRooms.Count()+1; i++)
-                    {
-                        if (i < TempRooms.Count())
-                        {
-                            //Funkar typ, oklart error måste fixa sen :(
-                            if (TempRooms[i].Price > TempRooms[i + 1].Price)
-                            {
-                                rooms.Add(TempRooms[i]);
-                                rooms.Add(TempRooms[i + 1]);
-                            }
-                            else
-                            {
-                                rooms.Add(TempRooms[i + 1]);
-                                rooms.Add(TempRooms[i]);
-                            }
-                        }
-                    }               
+            if(SortByInt == 1) { 
+            test = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Price));
+            }else if(SortByInt == 2)
+            {
+                test = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Price));
             }
             return test;
         }
