@@ -25,17 +25,13 @@ namespace HolidayMakerBackend.Controllers
 
         // GET: api/Rooms/HotelId
         [HttpGet("{HotelId}")]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId)
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby)
         {
-          ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
 
-              
-                  await foreach(Room r in _context.Room)
-                    {
-                        if(r.HotelID == HotelId)
-                        TempRooms.Add(r);
-                    }
-            return TempRooms;
+        
+
+
+            return _context.Room;
         }
 
         //// GET: api/Rooms/5

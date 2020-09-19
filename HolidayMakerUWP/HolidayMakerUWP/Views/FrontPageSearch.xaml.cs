@@ -19,6 +19,7 @@ namespace HolidayMakerUWP
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
         public HotelsService HotelsService { get; set; }
         public City City { get; set; }
+        public Regions Region { get; set; }
 
         public FrontPageSearch()
         {
@@ -40,12 +41,12 @@ namespace HolidayMakerUWP
 
         public async void GetAllCitiesInRegion()
         {
-            var cities = await HotelsService.GetAllCitiesAsync();
+            //var cities = await HotelsService.GetAllCitiesAsync();
 
-            foreach (City city in cities)
-            {
-                FrontPageSearchViewModel.Cities.Add(city);
-            }
+            //foreach (City city in cities)
+            //{
+            //    FrontPageSearchViewModel.Cities.Add(city);
+            //}
         }
 
         public void SearchButton_OnClick(object sender, RoutedEventArgs e)
@@ -63,6 +64,7 @@ namespace HolidayMakerUWP
                 
                 if (searchString == r.NameOfRegion)
                 {
+                    Region = r;
                     foreach (City city in cities)
                     {
                         if (city.RegionID == r.RegionID)
@@ -86,10 +88,19 @@ namespace HolidayMakerUWP
                 }
             }
 
+           
+
         }
 
-        private void GetAllRegionsListView_OnItemClick(object sender, ItemClickEventArgs e)
+        private void GetAllRegionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            FrontPageSearchViewModel.Search = new Search
+            {
+                Cities = (City)GetAllRegionsListView.SelectedItem,
+                Regions = Region,
+                StartDate = (DateTimeOffset)StartDate.Date,
+                EndDate = (DateTimeOffset)EndDate.Date
+            };
             this.Frame.Navigate(typeof(HotelSearch));
         }
     }
