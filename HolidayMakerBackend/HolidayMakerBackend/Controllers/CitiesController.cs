@@ -23,12 +23,27 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Cities
-    [HttpGet("{RegionID}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<City>>> GetCity()
+        {
+            var cities = await _context.City
+                .Include(c => c.Hotels)
+                .ThenInclude(c => c.Rooms)
+                .ToListAsync();
+
+            return Ok(cities);
+
+            //return await _context.Region.ToListAsync();
+        }
+
+        // GET: api/Cities
+        [HttpGet("{RegionID}")]
 
     public async Task<ActionResult<IEnumerable<City>>> GetCity(int regionID, DateTimeOffset startDate, DateTimeOffset endDate)
         {
             ObservableCollection<City> tempCities = new ObservableCollection<City>();
             //TODO add dates
+            //TODO include Hotels?
 
             await foreach (City city in _context.City)
             {
