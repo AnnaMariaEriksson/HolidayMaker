@@ -4,18 +4,22 @@ using HolidayMakerUWP.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HolidayMakerUWP.Viewmodel
 {
-    public class RoomSelectionVm
+    public class RoomSelectionVm : INotifyPropertyChanged
     {
         public HotelsService Vm;
         public HotelsService ServiceVm;
         public ICommand AddRoomBtn { get; set; }
+        public ICommand AddAllInclusiveBtn { get; set; }
         public ObservableCollection<Room> _roomBasket { get; set; }
         public ObservableCollection<Room> RoomBasket
         {
@@ -65,16 +69,22 @@ namespace HolidayMakerUWP.Viewmodel
                 _selectedhotel = value;
             }
         }
-        public ObservableCollection<Room> _rooms { get; set; }
+        public ObservableCollection<Room> _rooms { get; set;  }
         public ObservableCollection<Room> Rooms
         {
             get
             {
-                return _rooms;
+                foreach (Room r in _rooms)
+                {
+                    Debug.WriteLine("test" + r.IsAllInclusive);
+                }
+                    return _rooms;
             }
             set
             {
                 _rooms = value;
+                NotifyPropertyChanged("Rooms");
+               
             }
         }
         public RoomSelectionVm()
@@ -141,5 +151,13 @@ namespace HolidayMakerUWP.Viewmodel
             }
             _listOfFascilities = listoffascilities;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }
