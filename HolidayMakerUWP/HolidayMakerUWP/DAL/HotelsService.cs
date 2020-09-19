@@ -39,7 +39,7 @@ namespace HolidayMakerUWP.DAL
                     httpClient1.DefaultRequestHeaders.Accept.Clear();
                     httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels");
+                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels" + "/" + FrontPageSearchViewModel.Search.Cities.CityID);
 
                     Hotels = JsonConvert.DeserializeObject<ObservableCollection<Hotel>>(jsonResult);
 

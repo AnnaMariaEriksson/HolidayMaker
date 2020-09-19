@@ -7,47 +7,53 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
-using System.Collections.ObjectModel;
 
 namespace HolidayMakerBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HotelsController : ControllerBase
+    public class CitiesController : ControllerBase
     {
         private readonly HolidayMakerBackendContext _context;
 
-        public HotelsController(HolidayMakerBackendContext context)
+        public CitiesController(HolidayMakerBackendContext context)
         {
             _context = context;
         }
 
-        // GET: api/Hotels
-        [HttpGet("{CityID}")]
-        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel(int CityID)
+        // GET: api/Cities
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<City>>> GetCity()
         {
-            ObservableCollection<Hotel> TempHotels = new ObservableCollection<Hotel>();
-                await foreach(Hotel h in _context.Hotel){
-                if(h.CityID == CityID)
-                {
-                    TempHotels.Add(h);
-                }
-            }
-            return TempHotels;
+            return await _context.City.ToListAsync();
         }
 
-        // PUT: api/Hotels/5
+        // GET: api/Cities/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<City>> GetCity(int id)
+        {
+            var city = await _context.City.FindAsync(id);
+
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            return city;
+        }
+
+        // PUT: api/Cities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
+        public async Task<IActionResult> PutCity(int id, City city)
         {
-            if (id != hotel.HotelID)
+            if (id != city.CityID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(hotel).State = EntityState.Modified;
+            _context.Entry(city).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +61,7 @@ namespace HolidayMakerBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HotelExists(id))
+                if (!CityExists(id))
                 {
                     return NotFound();
                 }
@@ -68,37 +74,37 @@ namespace HolidayMakerBackend.Controllers
             return NoContent();
         }
 
-        // POST: api/Hotels
+        // POST: api/Cities
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
+        public async Task<ActionResult<City>> PostCity(City city)
         {
-            _context.Hotel.Add(hotel);
+            _context.City.Add(city);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHotel", new { id = hotel.HotelID }, hotel);
+            return CreatedAtAction("GetCity", new { id = city.CityID }, city);
         }
 
-        // DELETE: api/Hotels/5
+        // DELETE: api/Cities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Hotel>> DeleteHotel(int id)
+        public async Task<ActionResult<City>> DeleteCity(int id)
         {
-            var hotel = await _context.Hotel.FindAsync(id);
-            if (hotel == null)
+            var city = await _context.City.FindAsync(id);
+            if (city == null)
             {
                 return NotFound();
             }
 
-            _context.Hotel.Remove(hotel);
+            _context.City.Remove(city);
             await _context.SaveChangesAsync();
 
-            return hotel;
+            return city;
         }
 
-        private bool HotelExists(int id)
+        private bool CityExists(int id)
         {
-            return _context.Hotel.Any(e => e.HotelID == id);
+            return _context.City.Any(e => e.CityID == id);
         }
     }
 }
