@@ -26,7 +26,13 @@ namespace HolidayMakerBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Region>>> GetRegion()
         {
-            return await _context.Region.ToListAsync();
+            var regions = await _context.Region
+                .Include(r => r.Cities)
+                .ToListAsync();
+
+            return Ok(regions);
+
+            //return await _context.Region.ToListAsync();
         }
 
         // GET: api/Regions/5
