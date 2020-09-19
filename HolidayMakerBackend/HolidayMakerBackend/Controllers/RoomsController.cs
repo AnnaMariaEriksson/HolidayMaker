@@ -24,60 +24,14 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Rooms/HotelId
-        [HttpGet("{HotelId}/{SortByInt}")]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId, int SortByInt)
+        [HttpGet("{HotelId}")]
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby)
         {
-            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-            foreach(Room r in _context.Room)
-            {
-                if (r.HotelID == HotelId)
-                    rooms.Add(r);
-            }
-            return rooms;
-        //    ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-        //    if (SortByInt == 1) { 
-        //    ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
-        //    await foreach (Room r in _context.Room)
-        //    {
-        //        if (r.HotelID == HotelId)
-        //            TempRooms.Add(r);
-        //    }                       
-        //    for (int i = 1; i <= TempRooms.Count(); i++)
-        //    {
-        //        if (TempRooms[i].Price >= TempRooms[i + 1].Price)
-        //        {
-        //            rooms.Add(TempRooms[i]);
-        //            rooms.Add(TempRooms[i + 1]);
-        //        }
-        //        else
-        //        {
-        //            rooms.Add(TempRooms[i + 1]);
-        //            rooms.Add(TempRooms[i]);
-        //        }
-        //    }
-        //}else if (SortByInt == 2)
-        //    {
-        //        ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
-        //        await foreach (Room r in _context.Room)
-        //        {
-        //            if (r.HotelID == HotelId)
-        //                TempRooms.Add(r);
-        //        }              
-        //        for (int i = 1; i <= TempRooms.Count(); i++)
-        //        {
-        //            if (TempRooms[i].Price <= TempRooms[i + 1].Price)
-        //            {
-        //                rooms.Add(TempRooms[i]);
-        //                rooms.Add(TempRooms[i + 1]);
-        //            }
-        //            else
-        //            {
-        //                rooms.Add(TempRooms[i + 1]);
-        //                rooms.Add(TempRooms[i]);
-        //            }
-        //        }
-        //    }
-        //    return rooms;
+
+        
+
+
+            return _context.Room;
         }
 
         //// GET: api/Rooms/5

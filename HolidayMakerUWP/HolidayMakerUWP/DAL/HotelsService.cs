@@ -36,11 +36,11 @@ namespace HolidayMakerUWP.DAL
                 using (HttpClient httpClient1 = new HttpClient())
                 {
                     ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
-                    httpClient1.Timeout = new TimeSpan(0, 0, 5);
+      
                     httpClient1.DefaultRequestHeaders.Accept.Clear();
                     httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels" + "/" + FrontPageSearchViewModel.Search.Cities.CityID);
+                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels");
 
                     Hotels = JsonConvert.DeserializeObject<ObservableCollection<Hotel>>(jsonResult);
 
@@ -94,16 +94,24 @@ namespace HolidayMakerUWP.DAL
             return regions;
         }
 
-        public async Task<ObservableCollection<City>> GetAllCitiesAsync()
+        public static async Task<ObservableCollection<City>> GetCities()
         {
-            var jsonCities = await httpClient.GetStringAsync(cityURL);
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                ObservableCollection<City> Cities = new ObservableCollection<City>();
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpClient1.DefaultRequestHeaders.Accept.Clear();
+                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.MissingMemberHandling = MissingMemberHandling.Error;
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Cities/");
 
-            var cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonCities, settings);
+                Cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonResult);
 
-            return cities;
+                httpClient1.Dispose();
+                return Cities;
+            }
+
+
         }
 
 
