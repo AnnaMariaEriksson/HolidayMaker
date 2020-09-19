@@ -4,6 +4,7 @@ using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -41,7 +42,7 @@ namespace HolidayMakerUWP.Views
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)

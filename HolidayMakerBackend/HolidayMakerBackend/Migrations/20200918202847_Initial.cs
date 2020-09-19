@@ -22,6 +22,20 @@ namespace HolidayMakerBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "City",
+                columns: table => new
+                {
+                    CityID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RegionID = table.Column<int>(nullable: false),
+                    NameOfCity = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_City", x => x.CityID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Hotel",
                 columns: table => new
                 {
@@ -40,7 +54,8 @@ namespace HolidayMakerBackend.Migrations
                     HasPool = table.Column<bool>(nullable: false),
                     FilterReset = table.Column<bool>(nullable: false),
                     Test = table.Column<bool>(nullable: false),
-                    Test2 = table.Column<bool>(nullable: false)
+                    Test2 = table.Column<bool>(nullable: false),
+                    CityID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,6 +124,9 @@ namespace HolidayMakerBackend.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "City");
+
             migrationBuilder.DropTable(
                 name: "Room");
 
