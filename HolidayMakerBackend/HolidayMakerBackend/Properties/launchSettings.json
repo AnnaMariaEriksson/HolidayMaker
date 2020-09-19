@@ -19,7 +19,7 @@
     "HolidayMakerBackend": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "regions",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
