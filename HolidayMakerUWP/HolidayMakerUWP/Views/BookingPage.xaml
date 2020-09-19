@@ -47,7 +47,7 @@
                     Background="CornflowerBlue"
                     FontWeight="SemiBold" />
             <Button x:Name="CancelBookingBtn"
-                    Click="CancelBookingBtn_Click"
+                    
                     Grid.Row="2"
                     Grid.Column="0"
                     HorizontalAlignment="Left"
@@ -57,11 +57,21 @@
                     Background="CornflowerBlue"
                     FontWeight="SemiBold">
                 <Button.Flyout>
-                    <Flyout Placement="Auto" x:Name="cancelBookingFlyOut">
-                        <StackPanel>
-                            <Button Content="Ja"/>
-                            <Button Content="Nej" />
-                        </StackPanel> 
+                    <Flyout Placement="Top" x:Name="cancelBookingFlyOut">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Avrbyt bokning!" FontSize="24"
+                                       FontWeight="SemiBold"/>
+                            <StackPanel Grid.Row="1">
+                                <Button Content="Ja. återgå till första sidan."/>
+                                <Button Content="Nej, fortsätt med bokning."/>
+                            </StackPanel>
+                                
+
+                        </Grid>
                     </Flyout>
                 </Button.Flyout>
             </Button>
