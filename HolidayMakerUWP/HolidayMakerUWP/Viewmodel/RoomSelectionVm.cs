@@ -20,6 +20,10 @@ namespace HolidayMakerUWP.Viewmodel
         public HotelsService ServiceVm;
         public ICommand AddRoomBtn { get; set; }
         public ICommand AddAllInclusiveBtn { get; set; }
+        public ICommand AddFullBoardBtn { get; set; }
+        public ICommand AddHalfBoardBtn { get; set; }
+        public ICommand AddExtraBedBtn { get; set; }
+        public static ObservableCollection<Room> TempRooms { get; set; }
         public ObservableCollection<Room> _roomBasket { get; set; }
         public ObservableCollection<Room> RoomBasket
         {
@@ -73,17 +77,13 @@ namespace HolidayMakerUWP.Viewmodel
         public ObservableCollection<Room> Rooms
         {
             get
-            {
-                foreach (Room r in _rooms)
-                {
-                    Debug.WriteLine("test" + r.IsAllInclusive);
-                }
+            {             
                     return _rooms;
             }
             set
             {
                 _rooms = value;
-                NotifyPropertyChanged("Rooms");
+                //NotifyPropertyChanged("Rooms");
                
             }
         }
@@ -97,6 +97,17 @@ namespace HolidayMakerUWP.Viewmodel
         public void AddRoomToBasket(Room selectedRoom)
         {
             RoomBasket.Add(selectedRoom);
+        }
+        public ObservableCollection<Room> SortByPrice(int SortByInt)
+        {
+            ObservableCollection<Room> test = new ObservableCollection<Room>();
+            if(SortByInt == 1) { 
+            test = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Price));
+            }else if(SortByInt == 2)
+            {
+                test = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Price));
+            }
+            return test;
         }
         public void GetFascilities()
         {
