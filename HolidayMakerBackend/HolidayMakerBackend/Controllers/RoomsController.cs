@@ -27,8 +27,7 @@ namespace HolidayMakerBackend.Controllers
         [HttpGet("{HotelId}")]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby)
         {
-
-        
+       
 
 
             return _context.Room;
