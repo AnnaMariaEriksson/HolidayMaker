@@ -39,47 +39,44 @@ namespace HolidayMakerUWP
             //}
         }
 
-        public void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        public async void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
             //GetAllCitiesInRegions();
             FrontPageSearchViewModel.TempCity.Clear();
-            var region = FrontPageSearchViewModel.Regions;
+            var regions = await HotelsService.GetAllRegionsAsync();
             var cities = FrontPageSearchViewModel.Cities;
             var tempCity = FrontPageSearchViewModel.TempCity;
             var searchString = SearchField.Text;
             var endDate = EndDate.MaxDate;
             var startDate = StartDate.MinDate;
 
-            foreach (Regions r in region)
+            foreach (Regions r in regions)
             {
                 
-                if (searchString == r.NameOfRegion)
+                if (searchString.ToLower() == r.NameOfRegion.ToLower())
                 {
-                    Region = r;
-                    foreach (City city in cities)
+                    foreach (City city in r.Cities)
                     {
-                        if (city.RegionID == r.RegionID)
-                        {
-                            //TODO do something...
                            tempCity.Add(city);
-                        }
+                        
                     }
-                   
+                    break;   
                     
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }
-                if (tempCity.Count() == 0)
-                {
-                    IfNotFoundLabel.Text = "Tyvärr, vi hittade inget som matchade din sökning.";
-                }
-                else
-                {
-                    IfNotFoundLabel.Text = ($"Vi hittade ({tempCity.Count()}) hotell.");
-                }
+                
+            }
+            if (!tempCity.Any())
+            {
+                IfNotFoundLabel.Text = "Tyvärr, vi hittade inget som matchade din sökning.";
+            }
+            else
+            {
+                IfNotFoundLabel.Text = ($"Vi hittade ({tempCity.Count()}) hotell.");
             }
 
-           
+
 
         }
 
