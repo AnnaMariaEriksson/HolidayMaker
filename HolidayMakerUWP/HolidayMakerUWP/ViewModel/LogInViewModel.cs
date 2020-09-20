@@ -11,7 +11,7 @@ namespace HolidayMakerUWP.Viewmodel
 {
     public class LogInViewModel
     {        
-        public User User { get; set; }
+        public static User User { get; set; }
         public LogInViewModel()
         {       
             
