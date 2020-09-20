@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200919130516_test5")]
-    partial class test5
+    [Migration("20200920145502_somemissingstuff")]
+    partial class somemissingstuff
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,100 +37,6 @@ namespace HolidayMakerBackend.Migrations
                     b.HasKey("BookingID");
 
                     b.ToTable("Booking");
-                });
-
-            modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>
-                {
-                    b.Property<int>("CityID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NameOfCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RegionID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CityID");
-
-                    b.HasIndex("RegionID");
-
-                    b.ToTable("City");
-                });
-
-            modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
-                {
-                    b.Property<int>("HotelID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CityID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DistansToBeach")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DistansToCenter")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("FilterReset")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasAllInclusive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasChildrensClub")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasEntertainment")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasFullBoard")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasHalfBoard")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasPool")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasRestaurant")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("HotelDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Test")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Test2")
-                        .HasColumnType("bit");
-
-                    b.HasKey("HotelID");
-
-                    b.HasIndex("CityID");
-
-                    b.ToTable("Hotel");
-                });
-
-            modelBuilder.Entity("HolidayMakerBackend.Models.Region", b =>
-                {
-                    b.Property<int>("RegionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NameOfRegion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RegionID");
-
-                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>
@@ -200,20 +106,13 @@ namespace HolidayMakerBackend.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>
-                {
-                    b.HasOne("HolidayMakerBackend.Models.Region", null)
-                        .WithMany("Cities")
-                        .HasForeignKey("RegionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
                 {
                     b.HasOne("HolidayMakerBackend.Models.City", null)
                         .WithMany("Hotels")
-                        .HasForeignKey("CityID");
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>

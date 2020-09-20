@@ -52,7 +52,17 @@ namespace HolidayMakerBackend.Migrations
 
                     b.HasKey("CityID");
 
+                    b.HasIndex("RegionID");
+
                     b.ToTable("City");
+
+                    b.HasData(
+                        new
+                        {
+                            CityID = 1,
+                            NameOfCity = "Malmö",
+                            RegionID = 1
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
@@ -63,9 +73,6 @@ namespace HolidayMakerBackend.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CityID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CityID")
                         .HasColumnType("int");
 
                     b.Property<int>("DistansToBeach")
@@ -130,6 +137,13 @@ namespace HolidayMakerBackend.Migrations
                     b.HasKey("RegionID");
 
                     b.ToTable("Region");
+
+                    b.HasData(
+                        new
+                        {
+                            RegionID = 1,
+                            NameOfRegion = "Skåne"
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>
@@ -212,7 +226,9 @@ namespace HolidayMakerBackend.Migrations
                 {
                     b.HasOne("HolidayMakerBackend.Models.City", null)
                         .WithMany("Hotels")
-                        .HasForeignKey("CityID");
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>

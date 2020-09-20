@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Initial : Migration
+    public partial class somemissingstuff : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,47 +19,6 @@ namespace HolidayMakerBackend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Booking", x => x.BookingID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "City",
-                columns: table => new
-                {
-                    CityID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RegionID = table.Column<int>(nullable: false),
-                    NameOfCity = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_City", x => x.CityID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Hotel",
-                columns: table => new
-                {
-                    HotelID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    HotelDescription = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    DistansToBeach = table.Column<int>(nullable: false),
-                    DistansToCenter = table.Column<int>(nullable: false),
-                    HasAllInclusive = table.Column<bool>(nullable: false),
-                    HasFullBoard = table.Column<bool>(nullable: false),
-                    HasHalfBoard = table.Column<bool>(nullable: false),
-                    HasRestaurant = table.Column<bool>(nullable: false),
-                    HasChildrensClub = table.Column<bool>(nullable: false),
-                    HasEntertainment = table.Column<bool>(nullable: false),
-                    HasPool = table.Column<bool>(nullable: false),
-                    FilterReset = table.Column<bool>(nullable: false),
-                    Test = table.Column<bool>(nullable: false),
-                    Test2 = table.Column<bool>(nullable: false),
-                    CityID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hotel", x => x.HotelID);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,9 +84,6 @@ namespace HolidayMakerBackend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "City");
-
-            migrationBuilder.DropTable(
                 name: "Room");
 
             migrationBuilder.DropTable(
@@ -136,8 +92,7 @@ namespace HolidayMakerBackend.Migrations
             migrationBuilder.DropTable(
                 name: "Booking");
 
-            migrationBuilder.DropTable(
-                name: "Hotel");
+
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200919115219_ReAddedCitiesAndRegions")]
-    partial class ReAddedCitiesAndRegions
+    [Migration("20200920153132_SomeTestData")]
+    partial class SomeTestData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,14 @@ namespace HolidayMakerBackend.Migrations
                     b.HasIndex("RegionID");
 
                     b.ToTable("City");
+
+                    b.HasData(
+                        new
+                        {
+                            CityID = 1,
+                            NameOfCity = "Malmö",
+                            RegionID = 1
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
@@ -66,7 +74,7 @@ namespace HolidayMakerBackend.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CityID")
+                    b.Property<int>("CityID")
                         .HasColumnType("int");
 
                     b.Property<int>("DistansToBeach")
@@ -131,6 +139,13 @@ namespace HolidayMakerBackend.Migrations
                     b.HasKey("RegionID");
 
                     b.ToTable("Region");
+
+                    b.HasData(
+                        new
+                        {
+                            RegionID = 1,
+                            NameOfRegion = "Skåne"
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>
@@ -213,7 +228,9 @@ namespace HolidayMakerBackend.Migrations
                 {
                     b.HasOne("HolidayMakerBackend.Models.City", null)
                         .WithMany("Hotels")
-                        .HasForeignKey("CityID");
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>

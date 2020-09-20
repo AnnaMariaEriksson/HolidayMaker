@@ -24,5 +24,21 @@ namespace HolidayMakerBackend.Data
         public DbSet<HolidayMakerBackend.Models.Region> Region { get; set; }
 
         public DbSet<HolidayMakerBackend.Models.City> City { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Region>().HasData(new Region
+            {
+                RegionID = 1, NameOfRegion = "Skåne"
+            });
+
+            modelBuilder.Entity<City>().HasData(new City
+            {
+                CityID = 1,
+                NameOfCity = "Malmö",
+                RegionID = 1
+            });
+        }
     }
 }
