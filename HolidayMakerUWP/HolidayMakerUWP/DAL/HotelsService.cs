@@ -161,13 +161,12 @@ namespace HolidayMakerUWP.DAL
         {            
             using (HttpClient httpClient1 = new HttpClient())
             {
-
                 Booking booking = new Booking()
                 {
                     BookingRooms = rooms,
                     StartDate = startDate,
                     EndDate = endDate,
-                    UserID = LogInViewModel.User.UserID
+                    UserID = LogInViewModel.User.ID
                 };
                 var json = JsonConvert.SerializeObject(booking);
                 HttpContent httpContent = new StringContent(json);

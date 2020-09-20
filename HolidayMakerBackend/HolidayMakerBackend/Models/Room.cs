@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace HolidayMakerBackend.Models
 {
     public class Room
     {
-        public int RoomID { get; set; }
+        
+        public int ID { get; set; }
         public int HotelID { get; set; }
         public int Price { get; set; }
         public bool ExtraBed { get; set; }

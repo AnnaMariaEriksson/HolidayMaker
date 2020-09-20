@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200920203357_Add-Migration Skander")]
-    partial class AddMigrationSkander
+    [Migration("20200920224414_Skander")]
+    partial class Skander
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace HolidayMakerBackend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("roomID")
                         .HasColumnType("int");
 
                     b.HasKey("BookingID");
@@ -119,13 +122,10 @@ namespace HolidayMakerBackend.Migrations
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>
                 {
-                    b.Property<int>("RoomID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BookingID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("ExtraBed")
                         .HasColumnType("bit");
@@ -151,9 +151,7 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoomID");
-
-                    b.HasIndex("BookingID");
+                    b.HasKey("ID");
 
                     b.HasIndex("HotelID");
 
@@ -186,10 +184,6 @@ namespace HolidayMakerBackend.Migrations
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>
                 {
-                    b.HasOne("HolidayMakerBackend.Models.Booking", null)
-                        .WithMany("BookingRooms")
-                        .HasForeignKey("BookingID");
-
                     b.HasOne("HolidayMakerBackend.Models.Hotel", null)
                         .WithMany("Rooms")
                         .HasForeignKey("HotelID")

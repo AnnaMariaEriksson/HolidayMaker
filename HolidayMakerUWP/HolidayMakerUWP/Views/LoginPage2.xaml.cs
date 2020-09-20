@@ -35,6 +35,7 @@ namespace HolidayMakerUWP.Views
             var email = usernamebox.Text;
             var password = passwordbox.Password;
             Vm.GetUser(email, password);
+            Frame.Navigate(typeof(HotelSearch));
         }
     }
 }
