@@ -37,7 +37,7 @@ namespace HolidayMakerUWP.Views
         public bool HasRestaurant;
         public bool HasChildrensClub;
         public bool HasEntertainment;
-        public bool HasPool;
+        public bool HasPool; 
         public HotelSearchVm Vm { get; set; }
         public HotelsService _service;
         public HotelSearch()
