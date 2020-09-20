@@ -11,7 +11,7 @@ namespace HolidayMakerUWP.Viewmodel
         public ObservableCollection<Regions> Regions { get; set; }
         public ObservableCollection<City> Cities { get; set; }
         public ObservableCollection<City> TempCity { get; set; }
-        public Search Search { get; set; }
+        public static Search Search { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset EndDate { get; set; }
 
@@ -22,7 +22,7 @@ namespace HolidayMakerUWP.Viewmodel
             TempCity = new ObservableCollection<City>();
 
             HotelsService.GetAllRegionsAsync();
-            HotelsService.GetAllCitiesAsync();
+            HotelsService.GetCities();
         }
 
     }

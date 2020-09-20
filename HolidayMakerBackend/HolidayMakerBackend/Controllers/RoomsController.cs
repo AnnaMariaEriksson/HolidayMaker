@@ -32,19 +32,28 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Rooms/HotelId
-        /*[HttpGet("{HotelId}")]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId)
+        [HttpGet("{HotelId}")]
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId, int sorrtby)
         {
-          ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
+            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+            ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
+            await foreach (Room r in _context.Room)
+            {
+                if (r.HotelID == HotelId)
+                    TempRooms.Add(r);
+            }
 
-              
-                  await foreach(Room r in _context.Room)
-                    {
-                        if(r.HotelID == HotelId)
-                        TempRooms.Add(r);
-                    }
-            return TempRooms;
-        }*/
+            if (sorrtby == 1)
+            {
+                rooms = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Price));
+            }
+            else if (sorrtby == 2)
+            {
+                rooms = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Price));
+            }
+
+            return rooms;
+        }
 
         //// GET: api/Rooms/5
         //[HttpGet("{id}")]

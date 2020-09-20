@@ -52,8 +52,6 @@ namespace HolidayMakerBackend.Migrations
 
                     b.HasKey("CityID");
 
-                    b.HasIndex("RegionID");
-
                     b.ToTable("City");
                 });
 
@@ -63,6 +61,9 @@ namespace HolidayMakerBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CityID")
                         .HasColumnType("int");

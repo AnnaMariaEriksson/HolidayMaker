@@ -22,17 +22,17 @@
         <!--Grid TWO-->
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-            <TextBlock  Text="Malmö" VerticalAlignment="Center" FontSize="35" TextAlignment="Center" />
+            <Button  Content="Malmö" VerticalAlignment="Center" FontSize="35"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-            <TextBlock Grid.Column="1" Text="Skåne" VerticalAlignment="Center" FontSize="35" />
+            <Button Grid.Column="1" Content="Skåne" VerticalAlignment="Center" FontSize="35" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-            <TextBlock Grid.Column="1" Text="25/5 - 2020 " VerticalAlignment="Center" FontSize="35" />
+            <Button Grid.Column="1" Content="25/5 - 2020 " VerticalAlignment="Center" FontSize="35" />
                     </StackPanel>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-            <TextBlock Grid.Column="1" Text="15/8 - 2020" VerticalAlignment="Center" FontSize="35" />
-                        </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
+                    <Button Grid.Column="1" Content="15/8 - 2020" VerticalAlignment="Center" FontSize="35" />
+                </StackPanel>
         </StackPanel>
         <Button  Grid.Column="2"
                  Grid.Row="0"
@@ -90,6 +90,7 @@
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[5]}" Grid.Row="1"/>
                     </StackPanel>
                 </Grid>
+                <Button x:Name="FilterRoomsByPrice" Click="FilterRoomsByPrice_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Sortera Pris" Width="90" CornerRadius="25"/>
                 <Button x:Name="ConfirmChoosenRooms" Click="ConfirmChoosenRooms_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
                 <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
                     <ListView.ItemTemplate>
@@ -108,16 +109,15 @@
                                     <TextBlock Text="{x:Bind RoomName}"/>
                                     <StackPanel Margin="0,0,0,10">
                                         <Button x:Name="Allinclusive" Command="{Binding ElementName= RoomListView, Path=DataContext.AddAllInclusiveBtn}" CommandParameter="{Binding}" Content="Allinclusive 900kr" Click="Allinclusive_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsAllInclusive, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasAllInclusive, Converter={StaticResource bool2vis}}"/>
-                                        <TextBlock Text="{x:Bind IsAllInclusive,Mode=TwoWay}" />
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
-                                        <Button x:Name="FullBoard" Content="Fullboard 150kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= HasFullBoard, Converter={StaticResource bool2vis}}"/>
+                                        <Button x:Name="FullBoard" Command="{Binding ElementName= RoomListView, Path=DataContext.AddFullBoardBtn}" CommandParameter="{Binding}" Content="Fullboard 150kr" Click="FullBoard_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsFullBoard, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasFullBoard, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
-                                        <Button x:Name="HalfBoard" Content="Halfboard 200kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= HasHalfBoard, Converter={StaticResource bool2vis}}"/>
+                                        <Button x:Name="HalfBoard" Command="{Binding ElementName=RoomListView, Path=DataContext.AddHalfBoard}" CommandParameter="{Binding}" Content="Halfboard 200kr" Click="HalfBoard_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsHalfBoard,Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasHalfBoard, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
-                                            <Button x:Name="ExtraBed" Content="Extra Bed 100kr" Grid.Column="1" Grid.Row="1" Width="130" Visibility="{Binding Path= ExtraBed, Converter={StaticResource bool2vis}}"/>
+                                            <Button x:Name="ExtraBed" Command="{Binding ElementName=RoomListView, Path=DataContext.AddExtraBed}" CommandParameter="{Binding}" Content="Extra Bed 100kr" Click="ExtraBed_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsExtraBed, Converter={StaticResource bool2color}}" Visibility="{Binding Path= ExtraBed, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1">

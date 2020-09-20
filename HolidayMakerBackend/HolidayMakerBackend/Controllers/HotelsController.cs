@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
+using System.Collections.ObjectModel;
 
 namespace HolidayMakerBackend.Controllers
 {
@@ -23,23 +24,15 @@ namespace HolidayMakerBackend.Controllers
 
         // GET: api/Hotels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel()
+        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel(int CityID)
         {
-            return await _context.Hotel.ToListAsync();
-        }
-
-        // GET: api/Hotels/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Hotel>> GetHotel(int id)
-        {
-            var hotel = await _context.Hotel.FindAsync(id);
-
-            if (hotel == null)
-            {
-                return NotFound();
+            ObservableCollection<Hotel> TempHotels = new ObservableCollection<Hotel>();
+                await foreach(Hotel h in _context.Hotel){
+              
+                    TempHotels.Add(h);
+                
             }
-
-            return hotel;
+            return TempHotels;
         }
 
         // PUT: api/Hotels/5
