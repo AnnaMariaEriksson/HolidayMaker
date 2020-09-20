@@ -23,6 +23,7 @@ namespace HolidayMakerUWP.Viewmodel
         public ICommand AddFullBoardBtn { get; set; }
         public ICommand AddHalfBoardBtn { get; set; }
         public ICommand AddExtraBedBtn { get; set; }
+        public ICommand RedirectToFPS { get; set; }
         public static ObservableCollection<Room> TempRooms { get; set; }
         public ObservableCollection<Room> _roomBasket { get; set; }
         public ObservableCollection<Room> RoomBasket

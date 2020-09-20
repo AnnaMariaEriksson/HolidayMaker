@@ -27,7 +27,7 @@ namespace HolidayMakerUWP.DAL
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
 
         public static Hotel SelectedHotel { get; set; }
-        public static int SortByInt { get; set; }
+        public static int SortByInt { get; set; } = 1;
 
         private const string WebServiceUrl = "https://localhost:44368/api/";
         private static string TempOrderId = null;
