@@ -10,6 +10,7 @@ using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Diagnostics;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace HolidayMakerUWP.DAL
 {
@@ -17,6 +18,7 @@ namespace HolidayMakerUWP.DAL
     {
 
         private HttpClient httpClient;
+
 
         private string roomURL = "";
 
@@ -154,6 +156,29 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.Dispose();
                 return user;
             }
+        }
+        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTime startDate, DateTime endDate)
+        {            
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                Booking booking = new Booking()
+                {
+                    BookingRooms = rooms,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    UserID = LogInViewModel.User.ID
+                };
+                var json = JsonConvert.SerializeObject(booking);
+                HttpContent httpContent = new StringContent(json);
+
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpContent.Headers.Clear();
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");               
+                                                                                             
+                await httpClient1.PostAsync(WebServiceUrl + "Bookings", httpContent);
+
+                httpClient1.Dispose();                
+            }            
         }
     }
 

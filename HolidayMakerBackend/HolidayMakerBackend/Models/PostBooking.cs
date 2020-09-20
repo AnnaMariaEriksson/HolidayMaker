@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace HolidayMakerBackend.Models
 {
-    public class Booking
+    public class PostBooking
     {
-        public int BookingID { get; set; }
-        public int roomID { get; set; }
+        public ObservableCollection<Room> BookingRooms { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int UserID { get; set; }
-        public Booking()
+        public PostBooking()
         {
+
         }
     }
 }

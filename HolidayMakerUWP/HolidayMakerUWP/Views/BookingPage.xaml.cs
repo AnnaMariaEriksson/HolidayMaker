@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -29,21 +30,26 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class BookingPage : Page
     {
+        HotelsService hotelsService;
         BookingPageViewModel bookingPageViewModel;
+       
         public BookingPage()
         {
             this.InitializeComponent();
             this.bookingPageViewModel = new BookingPageViewModel();
-
         }
 
         private void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (TeleNummer.Text == "" || Adress.Text == "")
-                bookingPageViewModel.ErrorFillAllFields();
+            //if (TeleNummer.Text == "" || Adress.Text == "")
+            //    bookingPageViewModel.ErrorFillAllFields();
 
-            else
-                bookingPageViewModel.BookingMessageDialog();
+            //else
+            //    bookingPageViewModel.BookingMessageDialog();
+
+            //Task.Run.PostBooking(bookingPageViewModel._selectedRooms, DateTime.Now, DateTime.Now));
+
+            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, DateTime.Now, DateTime.Now));
         }
 
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
@@ -71,5 +77,7 @@ namespace HolidayMakerUWP.Views
             bookingPageViewModel.updateTotalPrice();
             totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
         }
+
+        
     }
 }
