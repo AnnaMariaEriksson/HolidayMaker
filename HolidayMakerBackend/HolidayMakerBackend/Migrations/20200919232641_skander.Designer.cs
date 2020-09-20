@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200919223548_Initial")]
-    partial class Initial
+    [Migration("20200919232641_skander")]
+    partial class skander
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

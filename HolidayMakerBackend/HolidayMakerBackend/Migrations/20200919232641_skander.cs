@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Initial : Migration
+    public partial class skander : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

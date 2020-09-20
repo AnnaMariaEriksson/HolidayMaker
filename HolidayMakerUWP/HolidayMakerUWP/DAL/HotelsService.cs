@@ -10,6 +10,7 @@ using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Diagnostics;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace HolidayMakerUWP.DAL
 {
@@ -27,7 +28,7 @@ namespace HolidayMakerUWP.DAL
         public FrontPageSearchViewModel FrontPageSearchViewModel { get; set; }
 
         public static Hotel SelectedHotel { get; set; }
-        public static int SortByInt { get; set; }
+        public static int SortByInt { get; set; } = 1;
 
         private const string WebServiceUrl = "https://localhost:44368/api/";
         private static string TempOrderId = null;
@@ -154,6 +155,29 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.Dispose();
                 return user;
             }
+        }
+        public static async void PostBooking(ObservableCollection<Room> rooms, DateTime startDate, DateTime endDate)
+        {            
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                Booking booking = new Booking()
+                {
+                    BookingRooms = rooms,
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
+
+                var json = JsonConvert.SerializeObject(booking);
+                HttpContent httpContent = new StringContent(json);
+
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpClient1.DefaultRequestHeaders.Accept.Clear();
+                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                                                              
+                await httpClient1.PostAsync(WebServiceUrl + "Bookings", httpContent);
+
+                httpClient1.Dispose();
+            }            
         }
     }
 

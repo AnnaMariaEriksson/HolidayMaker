@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.ObjectModel;
 
 namespace HolidayMakerBackend.Controllers
 {
@@ -83,7 +85,7 @@ namespace HolidayMakerBackend.Controllers
             _context.Booking.Add(booking);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBooking", new { id = booking.BookingID }, booking);
+            return Ok();
         }
 
         // DELETE: api/Bookings/5
