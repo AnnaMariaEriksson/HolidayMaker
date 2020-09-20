@@ -12,7 +12,8 @@ namespace HolidayMakerUWP.Model
         public int BookingID { get; set; }
         public ObservableCollection<Room> BookingRooms { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }       
+        public DateTime EndDate { get; set; }
+        public int UserID { get; set; }
         public Booking() { }
     }
 }

@@ -19,6 +19,7 @@ namespace HolidayMakerUWP.DAL
 
         private HttpClient httpClient;
 
+
         private string roomURL = "";
 
         private string regionURL = "";
@@ -156,27 +157,28 @@ namespace HolidayMakerUWP.DAL
                 return user;
             }
         }
-        public static async void PostBooking(ObservableCollection<Room> rooms, DateTime startDate, DateTime endDate)
+        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTime startDate, DateTime endDate)
         {            
             using (HttpClient httpClient1 = new HttpClient())
             {
+
                 Booking booking = new Booking()
                 {
                     BookingRooms = rooms,
                     StartDate = startDate,
-                    EndDate = endDate
+                    EndDate = endDate,
+                    UserID = LogInViewModel.User.UserID
                 };
-
                 var json = JsonConvert.SerializeObject(booking);
                 HttpContent httpContent = new StringContent(json);
 
                 httpClient1.Timeout = new TimeSpan(0, 0, 5);
-                httpClient1.DefaultRequestHeaders.Accept.Clear();
-                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                                                                              
+                httpContent.Headers.Clear();
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");               
+                                                                                             
                 await httpClient1.PostAsync(WebServiceUrl + "Bookings", httpContent);
 
-                httpClient1.Dispose();
+                httpClient1.Dispose();                
             }            
         }
     }

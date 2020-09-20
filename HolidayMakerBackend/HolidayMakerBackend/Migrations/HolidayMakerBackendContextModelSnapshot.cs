@@ -32,6 +32,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("BookingID");
 
                     b.ToTable("Booking");

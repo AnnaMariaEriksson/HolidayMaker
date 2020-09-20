@@ -81,7 +81,7 @@ namespace HolidayMakerBackend.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Booking>> PostBooking(Booking booking)
-        {
+        {           
             _context.Booking.Add(booking);
             await _context.SaveChangesAsync();
 
