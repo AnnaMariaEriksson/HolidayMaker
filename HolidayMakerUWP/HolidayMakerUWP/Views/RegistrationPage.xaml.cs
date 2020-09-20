@@ -26,6 +26,7 @@ namespace HolidayMakerUWP.Views
     public sealed partial class RegistrationPage : Page
     {
         public RegistrationPageViewModel RegistrationPageViewModel { get; set; }
+        public User User { get; set; }
         public RegistrationPage()
         {
             this.InitializeComponent();

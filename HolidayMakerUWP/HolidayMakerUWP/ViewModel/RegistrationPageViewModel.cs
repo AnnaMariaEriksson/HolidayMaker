@@ -11,6 +11,7 @@ namespace HolidayMakerUWP.Viewmodel
     public class RegistrationPageViewModel
     {
         public ObservableCollection<User> Users { get; set; }
+        public User User { get; set; }
 
         public RegistrationPageViewModel()
         {

@@ -80,7 +80,8 @@ namespace HolidayMakerBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            if (_context.User.FirstOrDefaultAsync(u => u.Email == user.Email) == null)
+            var userInDatabase = await _context.User.FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (userInDatabase == null)
             {
                 _context.User.Add(user);
                 await _context.SaveChangesAsync();
@@ -89,7 +90,7 @@ namespace HolidayMakerBackend.Controllers
             }
             else
             {
-                return NotFound("A user already exists with that email!");
+                return Conflict("A user already exists with that email!");
             }
     
         }

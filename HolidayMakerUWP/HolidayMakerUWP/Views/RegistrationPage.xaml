@@ -30,17 +30,17 @@
             Grid.Column="1"
             Width="250">
 
-            <TextBlock x:Name="FirstNameField" Text="Förnamn" />
-            <TextBox Text="{x:Bind User.FirstName}" />
+            <TextBlock x:Name="FirstNameLabel" Text="Förnamn" />
+            <TextBox x:Name="FirstNameField" Text="{x:Bind User.FirstName}" />
 
-            <TextBlock x:Name="LastNameField" Text="Efternamn" />
-            <TextBox Text="{x:Bind User.LastName}" />
+            <TextBlock x:Name="LastNameLabel" Text="Efternamn" />
+            <TextBox x:Name="LastNameField" Text="{x:Bind User.LastName}" />
 
-            <TextBlock x:Name="EmailField" Text="Email" />
-            <TextBox Text="{x:Bind User.Email}" />
+            <TextBlock x:Name="EmailLabel" Text="Email" />
+            <TextBox x:Name="EmailField" Text="{x:Bind User.Email}" />
 
-            <TextBlock x:Name="PasswordField" Text="Lösenord" />
-            <TextBox Text="{x:Bind User.Password}" />
+            <TextBlock x:Name="PasswordLabel" Text="Lösenord" />
+            <TextBox x:Name="PasswordField" Text="{x:Bind User.Password}" />
 
             <Button
                 x:Name="AddUserButton"

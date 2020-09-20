@@ -10,6 +10,7 @@ using HolidayMakerUWP.Viewmodel;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Diagnostics;
+using System.Net;
 
 namespace HolidayMakerUWP.DAL
 {
@@ -167,10 +168,19 @@ namespace HolidayMakerUWP.DAL
 
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var response = await httpClient1.PostAsync(userURL, httpContent);
-                var content = await response.Content.ReadAsStringAsync();
-                user = JsonConvert.DeserializeObject<User>(content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    user = JsonConvert.DeserializeObject<User>(content);
 
-                return user;
+                    return user;
+                }
+                else if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    //TODO decide how to handle this issue
+                }
+
+                throw new Exception($"Failed to post {userURL} with {await httpContent.ReadAsStringAsync()}. Got statuscode {response.StatusCode} with message: {await response.Content.ReadAsStringAsync()}");
             }
         }
 
