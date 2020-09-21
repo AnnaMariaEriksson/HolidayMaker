@@ -39,6 +39,45 @@ namespace HolidayMakerBackend.Data
                 NameOfCity = "Malmö",
                 RegionID = 1
             });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                FirstName = "Bosse",
+                LastName = "Larsson",
+                Email = "bosse@123.se",
+                Password = "hejhej",
+                ID = 1
+            });
+
+            modelBuilder.Entity<Hotel>().HasData(new Hotel
+            {
+                CityID = 1,
+                DistansToBeach = 20,
+                DistansToCenter = 1,
+                FilterReset = true,
+                HasAllInclusive = true,
+                HasChildrensClub = false,
+                HasEntertainment = true,
+                HasFullBoard = false,
+                HasHalfBoard = false,
+                HasPool = true,
+                Test = true,
+                Test2 = true,
+                HotelID = 0,
+                Name = "Bosses hotell"
+            });
+
+            modelBuilder.Entity<Room>().HasData(new Room
+            {
+                ExtraBed = true,
+                HasAllInclusive = true,
+                HasFullBoard = false,
+                HasHalfBoard = false,
+                HotelID = 1,
+                IsAllInclusive = true,
+                Price = 300,
+                RoomName = "Rum 1",
+            });
         }
     }
 }
