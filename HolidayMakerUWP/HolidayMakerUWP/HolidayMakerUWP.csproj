@@ -135,6 +135,7 @@
     <Compile Include="Viewmodel\FrontPageSearchViewModel.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
     <Compile Include="Viewmodel\LogInViewModel.cs" />
+    <Compile Include="Viewmodel\RegistrationPageViewModel.cs" />
     <Compile Include="Viewmodel\RoomSelectionVm.cs" />
     <Compile Include="Views\BasePage.xaml.cs">
       <DependentUpon>BasePage.xaml</DependentUpon>
@@ -157,6 +158,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MyBookingPage.xaml.cs">
       <DependentUpon>MyBookingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationPage.xaml.cs">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RoomSelection.xaml.cs">
       <DependentUpon>RoomSelection.xaml</DependentUpon>
@@ -209,6 +213,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MyBookingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

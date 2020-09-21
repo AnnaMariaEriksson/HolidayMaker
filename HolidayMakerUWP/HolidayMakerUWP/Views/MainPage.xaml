@@ -9,29 +9,33 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button
-            Name="NavigateToHotelSearchButton"
-            Width="521"
-            Height="90"
-            VerticalAlignment="Top"
-            Click="NavigateToHotelSearchButton_OnClick"
-            Content="Hotel search"
-            FontSize="60" Margin="83,67,0,0" />
+        <StackPanel>
+            <Button
+                Name="NavigateToHotelSearchButton"
+                Width="521"
+                Height="90"
+                Click="NavigateToHotelSearchButton_OnClick"
+                Content="Hotel search"
+                FontSize="60" />
 
-        <Button
-            Name="NavigateToFrontPageSearch"
-            Width="521"
-            Height="125"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            Click="NavigateToFrontPageSearch_OnClick"
-            Content="Front Page search!"
-            FontSize="60" Margin="0,200,896,0" />
-        <Button VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                Content="My Booking page"
-                FontSize="60"
-                x:Name="MyBookingPage"
-                Click="MyBookingPage_Click"/>
+            <Button
+                Name="NavigateToFrontPageSearch"
+                Width="521"
+                Height="125"
+                Click="NavigateToFrontPageSearch_OnClick"
+                Content="Front Page search!"
+                FontSize="60" />
+            <Button Content="My Booking page"
+                    FontSize="60"
+                    x:Name="MyBookingPage"
+                    Click="MyBookingPage_Click"/>
+            <Button x:Name="RegistrationPage"
+                    Content="Registration page" 
+                    Height="87" 
+                    Width="487"
+                    FontSize="55"
+                    Click="RegistrationPage_OnClick"/>
+        </StackPanel>
+        
     </Grid>
 </Page>

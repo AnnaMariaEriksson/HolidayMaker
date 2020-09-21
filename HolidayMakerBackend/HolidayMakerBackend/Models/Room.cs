@@ -8,7 +8,7 @@ namespace HolidayMakerBackend.Models
 {
     public class Room
     {
-        
+        [Key]
         public int ID { get; set; }
         public int HotelID { get; set; }
         public int Price { get; set; }

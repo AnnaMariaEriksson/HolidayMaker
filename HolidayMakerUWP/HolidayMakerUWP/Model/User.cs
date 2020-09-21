@@ -15,10 +15,6 @@ namespace HolidayMakerUWP.Model
         public string LastName { get; set; }
         public string Email { get; set; }
         public ObservableCollection<Booking> UserBookings;
-
-        public User()
-        {
-
-        }
+        
     }
 }

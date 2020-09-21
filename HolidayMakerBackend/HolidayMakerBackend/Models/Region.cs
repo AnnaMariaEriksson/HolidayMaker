@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace HolidayMakerBackend.Models
 {
-    public class City
+    public class Region
     {
         [Key]
-        public int CityID { get; set; }
         public int RegionID { get; set; }
-        public string NameOfCity { get; set; }
-        public virtual List<Hotel> Hotels { get; set; }
+        public string NameOfRegion { get; set; }
+        public virtual List<City> Cities { get; set; }
     }
 }

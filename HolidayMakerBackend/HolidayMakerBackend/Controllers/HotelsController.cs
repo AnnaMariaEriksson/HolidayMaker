@@ -32,7 +32,7 @@ namespace HolidayMakerBackend.Controllers
             {
             foreach(Room r in _context.Room.Where(x => x.HotelID == h.HotelID))
             {
-                    Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.RoomID);
+                    Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.ID);
                     if(booking.StartDate < StartDate && booking.EndDate < EndDate)
                     {
                         TempRooms.Add(r);
