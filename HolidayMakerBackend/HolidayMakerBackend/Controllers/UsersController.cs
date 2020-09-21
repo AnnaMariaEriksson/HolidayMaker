@@ -34,13 +34,14 @@ namespace HolidayMakerBackend.Controllers
         public async Task<ActionResult<User>> GetUser(string password, string email)
         {
             var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email);
-
-            if(user.Password == password)
+            if (user != null)
             {
-                return Ok(user);
+                if (user.Password == password)
+                {
+                    return Ok(user);
+                }
             }
-
-            return NotFound("Password or email is wrong.");
+            return Ok(null);
         }
 
         // PUT: api/Users/5

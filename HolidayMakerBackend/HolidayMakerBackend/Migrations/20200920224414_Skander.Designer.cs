@@ -4,14 +4,16 @@ using HolidayMakerBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    partial class HolidayMakerBackendContextModelSnapshot : ModelSnapshot
+    [Migration("20200920224414_Skander")]
+    partial class Skander
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,17 +60,7 @@ namespace HolidayMakerBackend.Migrations
 
                     b.HasKey("CityID");
 
-                    b.HasIndex("RegionID");
-
                     b.ToTable("City");
-
-                    b.HasData(
-                        new
-                        {
-                            CityID = 1,
-                            NameOfCity = "Malmö",
-                            RegionID = 1
-                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
@@ -125,31 +117,7 @@ namespace HolidayMakerBackend.Migrations
 
                     b.HasKey("HotelID");
 
-                    b.HasIndex("CityID");
-
                     b.ToTable("Hotel");
-                });
-
-            modelBuilder.Entity("HolidayMakerBackend.Models.Region", b =>
-                {
-                    b.Property<int>("RegionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NameOfRegion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RegionID");
-
-                    b.ToTable("Region");
-
-                    b.HasData(
-                        new
-                        {
-                            RegionID = 1,
-                            NameOfRegion = "Skåne"
-                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>
@@ -212,24 +180,6 @@ namespace HolidayMakerBackend.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>
-                {
-                    b.HasOne("HolidayMakerBackend.Models.Region", null)
-                        .WithMany("Cities")
-                        .HasForeignKey("RegionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HolidayMakerBackend.Models.Hotel", b =>
-                {
-                    b.HasOne("HolidayMakerBackend.Models.City", null)
-                        .WithMany("Hotels")
-                        .HasForeignKey("CityID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Room", b =>

@@ -23,35 +23,31 @@ namespace HolidayMakerBackend.Controllers
             _context = context;
         }
 
-        // GET: api/Rooms
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
-        {
-
-            return await _context.Room.ToListAsync();
-        }
-
         // GET: api/Rooms/HotelId
-        [HttpGet("{HotelId}")]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId, int sorrtby)
+        [HttpGet("{HotelId}/{sorrtby}")]
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-            ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
-            await foreach (Room r in _context.Room)
+            ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();        
+                  
+            foreach (Room r in _context.Room.Where(x => x.HotelID == HotelId))
             {
-                if (r.HotelID == HotelId)
-                    TempRooms.Add(r);
+                Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.RoomID);
+                if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                {
+                    if (r.HotelID == HotelId)
+                        TempRooms.Add(r);
+                }
             }
 
             if (sorrtby == 1)
             {
                 rooms = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Price));
-            }
-            else if (sorrtby == 2)
+            }else if (sorrtby == 2)
             {
                 rooms = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Price));
             }
-
+            
             return rooms;
         }
 

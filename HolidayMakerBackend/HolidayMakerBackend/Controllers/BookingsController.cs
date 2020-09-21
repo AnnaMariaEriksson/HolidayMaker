@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace HolidayMakerBackend.Controllers
 {
@@ -78,33 +81,68 @@ namespace HolidayMakerBackend.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Booking>> PostBooking(Booking booking)
+        public async Task<ActionResult<Booking>> PostBooking(PostBooking postBooking)
         {
-            _context.Booking.Add(booking);
-            await _context.SaveChangesAsync();
+            foreach (Room r in postBooking.BookingRooms)
+            {
+                Booking booking = new Booking()
+                {
+                    roomID = r.ID,
+                    StartDate = postBooking.StartDate,
+                    EndDate = postBooking.EndDate,
+                    UserID = postBooking.UserID,
+                    BookingID = 0
+                };
+                _context.Booking.Add(booking);
 
-            return CreatedAtAction("GetBooking", new { id = booking.BookingID }, booking);
+            }
+
+            var result = await _context.SaveChangesAsync();
+
+            if (result <= 0)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+
+            //Booking booking = new Booking();
+            //booking.roomID = postBooking.BookingRooms[0].ID;
+            //booking.BookingID = 0;
+            //booking.EndDate = postBooking.EndDate;
+            //booking.StartDate = postBooking.StartDate;
+            //booking.UserID = postBooking.UserID;
+            //_context.Booking.Add(booking);
+            //try
+            //{
+            //    var result = await _context.SaveChangesAsync();
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.WriteLine(e.Message);
+            //}
+            //return Ok(); CTRL + K, CTRL + C
         }
 
         // DELETE: api/Bookings/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Booking>> DeleteBooking(int id)
-        {
-            var booking = await _context.Booking.FindAsync(id);
-            if (booking == null)
+            public async Task<ActionResult<Booking>> DeleteBooking(int id)
             {
-                return NotFound();
+                var booking = await _context.Booking.FindAsync(id);
+                if (booking == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Booking.Remove(booking);
+                await _context.SaveChangesAsync();
+
+                return booking;
             }
 
-            _context.Booking.Remove(booking);
-            await _context.SaveChangesAsync();
-
-            return booking;
-        }
-
-        private bool BookingExists(int id)
-        {
-            return _context.Booking.Any(e => e.BookingID == id);
+            private bool BookingExists(int id)
+            {
+                return _context.Booking.Any(e => e.BookingID == id);
+            }
         }
     }
-}
