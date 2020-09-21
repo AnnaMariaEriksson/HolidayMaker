@@ -56,8 +56,14 @@ namespace HolidayMakerBackend.Controllers
                     TempRooms.Clear();
                 }
             }
-
-            return TempHotels;
+            if (TempHotels.Count() > 0)
+            {
+                return Ok(TempHotels);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // PUT: api/Hotels/5
