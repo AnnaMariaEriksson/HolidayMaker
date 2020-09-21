@@ -24,7 +24,7 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Rooms/HotelId
-        [HttpGet("{HotelId}/{sorrtby}")]
+        [HttpGet("{HotelId}/{sorrtby}/{StartDate}/{EndDate}")]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
@@ -32,11 +32,18 @@ namespace HolidayMakerBackend.Controllers
                   
             foreach (Room r in _context.Room.Where(x => x.HotelID == HotelId))
             {
-                Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.ID);
-                if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.roomID == r.ID);
+                if (booking != null)
                 {
-                    if (r.HotelID == HotelId)
-                        TempRooms.Add(r);
+                    if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                    {
+                        if (r.HotelID == HotelId)
+                            TempRooms.Add(r);
+                    }
+                }
+                else
+                {
+                    TempRooms.Add(r);
                 }
             }
 

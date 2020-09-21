@@ -36,7 +36,7 @@ namespace HolidayMakerBackend.Controllers
                     if (booking != null)
                     {
                      
-                        if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                        if (booking.StartDate < StartDate && booking.EndDate > EndDate)
                         {
                             TempRooms.Add(r);
                         }
@@ -62,7 +62,7 @@ namespace HolidayMakerBackend.Controllers
             }
             else
             {
-                return NotFound();
+                return Ok(TempHotels);
             }
         }
 
