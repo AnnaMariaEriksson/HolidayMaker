@@ -24,7 +24,7 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Rooms/HotelId
-        [HttpGet("{HotelId}/{sorrtby}")]
+        [HttpGet("{HotelId}/{sorrtby}/{StartDate}/{EndDate}")]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();

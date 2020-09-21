@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200921085026_newMigration1")]
-    partial class newMigration1
+    [Migration("20200921103030_Saimir")]
+    partial class Saimir
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -130,6 +130,26 @@ namespace HolidayMakerBackend.Migrations
                     b.HasIndex("CityID");
 
                     b.ToTable("Hotel");
+
+                    b.HasData(
+                        new
+                        {
+                            HotelID = 1,
+                            CityID = 1,
+                            DistansToBeach = 20,
+                            DistansToCenter = 1,
+                            FilterReset = true,
+                            HasAllInclusive = true,
+                            HasChildrensClub = false,
+                            HasEntertainment = true,
+                            HasFullBoard = false,
+                            HasHalfBoard = false,
+                            HasPool = true,
+                            HasRestaurant = false,
+                            Name = "Bosses hotell",
+                            Test = true,
+                            Test2 = true
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Region", b =>
@@ -190,6 +210,20 @@ namespace HolidayMakerBackend.Migrations
                     b.HasIndex("HotelID");
 
                     b.ToTable("Room");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ExtraBed = true,
+                            HasAllInclusive = true,
+                            HasFullBoard = false,
+                            HasHalfBoard = false,
+                            HotelID = 1,
+                            IsAllInclusive = true,
+                            Price = 300,
+                            RoomName = "Rum 1"
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.User", b =>
@@ -214,6 +248,16 @@ namespace HolidayMakerBackend.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "bosse@123.se",
+                            FirstName = "Bosse",
+                            LastName = "Larsson",
+                            Password = "hejhej"
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>

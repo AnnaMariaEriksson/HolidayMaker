@@ -63,7 +63,7 @@ namespace HolidayMakerBackend.Data
                 HasPool = true,
                 Test = true,
                 Test2 = true,
-                HotelID = 0,
+                HotelID = 1,
                 Name = "Bosses hotell"
             });
 
@@ -77,6 +77,7 @@ namespace HolidayMakerBackend.Data
                 IsAllInclusive = true,
                 Price = 300,
                 RoomName = "Rum 1",
+                ID = 1
             });
         }
     }
