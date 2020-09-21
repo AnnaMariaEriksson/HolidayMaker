@@ -25,16 +25,22 @@ namespace HolidayMakerBackend.Controllers
 
         // GET: api/Rooms/HotelId
         [HttpGet("{HotelId}/{sorrtby}")]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby)
+        public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
             ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();        
-                  await foreach(Room r in _context.Room)
-                    {
-                        if(r.HotelID == HotelId)
+                  
+            foreach (Room r in _context.Room.Where(x => x.HotelID == HotelId))
+            {
+                Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.RoomID);
+                if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                {
+                    if (r.HotelID == HotelId)
                         TempRooms.Add(r);
-                    }
-            if(sorrtby == 1)
+                }
+            }
+
+            if (sorrtby == 1)
             {
                 rooms = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Price));
             }else if (sorrtby == 2)
@@ -65,7 +71,7 @@ namespace HolidayMakerBackend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
-            if (id != room.ID)
+            if (id != room.RoomID)
             {
                 return BadRequest();
             }
@@ -100,7 +106,7 @@ namespace HolidayMakerBackend.Controllers
             _context.Room.Add(room);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRoom", new { id = room.ID }, room);
+            return CreatedAtAction("GetRoom", new { id = room.RoomID }, room);
         }
 
         // DELETE: api/Rooms/5
@@ -121,7 +127,7 @@ namespace HolidayMakerBackend.Controllers
 
         private bool RoomExists(int id)
         {
-            return _context.Room.Any(e => e.ID == id);
+            return _context.Room.Any(e => e.RoomID == id);
         }
     }
 }
