@@ -30,6 +30,7 @@ namespace HolidayMakerUWP.Views
     public sealed partial class RoomSelection : Page
     {
         public bool BtnClicked = true;
+        public FrontPageSearchViewModel FPSVm { get; set; }
         public RoomSelectionVm Vm { get; set; }
         public HotelsService ServiceVm;
         public RoomSelection()
@@ -209,6 +210,26 @@ namespace HolidayMakerUWP.Views
                 Vm._rooms = Vm.SortByPrice(2);
                 RoomListView.ItemsSource = Vm.Rooms;
             }           
+        }
+
+        private void EndDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void StartDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void RegionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void CityButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
         }
     }
 }
