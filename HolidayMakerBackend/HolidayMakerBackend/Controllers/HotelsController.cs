@@ -21,17 +21,30 @@ namespace HolidayMakerBackend.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Hotels
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel(int CityID)
+        
+            // GET: api/Hotels
+            [HttpGet]
+        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel(int CityID,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Hotel> TempHotels = new ObservableCollection<Hotel>();
-                await foreach(Hotel h in _context.Hotel){
-              
-                    TempHotels.Add(h);
-                
+            ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
+           await foreach(Hotel h in _context.Hotel)
+            {
+            foreach(Room r in _context.Room.Where(x => x.HotelID == h.HotelID))
+            {
+                    Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.RoomID);
+                    if(booking.StartDate < StartDate && booking.EndDate < EndDate)
+                    {
+                        TempRooms.Add(r);
+                    }
             }
+            if(TempRooms.Count > 0)
+                {
+                    TempHotels.Add(h);
+                    TempRooms.Clear();
+                }
+            }
+
             return TempHotels;
         }
 
