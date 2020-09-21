@@ -45,6 +45,7 @@ namespace HolidayMakerUWP.DAL
 
                     httpClient1.Dispose();
                     return Hotels;
+
                 }
         }
 
