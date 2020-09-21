@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Skander : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,10 @@ namespace HolidayMakerBackend.Migrations
                 {
                     BookingID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    roomID = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false)
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,7 +84,7 @@ namespace HolidayMakerBackend.Migrations
                 name: "Room",
                 columns: table => new
                 {
-                    RoomID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HotelID = table.Column<int>(nullable: false),
                     Price = table.Column<int>(nullable: false),
@@ -91,18 +93,11 @@ namespace HolidayMakerBackend.Migrations
                     IsAllInclusive = table.Column<bool>(nullable: false),
                     HasFullBoard = table.Column<bool>(nullable: false),
                     HasHalfBoard = table.Column<bool>(nullable: false),
-                    RoomName = table.Column<string>(nullable: true),
-                    BookingID = table.Column<int>(nullable: true)
+                    RoomName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Room", x => x.RoomID);
-                    table.ForeignKey(
-                        name: "FK_Room_Booking_BookingID",
-                        column: x => x.BookingID,
-                        principalTable: "Booking",
-                        principalColumn: "BookingID",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Room", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Room_Hotel_HotelID",
                         column: x => x.HotelID,
@@ -110,11 +105,6 @@ namespace HolidayMakerBackend.Migrations
                         principalColumn: "HotelID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Room_BookingID",
-                table: "Room",
-                column: "BookingID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Room_HotelID",
@@ -125,6 +115,9 @@ namespace HolidayMakerBackend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Booking");
+
+            migrationBuilder.DropTable(
                 name: "City");
 
             migrationBuilder.DropTable(
@@ -132,9 +125,6 @@ namespace HolidayMakerBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Booking");
 
             migrationBuilder.DropTable(
                 name: "Hotel");

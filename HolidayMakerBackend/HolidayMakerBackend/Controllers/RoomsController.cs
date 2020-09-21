@@ -24,7 +24,7 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Rooms/HotelId
-        [HttpGet("{HotelId}")]
+        [HttpGet("{HotelId}/{sorrtby}")]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby)
         {
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
@@ -65,7 +65,7 @@ namespace HolidayMakerBackend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
-            if (id != room.RoomID)
+            if (id != room.ID)
             {
                 return BadRequest();
             }
@@ -100,7 +100,7 @@ namespace HolidayMakerBackend.Controllers
             _context.Room.Add(room);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRoom", new { id = room.RoomID }, room);
+            return CreatedAtAction("GetRoom", new { id = room.ID }, room);
         }
 
         // DELETE: api/Rooms/5
@@ -121,7 +121,7 @@ namespace HolidayMakerBackend.Controllers
 
         private bool RoomExists(int id)
         {
-            return _context.Room.Any(e => e.RoomID == id);
+            return _context.Room.Any(e => e.ID == id);
         }
     }
 }
