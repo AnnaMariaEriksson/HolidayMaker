@@ -32,7 +32,7 @@ namespace HolidayMakerBackend.Controllers
                   
             foreach (Room r in _context.Room.Where(x => x.HotelID == HotelId))
             {
-                Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.RoomID);
+                Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.ID);
                 if (booking.StartDate < StartDate && booking.EndDate < EndDate)
                 {
                     if (r.HotelID == HotelId)
@@ -71,7 +71,7 @@ namespace HolidayMakerBackend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
-            if (id != room.RoomID)
+            if (id != room.ID)
             {
                 return BadRequest();
             }
@@ -106,7 +106,7 @@ namespace HolidayMakerBackend.Controllers
             _context.Room.Add(room);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRoom", new { id = room.RoomID }, room);
+            return CreatedAtAction("GetRoom", new { id = room.ID }, room);
         }
 
         // DELETE: api/Rooms/5
@@ -127,7 +127,7 @@ namespace HolidayMakerBackend.Controllers
 
         private bool RoomExists(int id)
         {
-            return _context.Room.Any(e => e.RoomID == id);
+            return _context.Room.Any(e => e.ID == id);
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Skander : Migration
+    public partial class newMigration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,6 +24,35 @@ namespace HolidayMakerBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Region",
+                columns: table => new
+                {
+                    RegionID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameOfRegion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Region", x => x.RegionID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Password = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "City",
                 columns: table => new
                 {
@@ -35,6 +64,12 @@ namespace HolidayMakerBackend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_City", x => x.CityID);
+                    table.ForeignKey(
+                        name: "FK_City_Region_RegionID",
+                        column: x => x.RegionID,
+                        principalTable: "Region",
+                        principalColumn: "RegionID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,22 +97,12 @@ namespace HolidayMakerBackend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Hotel", x => x.HotelID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Password = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Hotel_City_CityID",
+                        column: x => x.CityID,
+                        principalTable: "City",
+                        principalColumn: "CityID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -106,6 +131,26 @@ namespace HolidayMakerBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Region",
+                columns: new[] { "RegionID", "NameOfRegion" },
+                values: new object[] { 1, "Skåne" });
+
+            migrationBuilder.InsertData(
+                table: "City",
+                columns: new[] { "CityID", "NameOfCity", "RegionID" },
+                values: new object[] { 1, "Malmö", 1 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_City_RegionID",
+                table: "City",
+                column: "RegionID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hotel_CityID",
+                table: "Hotel",
+                column: "CityID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Room_HotelID",
                 table: "Room",
@@ -118,9 +163,6 @@ namespace HolidayMakerBackend.Migrations
                 name: "Booking");
 
             migrationBuilder.DropTable(
-                name: "City");
-
-            migrationBuilder.DropTable(
                 name: "Room");
 
             migrationBuilder.DropTable(
@@ -128,6 +170,12 @@ namespace HolidayMakerBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Hotel");
+
+            migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
+                name: "Region");
         }
     }
 }

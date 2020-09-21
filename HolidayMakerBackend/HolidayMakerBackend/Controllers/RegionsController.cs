@@ -32,8 +32,6 @@ namespace HolidayMakerBackend.Controllers
                 .ToListAsync();
 
             return Ok(regions);
-
-            return await _context.Region.ToListAsync();
         }
 
         // GET: api/Regions/5
