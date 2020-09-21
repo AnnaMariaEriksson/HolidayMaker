@@ -43,7 +43,7 @@ namespace HolidayMakerUWP.Views
         public HotelsService _service;
         public HotelSearch()
         {
-            this.InitializeComponent();
+            this.InitializeComponent(); 
             HasAllInclusive = false;
             HasFullBoard = false;
             HasHalfBoard = false;

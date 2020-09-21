@@ -143,7 +143,8 @@ namespace HolidayMakerBackend.Migrations
                             HasFullBoard = false,
                             HasHalfBoard = false,
                             HasPool = true,
-                            HasRestaurant = false,
+                            HasRestaurant = true,
+                            HotelDescription = "Ett fint hotell",
                             Name = "Bosses hotell",
                             Test = true,
                             Test2 = true
