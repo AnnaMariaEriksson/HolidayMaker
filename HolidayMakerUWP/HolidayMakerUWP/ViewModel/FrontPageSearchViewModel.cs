@@ -20,9 +20,6 @@ namespace HolidayMakerUWP.Viewmodel
             Regions = new ObservableCollection<Regions>();
             Cities = new ObservableCollection<City>();
             TempCity = new ObservableCollection<City>();
-
-            HotelsService.GetAllRegionsAsync();
-            HotelsService.GetCities();
         }
 
     }

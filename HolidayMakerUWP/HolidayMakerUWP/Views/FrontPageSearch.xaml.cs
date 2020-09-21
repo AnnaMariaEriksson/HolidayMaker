@@ -76,8 +76,6 @@ namespace HolidayMakerUWP
                 IfNotFoundLabel.Text = ($"Vi hittade ({tempCity.Count()}) hotell.");
             }
 
-
-
         }
 
         private void GetAllRegionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
