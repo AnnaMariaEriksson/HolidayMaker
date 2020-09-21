@@ -8,7 +8,6 @@ namespace HolidayMakerBackend.Models
 {
     public class Hotel
     {
-        [Key]
         public int HotelID { get; set; }
         public string HotelDescription { get; set; }
         public string Name { get; set; }
