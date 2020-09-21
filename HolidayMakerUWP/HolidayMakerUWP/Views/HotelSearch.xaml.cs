@@ -38,6 +38,7 @@ namespace HolidayMakerUWP.Views
         public bool HasChildrensClub;
         public bool HasEntertainment;
         public bool HasPool;
+        public FrontPageSearchViewModel FPSVm { get; set; }
         public HotelSearchVm Vm { get; set; }
         public HotelsService _service;
         public HotelSearch()
@@ -196,6 +197,25 @@ namespace HolidayMakerUWP.Views
             Frame.Navigate(typeof(RoomSelection));
         }
 
-       
+        private void EndDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void StartDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void RegionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void CityButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
     }
 }
