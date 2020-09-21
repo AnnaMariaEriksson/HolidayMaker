@@ -36,7 +36,7 @@ namespace HolidayMakerBackend.Controllers
                     if (booking != null)
                     {
                      
-                        if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                        if (booking.StartDate < StartDate && booking.EndDate > EndDate)
                         {
                             TempRooms.Add(r);
                         }
@@ -56,8 +56,14 @@ namespace HolidayMakerBackend.Controllers
                     TempRooms.Clear();
                 }
             }
-
-            return TempHotels;
+            if (TempHotels.Count() > 0)
+            {
+                return Ok(TempHotels);
+            }
+            else
+            {
+                return Ok(TempHotels);
+            }
         }
 
         // PUT: api/Hotels/5

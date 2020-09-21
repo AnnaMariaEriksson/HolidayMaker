@@ -20,16 +20,16 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button  Content="{x:Bind FPSVm.Regions}" Click="RegionsButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
+                <Button  Content="{x:Bind FPSVm.Regions,Mode=TwoWay}" x:Name="RegionsButton" Click="RegionsButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.Cities}" Click="CityButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160" />
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.Cities}" x:Name="CityButton" Click="CityButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160" />
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.StartDate}" Click="StartDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.StartDate}" x:Name="StartDateButton" Click="StartDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.EndDate}" Click="EndDateButton_Click" FontSize="35" Height="50" Width="160"/>
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.EndDate}" x:Name="EndDateButton" Click="EndDateButton_Click" FontSize="35" Height="50" Width="160"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0"
