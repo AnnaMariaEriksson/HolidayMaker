@@ -35,11 +35,13 @@ namespace HolidayMakerUWP.DAL
       
                     httpClient1.DefaultRequestHeaders.Accept.Clear();
                     httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //var test = WebServiceUrl + "hotels/" + FrontPageSearchViewModel.Search.Cities.CityID + "/"
+                //        + "2018" + "/" + "2019"
 
-                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels/" 
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels/" 
                         + FrontPageSearchViewModel.Search.Cities.CityID + "/"
-                        + FrontPageSearchViewModel.Search.StartDate.UtcDateTime +"/" 
-                        + FrontPageSearchViewModel.Search.EndDate.UtcDateTime);
+                        + FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd") +"/" 
+                        + FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd"));
 
                     Hotels = JsonConvert.DeserializeObject<ObservableCollection<Hotel>>(jsonResult);
 
@@ -57,7 +59,7 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + HotelId + "/" + SortByInt);
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + HotelId + "/" + SortByInt + "/" + FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString() + "/" + FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString());
 
                 Rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonResult);
 

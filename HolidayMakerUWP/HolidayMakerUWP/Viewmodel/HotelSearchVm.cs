@@ -59,8 +59,23 @@ namespace HolidayMakerUWP.Viewmodel
             FilterBtn = new RelayCommand<string>(FilterToggle);
             Filters = new Dictionary<string, object>();
             this._service = new HotelsService();
-            _hotels = Task.Run(() => HotelsService.GetHotels()).Result;
-            TempHotel = Task.Run(() => HotelsService.GetHotels()).Result;
+
+            var GetHotelResult = Task.Run(() => HotelsService.GetHotels()).Result;
+            if(GetHotelResult == null)
+            {
+                _hotels = new ObservableCollection<Hotel>();
+            }
+            else { _hotels = Task.Run(() => HotelsService.GetHotels()).Result; }
+
+            if(GetHotelResult == null)
+            {
+                TempHotel = new ObservableCollection<Hotel>();
+            }
+            else
+            {
+                TempHotel = Task.Run(() => HotelsService.GetHotels()).Result;
+            }
+            
             DistansToBeach = 50;
             DistansToCenter = 50;
         }
