@@ -229,7 +229,7 @@ public static async Task<User> GetUser(string email, string password)
                 return user;
             }
         }
-        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTime startDate, DateTime endDate)
+        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTimeOffset startDate, DateTimeOffset endDate)
         {            
             using (HttpClient httpClient1 = new HttpClient())
             {

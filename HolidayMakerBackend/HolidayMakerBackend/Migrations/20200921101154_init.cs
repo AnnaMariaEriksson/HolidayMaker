@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class newMigration1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -137,9 +137,24 @@ namespace HolidayMakerBackend.Migrations
                 values: new object[] { 1, "Skåne" });
 
             migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "ID", "Email", "FirstName", "LastName", "Password" },
+                values: new object[] { 1, "bosse@123.se", "Bosse", "Larsson", "hejhej" });
+
+            migrationBuilder.InsertData(
                 table: "City",
                 columns: new[] { "CityID", "NameOfCity", "RegionID" },
                 values: new object[] { 1, "Malmö", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Hotel",
+                columns: new[] { "HotelID", "CityID", "DistansToBeach", "DistansToCenter", "FilterReset", "HasAllInclusive", "HasChildrensClub", "HasEntertainment", "HasFullBoard", "HasHalfBoard", "HasPool", "HasRestaurant", "HotelDescription", "Name", "Test", "Test2" },
+                values: new object[] { 1, 1, 20, 1, true, true, false, true, false, false, true, false, null, "Bosses hotell", true, true });
+
+            migrationBuilder.InsertData(
+                table: "Room",
+                columns: new[] { "ID", "ExtraBed", "HasAllInclusive", "HasFullBoard", "HasHalfBoard", "HotelID", "IsAllInclusive", "Price", "RoomName" },
+                values: new object[] { 1, true, true, false, false, 1, true, 300, "Rum 1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_RegionID",

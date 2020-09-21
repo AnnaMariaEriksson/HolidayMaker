@@ -49,7 +49,7 @@ namespace HolidayMakerUWP.Views
 
             //Task.Run.PostBooking(bookingPageViewModel._selectedRooms, DateTime.Now, DateTime.Now));
 
-            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, DateTime.Now, DateTime.Now));
+            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, FrontPageSearchViewModel.Search.StartDate, DateTime.Now));
         }
 
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
