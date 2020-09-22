@@ -22,16 +22,16 @@
         <!--Grid TWO-->
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button  Content="{x:Bind FPSVm.Regions}" Click="RegionsButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
+                <Button Content="{x:Bind FPSVm.Regions}" x:Name="RegionsButton" Click="RegionsButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.Cities}" Click="CityButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160" />
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.Cities}" x:Name="CityButton" Click="CityButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160" />
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.StartDate}" Click="StartDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.StartDate}" x:Name="StartDateButton" Click="StartDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="200"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.EndDate}" Click="EndDateButton_Click" FontSize="35" Height="50" Width="160"/>
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.EndDate}" x:Name="EndDateButton" Click="EndDateButton_Click" FontSize="35" Height="50" Width="200"/>
             </StackPanel>
         </StackPanel>
         <Button  Grid.Column="2"
@@ -90,7 +90,18 @@
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[5]}" Grid.Row="1"/>
                     </StackPanel>
                 </Grid>
-                <Button x:Name="FilterRoomsByPrice" Click="FilterRoomsByPrice_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Sortera Pris" Width="90" CornerRadius="25"/>
+                <Button x:Name="FilterRoomsByPrice" Click="FilterRoomsByPrice_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="90" Height="40">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/SortIcon.png" Stretch="Uniform" Margin="0,0,15,0"/>
+                        <TextBlock Text="Pris" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="SortRoomsByRating" Click="SortRoomsByRating_Click" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="90" Height="40" Margin="0,50,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/SortIcon.png" Stretch="Uniform" Margin="0,0,0,0"/>
+                        <TextBlock Text="Rating" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
                 <Button x:Name="ConfirmChoosenRooms" Click="ConfirmChoosenRooms_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
                 <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
                     <ListView.ItemTemplate>
@@ -105,8 +116,20 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,15">
-                                    <TextBlock Text="{x:Bind Price}"/>
-                                    <TextBlock Text="{x:Bind RoomName}"/>
+                                    <StackPanel>
+                                        <TextBlock Text="{x:Bind RoomName}" FontWeight="Bold"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Pris:" Margin="0,0,3,0" FontWeight="Bold"/>
+                                        <TextBlock Text="{x:Bind Price}"/>
+                                        <TextBlock Text="Kr"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Rating:" Margin="0,0,3,0" FontWeight="Bold"/>
+                                        <TextBlock Text="{x:Bind Rating}"/>
+                                        <TextBlock Text="/"/>
+                                        <TextBlock Text="5"/>
+                                    </StackPanel>
                                     <StackPanel Margin="0,0,0,10">
                                         <Button x:Name="Allinclusive" Command="{Binding ElementName= RoomListView, Path=DataContext.AddAllInclusiveBtn}" CommandParameter="{Binding}" Content="Allinclusive 900kr" Click="Allinclusive_Click" Grid.Column="1" Grid.Row="1" Width="130" Background="{Binding Path=IsAllInclusive, Converter={StaticResource bool2color}}" Visibility="{Binding Path= HasAllInclusive, Converter={StaticResource bool2vis}}"/>
                                     </StackPanel>

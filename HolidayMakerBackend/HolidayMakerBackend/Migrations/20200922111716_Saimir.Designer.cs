@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200921121215_Saimir")]
+    [Migration("20200922111716_Saimir")]
     partial class Saimir
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -203,6 +203,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
@@ -223,6 +226,7 @@ namespace HolidayMakerBackend.Migrations
                             HotelID = 1,
                             IsAllInclusive = true,
                             Price = 300,
+                            Rating = 2.5,
                             RoomName = "Rum 1"
                         });
                 });

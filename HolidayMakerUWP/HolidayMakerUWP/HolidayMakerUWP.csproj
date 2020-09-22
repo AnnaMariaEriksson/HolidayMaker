@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="BoolConverter\BooleanColorConverter.cs" />
     <Compile Include="BoolConverter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="BoolConverter\LoginToVisibilityConverter.cs" />
     <Compile Include="DAL\HotelsService.cs" />
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\City.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\Search.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Viewmodel\BasePageVm.cs" />
     <Compile Include="Viewmodel\BookingPageViewModel.cs" />
     <Compile Include="Viewmodel\FrontPageSearchViewModel.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
@@ -172,6 +174,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\SortIcon.png" />
     <Content Include="Images\MalmoImage.png" />
     <Content Include="Images\ProfileIcon.png" />
     <Content Include="Properties\Default.rd.xml" />

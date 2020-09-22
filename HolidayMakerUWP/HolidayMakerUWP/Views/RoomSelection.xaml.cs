@@ -37,6 +37,10 @@ namespace HolidayMakerUWP.Views
         {
             this.InitializeComponent();
             this.Vm = new RoomSelectionVm();
+            RegionsButton.Content = FrontPageSearchViewModel.Search.Regions.NameOfRegion;
+            CityButton.Content = FrontPageSearchViewModel.Search.Cities.NameOfCity;
+            StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
+            EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -230,6 +234,25 @@ namespace HolidayMakerUWP.Views
         private void CityButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void SortRoomsByRating_Click(object sender, RoutedEventArgs e)
+        {
+            if (BtnClicked == false)
+            {
+                BtnClicked = true;
+                HotelsService.SortByInt = 1;
+                Vm._rooms = Vm.SortByRating(1);
+                RoomListView.ItemsSource = Vm.Rooms;
+            }
+
+            else
+            {
+                BtnClicked = false;
+                HotelsService.SortByInt = 2;
+                Vm._rooms = Vm.SortByRating(2);
+                RoomListView.ItemsSource = Vm.Rooms;
+            }
         }
     }
 }

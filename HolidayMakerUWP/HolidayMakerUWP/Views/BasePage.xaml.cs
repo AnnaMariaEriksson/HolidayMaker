@@ -1,4 +1,5 @@
 ﻿using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,9 +24,13 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class BasePage : Page
     {
+        LogInViewModel lVm { get; set; }
+        User tempUser;
         public BasePage()
         {
             this.InitializeComponent();
+            MainFrame.Navigate(typeof(FrontPageSearch));
+            tempUser = LogInViewModel.User;
         }
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {

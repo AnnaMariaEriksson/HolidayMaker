@@ -56,8 +56,8 @@ namespace HolidayMakerUWP.Views
             CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
             RegionsButton.Content = FrontPageSearchViewModel.Search.Regions.NameOfRegion;
             CityButton.Content = FrontPageSearchViewModel.Search.Cities.NameOfCity;
-            StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString();
-            EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString();
+            StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
+            EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
 
         }
 
