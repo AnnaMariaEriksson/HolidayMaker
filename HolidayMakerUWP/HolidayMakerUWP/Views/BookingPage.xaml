@@ -154,11 +154,11 @@
 
                         <StackPanel VerticalAlignment="Top"
                                     Height="250">
-                            <TextBlock Text="{}"
+                            <TextBlock Text="{x:Bind tempUser.FirstName}"
                                        FontSize="24" />
-                            <TextBlock Text="{}"
+                            <TextBlock Text="{x:Bind tempUser.LastName}"
                                        FontSize="24" />
-                            <TextBlock Text="{}"
+                            <TextBlock Text="{x:Bind tempUser.Email}"
                                        FontSize="24" />
                             <TextBox x:Name="TeleNummer"
                                      PlaceholderText="Ange telefonmummer"
@@ -194,9 +194,9 @@
                                         <TextBlock Text="Kr"
                                                    Grid.Column="4"
                                                    FontSize="16" />
-                                        <TextBlock Text="check-in datum"
+                                        <TextBlock Text=""
                                                    Grid.Column="5" />
-                                        <TextBlock Text=" 19/12/1"
+                                        <TextBlock Text=""
                                                    Grid.Column="6" />
                                     </Grid>
                                 </DataTemplate>

@@ -30,26 +30,20 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class BookingPage : Page
     {
-        HotelsService hotelsService;
         BookingPageViewModel bookingPageViewModel;
+        User tempUser = new User();
+        
        
         public BookingPage()
         {
             this.InitializeComponent();
             this.bookingPageViewModel = new BookingPageViewModel();
+            tempUser = LogInViewModel.User;
         }
 
         private void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //if (TeleNummer.Text == "" || Adress.Text == "")
-            //    bookingPageViewModel.ErrorFillAllFields();
-
-            //else
-            //    bookingPageViewModel.BookingMessageDialog();
-
-            //Task.Run.PostBooking(bookingPageViewModel._selectedRooms, DateTime.Now, DateTime.Now));
-
-            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, FrontPageSearchViewModel.Search.StartDate, DateTime.Now));
+        {            
+            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, FrontPageSearchViewModel.Search.StartDate, FrontPageSearchViewModel.Search.EndDate));
         }
 
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
