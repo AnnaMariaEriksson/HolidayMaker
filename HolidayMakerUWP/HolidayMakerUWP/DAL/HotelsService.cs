@@ -17,7 +17,7 @@ namespace HolidayMakerUWP.DAL
 {
     public class HotelsService
     {
-        static LogInViewModel lVm;
+        LogInViewModel lVm;
         private string roomURL = "https://localhost:44368/api/rooms";
         private static string regionURL = "https://localhost:44368/api/regions";
         private static string cityURL = "https://localhost:44368/api/cities";
@@ -246,7 +246,7 @@ public static async Task<User> GetUser(string email, string password)
                     BookingRooms = rooms,
                     StartDate = startDate,
                     EndDate = endDate,
-                    UserID = lVm.User.ID
+                    UserID = LogInViewModel.User.ID
                 };
                 var json = JsonConvert.SerializeObject(booking);
                 HttpContent httpContent = new StringContent(json);
