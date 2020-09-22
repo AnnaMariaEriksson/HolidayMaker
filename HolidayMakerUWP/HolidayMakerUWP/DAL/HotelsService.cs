@@ -236,7 +236,7 @@ public static async Task<User> GetUser(string email, string password)
                 return user;
             }
         }
-        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTimeOffset startDate, DateTimeOffset endDate)
+        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTimeOffset startDate, DateTimeOffset endDate, string phoneNumber, string adress)
         {            
             using (HttpClient httpClient1 = new HttpClient())
             {
@@ -245,7 +245,9 @@ public static async Task<User> GetUser(string email, string password)
                     BookingRooms = rooms,
                     StartDate = startDate,
                     EndDate = endDate,
-                    UserID = LogInViewModel.User.ID
+                    UserID = LogInViewModel.User.ID,
+                    PhoneNumber = phoneNumber,
+                    Adress = adress
                 };
                 var json = JsonConvert.SerializeObject(booking);
                 HttpContent httpContent = new StringContent(json);

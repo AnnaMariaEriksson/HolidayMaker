@@ -16,7 +16,9 @@ namespace HolidayMakerUWP.Viewmodel
         public double totalPrice;
         public double totalDate;
         public double isAllInclusive;
-        
+        public string startDate = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
+        public string endDate = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
+
 
         public ObservableCollection<Room> _selectedRooms { get; set; }
         public ObservableCollection<Room> SelectedRooms
@@ -56,6 +58,16 @@ namespace HolidayMakerUWP.Viewmodel
                 CloseButtonText = "Ok"
             };
             await errorDialog.ShowAsync();
+        }
+        public async void bookingMessage()
+        {
+            ContentDialog contentDialog = new ContentDialog()
+            {
+                Title = "Bokningnen genomfördes",
+                Content = "Din bokning gemonfördes och du kommer nu återgå till första sidan.",
+                CloseButtonText = "Ok."
+            };
+            await contentDialog.ShowAsync();
         }
 
         public void updateTotalPrice()

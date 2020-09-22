@@ -11,6 +11,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -32,8 +33,10 @@ namespace HolidayMakerUWP.Views
     {
         BookingPageViewModel bookingPageViewModel;
         User tempUser = new User();
-        
-       
+        string inputNummer;
+        string inputAdress;
+
+
         public BookingPage()
         {
             this.InitializeComponent();
@@ -42,8 +45,13 @@ namespace HolidayMakerUWP.Views
         }
 
         private void ConfirmBookingBtn_Click(object sender, RoutedEventArgs e)
-        {            
-            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, FrontPageSearchViewModel.Search.StartDate, FrontPageSearchViewModel.Search.EndDate));
+        {
+            inputNummer = TeleNummer.Text;
+            inputAdress = Adress.Text;
+            Task.Run(() => HotelsService.PostBooking(bookingPageViewModel._selectedRooms, FrontPageSearchViewModel.Search.StartDate, FrontPageSearchViewModel.Search.EndDate, inputNummer, inputAdress));
+            
+            bookingPageViewModel.bookingMessage();
+            Frame.Navigate(typeof(FrontPageSearch));
         }
 
         private void TeleNummer_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
@@ -61,7 +69,6 @@ namespace HolidayMakerUWP.Views
 
             else
                 totalSumman.Text = "";
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -72,6 +79,9 @@ namespace HolidayMakerUWP.Views
             totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
         }
 
-        
+        private void ReturnToPage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FrontPageSearch));
+        }
     }
 }

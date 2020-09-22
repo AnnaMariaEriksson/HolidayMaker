@@ -91,6 +91,8 @@ namespace HolidayMakerBackend.Controllers
                     StartDate = postBooking.StartDate,
                     EndDate = postBooking.EndDate,
                     UserID = postBooking.UserID,
+                    PhoneNumber = postBooking.PhoneNumber,
+                    Adress = postBooking.Adress,
                     BookingID = 0
                 };
                 _context.Booking.Add(booking);
