@@ -41,6 +41,7 @@ namespace HolidayMakerUWP
 
         public async void SearchButton_OnClick(object sender, RoutedEventArgs e)
         {
+          
             //GetAllCitiesInRegions();
             FrontPageSearchViewModel.TempCity.Clear();
             var regions = await HotelsService.GetAllRegionsAsync();
@@ -55,13 +56,15 @@ namespace HolidayMakerUWP
                 
                 if (searchString.ToLower() == r.NameOfRegion.ToLower())
                 {
+                    Region = r;
                     foreach (City city in r.Cities)
                     {
                            tempCity.Add(city);
                         
                     }
-                    break;   
                     
+                    break;
+                   
                     //TODO add get method for cities and dates
                     //TODO check number of rooms at get. If rooms < 3 don't show
                 }

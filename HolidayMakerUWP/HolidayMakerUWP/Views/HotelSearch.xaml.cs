@@ -54,6 +54,10 @@ namespace HolidayMakerUWP.Views
             this.Vm = new HotelSearchVm();
             SeaDistansValue.Text = Vm.DistansToBeach + "+Km";
             CenterDistansValue.Text = Vm.DistansToCenter + "+Km";
+            RegionsButton.Content = FrontPageSearchViewModel.Search.Regions.NameOfRegion;
+            CityButton.Content = FrontPageSearchViewModel.Search.Cities.NameOfCity;
+            StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString();
+            EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString();
 
         }
 
