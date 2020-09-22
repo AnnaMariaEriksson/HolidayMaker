@@ -27,7 +27,8 @@
                 </StackPanel.DataContext>
                 <StackPanel Orientation="Horizontal" 
                     Background="{Binding BackgroundColor}">
-                    <Button x:Name="NavButton" 
+                    <StackPanel>
+                        <Button x:Name="NavButton"                               
                         Content="" 
                         FontFamily="Segoe MDL2 Assets" 
                         Width="48" 
@@ -35,7 +36,8 @@
                         Click="NavButton_Click" 
                         Background="Transparent" 
                         HorizontalAlignment="Left" />
-                    <TextBlock Text="{x:Bind tempUser.FirstName}" Margin="16,8,0,0" Visibility="{Binding Path=FirstName, Converter={StaticResource login2vis}}"/>
+                </StackPanel>
+                <TextBlock Text="{x:Bind BVm.TempUser, Mode=TwoWay}" Margin="16,8,0,0" Visibility="{Binding Path=FirstName, Converter={StaticResource login2vis}}"/>
                 </StackPanel>
                 <ListBox x:Name="NavMenu" 
                     HorizontalAlignment="Left" 

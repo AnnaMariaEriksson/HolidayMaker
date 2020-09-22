@@ -80,7 +80,10 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="{x:Bind Vm.SelectedHotel.HotelDescription}" TextWrapping="Wrap"/>
+                    <StackPanel>
+                        <TextBlock Text="Hotell Beskrivning:" FontWeight="Bold"/>
+                        <TextBlock Text="{x:Bind Vm.SelectedHotel.HotelDescription}" TextWrapping="Wrap"/>
+                    </StackPanel>
                     <StackPanel Grid.Row="2" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[0]}" Grid.Row="1"/>
                         <TextBlock Text="{x:Bind Vm.ListOfFascilities[1]}" Grid.Row="1"/>

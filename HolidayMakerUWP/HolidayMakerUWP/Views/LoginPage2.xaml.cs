@@ -36,7 +36,7 @@ namespace HolidayMakerUWP.Views
             var email = usernamebox.Text.ToLower();
             var password = passwordbox.Password.ToLower();
             Vm.GetUser(email, password);
-            if(LogInViewModel.User == null)
+            if(Vm.User == null)
             {
                 MessageDialog confirmDialog = new MessageDialog("Your login credentials don't match an account in our system.", "ERROR");
                 confirmDialog.Commands.Add(new UICommand("OK"));

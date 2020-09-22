@@ -24,13 +24,14 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class BasePage : Page
     {
-        LogInViewModel lVm { get; set; }
+        BasePageVm BVm { get; set; }
         User tempUser;
         public BasePage()
         {
             this.InitializeComponent();
+            this.BVm = new BasePageVm();
             MainFrame.Navigate(typeof(FrontPageSearch));
-            tempUser = LogInViewModel.User;
+
         }
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
