@@ -65,11 +65,22 @@ namespace HolidayMakerUWP.Views
             //kolla om användaren är inloggad och lägg rätt knappar
         }
 
-        private void roomToBasket_Click(object sender, RoutedEventArgs e)
+        private async void roomToBasket_Click(object sender, RoutedEventArgs e)
         {
-            Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
-            Vm.AddRoomToBasket(TempRoom);
-            Vm.Rooms.Remove(TempRoom);
+            if (LogInViewModel.User != null)
+            {
+                Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
+                Vm.AddRoomToBasket(TempRoom);
+                Vm.Rooms.Remove(TempRoom);
+            }
+            if (LogInViewModel.User == null)
+            {
+                MessageDialog confirmDialog = new MessageDialog("Du måste vara inloggad för att välja ett rum", "ERROR");
+                confirmDialog.Commands.Add(new UICommand("OK"));
+                var confirmResult = await confirmDialog.ShowAsync();
+                // "No" button pressed: Keep the app open.
+                if (confirmResult != null && confirmResult.Label == "OK") { return; }
+            }
         }
 
         private async void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)

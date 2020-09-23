@@ -97,7 +97,10 @@ namespace HolidayMakerUWP.Viewmodel
         }
         public void AddRoomToBasket(Room selectedRoom)
         {
-            RoomBasket.Add(selectedRoom);
+            if (LogInViewModel.User != null)
+            {
+                RoomBasket.Add(selectedRoom);
+            }
         }
         public ObservableCollection<Room> SortByPrice(int SortByInt)
         {
