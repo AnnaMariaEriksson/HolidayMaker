@@ -126,22 +126,16 @@
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Hotel.cs" />
-    <Compile Include="Model\Nav.cs" />
-    <Compile Include="Model\NavMenu.cs" />
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\Search.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Viewmodel\BasePageVm.cs" />
     <Compile Include="Viewmodel\BookingPageViewModel.cs" />
     <Compile Include="Viewmodel\FrontPageSearchViewModel.cs" />
     <Compile Include="Viewmodel\HotelSearchVm.cs" />
     <Compile Include="Viewmodel\LogInViewModel.cs" />
     <Compile Include="Viewmodel\RegistrationPageViewModel.cs" />
     <Compile Include="Viewmodel\RoomSelectionVm.cs" />
-    <Compile Include="Views\BasePage.xaml.cs">
-      <DependentUpon>BasePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
     </Compile>
@@ -191,10 +185,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\BasePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\BookingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

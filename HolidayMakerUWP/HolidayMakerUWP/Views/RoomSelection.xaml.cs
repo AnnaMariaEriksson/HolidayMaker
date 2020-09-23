@@ -12,6 +12,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,6 +42,7 @@ namespace HolidayMakerUWP.Views
             CityButton.Content = FrontPageSearchViewModel.Search.Cities.NameOfCity;
             StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
             EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
+            CheckLoginState();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -55,12 +57,7 @@ namespace HolidayMakerUWP.Views
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            //temporärt det ska lägga i MenuFlyout_Opening
-            LogInButton.Visibility = Visibility.Collapsed;
-            RegisterButton.Visibility = Visibility.Collapsed;
-            MyBookingsButton.Visibility = Visibility.Visible;
-            LogoutButton.Visibility = Visibility.Visible;
-            /////////////////////////////////////////////
+            Frame.Navigate(typeof(LoginPage2));
         }
 
         private void MenuFlyout_Opening(object sender, object e)
@@ -75,10 +72,21 @@ namespace HolidayMakerUWP.Views
             Vm.Rooms.Remove(TempRoom);
         }
 
-        private void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
+        private async void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
         {
             var SelectedRooms = Vm.RoomBasket;
-            Frame.Navigate(typeof(BookingPage), SelectedRooms);
+            if (LogInViewModel.User != null)
+            {
+                Frame.Navigate(typeof(BookingPage), SelectedRooms);
+            }
+            if (LogInViewModel.User == null)
+            {
+                MessageDialog confirmDialog = new MessageDialog("Du måste vara inloggad för att genomföra bokningen", "ERROR");
+                confirmDialog.Commands.Add(new UICommand("OK"));
+                var confirmResult = await confirmDialog.ShowAsync();
+                // "No" button pressed: Keep the app open.
+                if (confirmResult != null && confirmResult.Label == "OK") { return; }
+            }
         }
 
         private void Allinclusive_Click(object sender, RoutedEventArgs e)
@@ -253,6 +261,35 @@ namespace HolidayMakerUWP.Views
                 Vm._rooms = Vm.SortByRating(2);
                 RoomListView.ItemsSource = Vm.Rooms;
             }
+        }
+        public void CheckLoginState()
+        {
+            if(LogInViewModel.User != null)
+            {
+                LogInButton.Visibility = Visibility.Collapsed;
+                RegisterButton.Visibility = Visibility.Collapsed;
+                MyBookingsButton.Visibility = Visibility.Visible;
+                LogoutButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LogInButton.Visibility = Visibility.Visible;
+                RegisterButton.Visibility = Visibility.Visible;
+                MyBookingsButton.Visibility = Visibility.Collapsed;
+                LogoutButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            LogInViewModel.User = null;
+            this.Frame.Navigate(typeof(FrontPageSearch));
+
+        }
+
+        private void MyBookingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

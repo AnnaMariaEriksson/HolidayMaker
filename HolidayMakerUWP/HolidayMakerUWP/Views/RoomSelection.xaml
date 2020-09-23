@@ -49,8 +49,8 @@
                                 Click="LogInButton_Click" />
                         <Button Content="Registrera dig" Width="150"  HorizontalAlignment="Center" x:Name="RegisterButton" Margin="0,5,0,0"
                                 Click="RegisterButton_Click" />
-                        <Button Content="Mina bokningar" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,5,0,0" x:Name="MyBookingsButton"/>
-                        <Button Content="Logga ut" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,5,0,0" x:Name="LogoutButton"/>
+                        <Button Content="Mina bokningar" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Click="MyBookingsButton_Click" Margin="0,5,0,0" x:Name="MyBookingsButton"/>
+                        <Button Content="Logga ut" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Click="LogoutButton_Click" Margin="0,5,0,0" x:Name="LogoutButton"/>
                     </StackPanel>
                 </Flyout>
             </Button.Flyout>
@@ -105,8 +105,8 @@
                         <TextBlock Text="Rating" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button x:Name="ConfirmChoosenRooms" Click="ConfirmChoosenRooms_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Välj" Width="350" Height="70" FontSize="40" CornerRadius="25"/>
-                <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0" >
+                <Button x:Name="ConfirmChoosenRooms" Click="ConfirmChoosenRooms_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Genomför Bokning" Height="70" FontSize="40" CornerRadius="25"/>
+                <ListView Grid.Column="0" x:Name="RoomListView" Grid.RowSpan="2" ItemsSource="{x:Bind Vm.Rooms, Mode=TwoWay}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" BorderBrush="Black" BorderThickness="5" Margin="0,0,90,0">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:Room">
                             <Grid>

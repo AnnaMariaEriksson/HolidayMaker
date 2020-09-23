@@ -38,7 +38,7 @@ namespace HolidayMakerUWP.Views
             Vm.GetUser(email, password);
             if(LogInViewModel.User == null)
             {
-                MessageDialog confirmDialog = new MessageDialog("Your login credentials don't match an account in our system.", "ERROR");
+                MessageDialog confirmDialog = new MessageDialog("Ditt lösenord eller användarnamn är fel", "ERROR");
                 confirmDialog.Commands.Add(new UICommand("OK"));
                 var confirmResult = await confirmDialog.ShowAsync();
                 // "No" button pressed: Keep the app open.
