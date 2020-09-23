@@ -26,8 +26,8 @@
                     <RowDefinition Height="14*" />
                 </Grid.RowDefinitions>
                 <TextBlock Text="Vald bokning"
-                           FontSize="40" 
-                           HorizontalAlignment="Center"/>
+                           FontSize="40"
+                           HorizontalAlignment="Center" />
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -52,10 +52,21 @@
                            FontSize="40"
                            HorizontalAlignment="Center" />
                 <ListView VerticalAlignment="Stretch">
-                    <StackPanel>
-                        <TextBlock Text="Booking name" />
-                        <TextBlock Text="19/20/2020" />
-                    </StackPanel>
+                    <ListViewItem>
+                        <DataTemplate>
+                            
+                        </DataTemplate>
+                    </ListViewItem>
+                </ListView>
+                <TextBlock Text="Boknings historik"
+                           FontSize="40"
+                           HorizontalAlignment="Center" />
+                <ListView>
+                    <ListViewItem>
+                        <DataTemplate>
+                            
+                        </DataTemplate>
+                    </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>
