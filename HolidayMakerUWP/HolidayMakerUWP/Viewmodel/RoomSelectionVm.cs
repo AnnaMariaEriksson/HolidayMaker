@@ -97,7 +97,10 @@ namespace HolidayMakerUWP.Viewmodel
         }
         public void AddRoomToBasket(Room selectedRoom)
         {
-            RoomBasket.Add(selectedRoom);
+            if (LogInViewModel.User != null)
+            {
+                RoomBasket.Add(selectedRoom);
+            }
         }
         public ObservableCollection<Room> SortByPrice(int SortByInt)
         {
@@ -107,6 +110,19 @@ namespace HolidayMakerUWP.Viewmodel
             }else if(SortByInt == 2)
             {
                 test = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Price));
+            }
+            return test;
+        }
+        public ObservableCollection<Room> SortByRating(int SortByInt)
+        {
+            ObservableCollection<Room> test = new ObservableCollection<Room>();
+            if (SortByInt == 1)
+            {
+                test = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Rating));
+            }
+            else if (SortByInt == 2)
+            {
+                test = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Rating));
             }
             return test;
         }

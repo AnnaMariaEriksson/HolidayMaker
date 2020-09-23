@@ -115,6 +115,7 @@ namespace HolidayMakerBackend.Migrations
                     Price = table.Column<int>(nullable: false),
                     ExtraBed = table.Column<bool>(nullable: false),
                     HasAllInclusive = table.Column<bool>(nullable: false),
+                    Rating = table.Column<double>(nullable: false),
                     IsAllInclusive = table.Column<bool>(nullable: false),
                     HasFullBoard = table.Column<bool>(nullable: false),
                     HasHalfBoard = table.Column<bool>(nullable: false),
@@ -153,8 +154,8 @@ namespace HolidayMakerBackend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Room",
-                columns: new[] { "ID", "ExtraBed", "HasAllInclusive", "HasFullBoard", "HasHalfBoard", "HotelID", "IsAllInclusive", "Price", "RoomName" },
-                values: new object[] { 1, true, true, false, false, 1, true, 300, "Rum 1" });
+                columns: new[] { "ID", "ExtraBed", "HasAllInclusive", "HasFullBoard", "HasHalfBoard", "HotelID", "IsAllInclusive", "Price", "Rating", "RoomName" },
+                values: new object[] { 1, true, true, false, false, 1, true, 300, 2.5, "Rum 1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_RegionID",
