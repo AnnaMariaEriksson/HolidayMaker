@@ -1,6 +1,8 @@
-﻿using HolidayMakerUWP.Viewmodel;
+﻿using HolidayMakerUWP.Model;
+using HolidayMakerUWP.Viewmodel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,6 +26,9 @@ namespace HolidayMakerUWP.Views
     public sealed partial class MyBookingPage : Page
     {
         public MyBookingViewModel myBookingPageViewModel;
+
+
+
         public MyBookingPage()
         {
             this.InitializeComponent();
@@ -32,6 +37,12 @@ namespace HolidayMakerUWP.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             myBookingPageViewModel.GetUserBookings();
+        }
+
+        private void cancelBooking_Click(object sender, RoutedEventArgs e)
+        {
+            myBookingPageViewModel.DeleteBooking((Booking)listView.SelectedItem);
+            myBookingPageViewModel.NewBookings.Remove((Booking)listView.SelectedItem);
         }
     }
 }

@@ -295,6 +295,22 @@ namespace HolidayMakerUWP.DAL
                 return oldBookings;
             }
         }
+        public static async Task DeleteBooking(Booking booking)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {                
+                var json = JsonConvert.SerializeObject(booking);
+                HttpContent httpContent = new StringContent(json);
+
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpContent.Headers.Clear();
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                await httpClient1.DeleteAsync(WebServiceUrl + "Bookings/" + booking.BookingID);
+
+                httpClient1.Dispose();
+            }
+        }
     }
 
 }

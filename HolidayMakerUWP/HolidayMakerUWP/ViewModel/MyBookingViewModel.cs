@@ -14,7 +14,7 @@ namespace HolidayMakerUWP.Viewmodel
     {
         public Room tempOb = new Room();
 
-        ObservableCollection<Booking> _newBookings { get; set; }
+        public ObservableCollection<Booking> _newBookings { get; set; }
         public ObservableCollection<Booking> NewBookings { get { return _newBookings; } set { _newBookings = value; } }
 
         ObservableCollection<Booking> _oldBookings { get; set; }
@@ -23,12 +23,11 @@ namespace HolidayMakerUWP.Viewmodel
         public void GetUserBookings()
         {
             _newBookings = Task.Run(() => HotelsService.GetNewBookings(LogInViewModel.User.ID)).Result;
-            _oldBookings = Task.Run(() => HotelsService.GetOldBookings(LogInViewModel.User.ID)).Result;
-           
-            //foreach (Booking b in _newBookings)
-            //{
-            //    tempOb = b.Room;
-            //}                        
+            _oldBookings = Task.Run(() => HotelsService.GetOldBookings(LogInViewModel.User.ID)).Result;                                   
+        }
+        public void DeleteBooking(Booking booking)
+        {
+            Task.Run(() => HotelsService.DeleteBooking(booking));
         }
     }   
 }

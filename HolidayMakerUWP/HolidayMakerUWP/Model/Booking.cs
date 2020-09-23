@@ -9,6 +9,7 @@ namespace HolidayMakerUWP.Model
 {
     public class Booking
     {
+        public int BookingID { get; set; }
         public ObservableCollection<Room> BookingRooms { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset EndDate { get; set; }
