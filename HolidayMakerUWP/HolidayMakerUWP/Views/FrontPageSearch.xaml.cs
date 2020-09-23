@@ -92,5 +92,10 @@ namespace HolidayMakerUWP
             };
             this.Frame.Navigate(typeof(HotelSearch));
         }
+
+        private void mybooking_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MyBookingPage));
+        }
     }
 }

@@ -2,6 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:HolidayMakerUWP.Views"
+      xmlns:local1="using:HolidayMakerUWP.Model"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
@@ -25,48 +26,51 @@
                     <RowDefinition />
                     <RowDefinition Height="14*" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Vald bokning"
-                           FontSize="40"
-                           HorizontalAlignment="Center" />
+                <StackPanel>
+                    <TextBlock Text="Vald bokning"
+                               FontSize="40"
+                               HorizontalAlignment="Center" />
 
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                    <ListView HorizontalAlignment="Center" ItemsSource="{x:Bind myBookingPageViewModel.tempOb}">
+                        <ListViewItem>
+                            <DataTemplate x:DataType="local1:Room">
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind RoomName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListViewItem>
+                    </ListView>
+                </StackPanel>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>
             </Grid>
             <StackPanel Grid.Row="1"
                         Orientation="Vertical">
                 <TextBlock Text="Dina Bokningar"
                            FontSize="40"
                            HorizontalAlignment="Center" />
-                <ListView VerticalAlignment="Stretch">
-                    <ListViewItem>
-                        <DataTemplate>
-                            
+                <ListView VerticalAlignment="Stretch"
+                          ItemsSource="{x:Bind myBookingPageViewModel.NewBookings}"
+                          Height="300">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Booking">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="20">
+                                <TextBlock Text="{x:Bind StartDate.UtcDateTime}" />
+                            </StackPanel>
                         </DataTemplate>
-                    </ListViewItem>
+                    </ListView.ItemTemplate>
                 </ListView>
                 <TextBlock Text="Boknings historik"
                            FontSize="40"
                            HorizontalAlignment="Center" />
-                <ListView>
-                    <ListViewItem>
-                        <DataTemplate>
-                            
+                <ListView ItemsSource="{x:Bind myBookingPageViewModel.OldBookings}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local1:Booking">
+                            <StackPanel>
+                                <TextBlock Text="{x:Bind StartDate.UtcDateTime}" />
+                            </StackPanel>
                         </DataTemplate>
-                    </ListViewItem>
+                    </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
         </Grid>

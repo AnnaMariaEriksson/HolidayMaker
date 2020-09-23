@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HolidayMakerUWP.Viewmodel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,15 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class MyBookingPage : Page
     {
+        public MyBookingViewModel myBookingPageViewModel;
         public MyBookingPage()
         {
             this.InitializeComponent();
+            this.myBookingPageViewModel = new MyBookingViewModel();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            myBookingPageViewModel.GetUserBookings();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace HolidayMakerBackend.Controllers
 
             foreach (Booking b in _context.Booking.Where(x => x.UserID == UserId))
             {
-                if (b.EndDate <= DateTime.Now)
+                if (b.EndDate >= DateTime.Now)
                 {
                     tempBooking.Add(b);
                 }
@@ -48,7 +48,7 @@ namespace HolidayMakerBackend.Controllers
 
             foreach (Booking b in _context.Booking.Where(x => x.UserID == UserId))
             {
-                if (b.EndDate >= DateTime.Now)
+                if (b.EndDate < DateTime.Now)
                 {
                     tempBooking.Add(b);
                 }
