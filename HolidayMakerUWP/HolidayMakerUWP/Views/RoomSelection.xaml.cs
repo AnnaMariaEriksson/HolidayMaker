@@ -52,7 +52,7 @@ namespace HolidayMakerUWP.Views
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(RegistrationPage));
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
@@ -300,7 +300,7 @@ namespace HolidayMakerUWP.Views
 
         private void MyBookingsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(MyBookingPage));
         }
     }
 }
