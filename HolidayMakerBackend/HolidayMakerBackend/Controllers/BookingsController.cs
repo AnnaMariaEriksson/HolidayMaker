@@ -107,7 +107,6 @@ namespace HolidayMakerBackend.Controllers
                     BookingID = 0
                 };
                 _context.Booking.Add(booking);
-
             }
 
             var result = await _context.SaveChangesAsync();

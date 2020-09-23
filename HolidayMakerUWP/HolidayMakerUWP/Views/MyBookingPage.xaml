@@ -31,11 +31,11 @@
                                FontSize="40"
                                HorizontalAlignment="Center" />
 
-                    <ListView HorizontalAlignment="Center" ItemsSource="{x:Bind myBookingPageViewModel.tempOb}">
+                    <ListView HorizontalAlignment="Center">
                         <ListViewItem>
                             <DataTemplate x:DataType="local1:Room">
                                 <StackPanel>
-                                    <TextBlock Text="{x:Bind RoomName}" />
+                                    <TextBlock Text=""/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListViewItem>

@@ -270,7 +270,7 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "bookings/" + userId + "new");
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "bookings/" + userId + "/new");
 
                 newBooking = JsonConvert.DeserializeObject<ObservableCollection<Booking>>(jsonResult);
 
@@ -287,7 +287,7 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "bookings/" + userId + "/" + "old");
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "bookings/" + userId + "/old");
 
                 oldBookings = JsonConvert.DeserializeObject<ObservableCollection<Booking>>(jsonResult);
 
