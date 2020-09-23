@@ -20,6 +20,9 @@ namespace HolidayMakerUWP.Viewmodel
             Regions = new ObservableCollection<Regions>();
             Cities = new ObservableCollection<City>();
             TempCity = new ObservableCollection<City>();
+
+            StartDate = DateTime.UtcNow;
+            EndDate = DateTime.UtcNow;
         }
 
     }
