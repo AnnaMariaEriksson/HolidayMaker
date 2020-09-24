@@ -29,7 +29,7 @@ namespace HolidayMakerUWP.Views
     /// </summary>
     public sealed partial class HotelSearch : Page
     {
-       
+
         ObservableCollection<Hotel> FilteredHotels { get; set; }
         public static bool HasAllInclusive { get; set; }
         public bool HasFullBoard;
@@ -43,7 +43,7 @@ namespace HolidayMakerUWP.Views
         public HotelsService _service;
         public HotelSearch()
         {
-            this.InitializeComponent(); 
+            this.InitializeComponent();
             HasAllInclusive = false;
             HasFullBoard = false;
             HasHalfBoard = false;
@@ -58,6 +58,7 @@ namespace HolidayMakerUWP.Views
             CityButton.Content = FrontPageSearchViewModel.Search.Cities.NameOfCity;
             StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
             EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
+            CheckLoginState();
 
         }
 
@@ -86,14 +87,14 @@ namespace HolidayMakerUWP.Views
             }
 
         }
-
+        
         private void AllInclusiveButton_Click(object sender, RoutedEventArgs e)
-        {   
+        {
             //Tar bort alla hotel som inte stämmer med filtret(funkar)
             if (HasAllInclusive == false)
             {
                 HasAllInclusive = true;
-                AllInclusiveButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221)); 
+                AllInclusiveButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 48, 179, 221));
             }
             else
             {
@@ -114,7 +115,7 @@ namespace HolidayMakerUWP.Views
             {
                 HasFullBoard = false;
                 FullBoardButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
-              
+
             }
         }
 
@@ -188,11 +189,7 @@ namespace HolidayMakerUWP.Views
                 ChildrensClubButton.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 204, 204, 204));
             }
         }
-
-        private void HotelList_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            
-        }
+    
 
         private void HotelList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -201,24 +198,47 @@ namespace HolidayMakerUWP.Views
             Frame.Navigate(typeof(RoomSelection));
         }
 
+        public void CheckLoginState()
+        {
+            if (LogInViewModel.User != null)
+            {
+                LogInButton.Visibility = Visibility.Collapsed;
+                RegisterButton.Visibility = Visibility.Collapsed;
+                MyBookingsButton.Visibility = Visibility.Visible;
+                LogoutButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LogInButton.Visibility = Visibility.Visible;
+                RegisterButton.Visibility = Visibility.Visible;
+                MyBookingsButton.Visibility = Visibility.Collapsed;
+                LogoutButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
         private void EndDateButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(FrontPageSearch));
         }
 
-        private void StartDateButton_Click(object sender, RoutedEventArgs e)
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
+            LogInViewModel.User = null;
             this.Frame.Navigate(typeof(FrontPageSearch));
+
+        }
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginPage2));
+        }
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RegistrationPage));
         }
 
-        private void RegionsButton_Click(object sender, RoutedEventArgs e)
+        private void MyBookingsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(FrontPageSearch));
-        }
-
-        private void CityButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(FrontPageSearch));
+            this.Frame.Navigate(typeof(MyBookingPage));
         }
 
     }
