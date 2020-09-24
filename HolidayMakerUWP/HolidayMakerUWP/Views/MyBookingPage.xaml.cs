@@ -46,6 +46,7 @@ namespace HolidayMakerUWP.Views
             myBookingPageViewModel.DeleteBooking(MyBookingViewModel.SelectedBooking);            
             myBookingPageViewModel.NewBookings.Remove(MyBookingViewModel.SelectedBooking);
             changeBookingInfoBtn.Visibility = Visibility.Collapsed;
+            removeListInfo();
         }
 
         private void bookingHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,26 +71,42 @@ namespace HolidayMakerUWP.Views
             updateListNewInfo();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void updateListNewInfo()
+        {
+
+                MyBookingViewModel.SelectedBooking = (Booking)bookingsNew.SelectedItem;
+                cancelBooking.Visibility = Visibility.Visible;
+                BookingIdText.Text = MyBookingViewModel.SelectedBooking.BookingID.ToString();
+                BookingPhoneNumberText.Text = MyBookingViewModel.SelectedBooking.PhoneNumber;
+                BookingAdressText.Text = MyBookingViewModel.SelectedBooking.Adress;
+                BookingStartDateText.Text = MyBookingViewModel.SelectedBooking.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
+                BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
+                BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
+                BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
+                changeBookingInfoBtn.Visibility = Visibility.Visible;
+        }
+
+        public void removeListInfo()
+        {
+            cancelBooking.Visibility = Visibility.Collapsed;
+            BookingIdText.Text = "";
+            BookingPhoneNumberText.Text = "";
+            BookingAdressText.Text = "";
+            BookingStartDateText.Text = "";
+            BookingEndDateText.Text = "";
+            BookingRoomNameText.Text = "";
+            BookingRoomPriceText.Text = "";
+            changeBookingInfoBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private void BackToFrontPageSearch_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(FrontPageSearch));
         }
 
-        private void bookingsNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void choosenBookingBtn_Click(object sender, RoutedEventArgs e)
         {
             updateListNewInfo();
-        }
-        public void updateListNewInfo()
-        {
-            MyBookingViewModel.SelectedBooking = (Booking)bookingsNew.SelectedItem;
-            cancelBooking.Visibility = Visibility.Visible;
-            BookingIdText.Text = MyBookingViewModel.SelectedBooking.BookingID.ToString();
-            BookingPhoneNumberText.Text = MyBookingViewModel.SelectedBooking.PhoneNumber;
-            BookingAdressText.Text = MyBookingViewModel.SelectedBooking.Adress;
-            BookingStartDateText.Text = MyBookingViewModel.SelectedBooking.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
-            BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
-            BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
-            BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
             changeBookingInfoBtn.Visibility = Visibility.Visible;
         }
     }

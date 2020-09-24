@@ -74,16 +74,33 @@
                     <TextBlock x:Name="BookingRoomPriceText"
                                TextAlignment="Center"
                                FontSize="15" />
-
-                    <Button Content="Avboka"
-                            FontSize="24"
-                            HorizontalAlignment="Center"
-                            x:Name="cancelBooking"
-                            Click="cancelBooking_Click" />
                 </StackPanel>
 
+                <Button Content="Avboka"
+                        FontSize="24"
+                        HorizontalAlignment="Center"
+                        x:Name="cancelBooking"
+                        Click="cancelBooking_Click"
+                        Grid.Row="1" />
+                <Button Content="Ändra boknings information!"
+                        Grid.Row="1"
+                        x:Name="changeBookingInfoBtn"
+                        Click="changeBookingInfoBtn_Click"
+                        FontSize="24"
+                        HorizontalAlignment="Right"
+                        Visibility="Collapsed" />
+
             </Grid>
-            <Button Content="Back" Click="Button_Click"/>
+            <Button x:Name="BackToFrontPageSearch"
+                    Click="BackToFrontPageSearch_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="70"
+                    FontSize="40">
+                <Image Source="../Images/BackArrow.png"
+                       Height="50"
+                       Width="100" />
+            </Button>
             <StackPanel Grid.Row="1"
                         Orientation="Vertical">
                 <TextBlock Text="Boknings historik"
@@ -96,21 +113,29 @@
                           SelectionChanged="bookingHistory_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Booking">
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="20">
-                                <TextBlock Text="Check-in Datum:"
-                                           FontSize="24" />
-                                <TextBlock Text="{x:Bind StartDate.Year}"
-                                           FontSize="24" />
-                                <TextBlock Text="-"
-                                           FontSize="24" />
-                                <TextBlock Text="{x:Bind StartDate.Month}"
-                                           FontSize="24" />
-                                <TextBlock Text="-"
-                                           FontSize="24" />
-                                <TextBlock Text="{x:Bind StartDate.Day}"
-                                           FontSize="24" />
-                            </StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{x:Bind BookedRoom.RoomName}"
+                                               FontSize="24" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="1">
+                                    <TextBlock Text="{x:Bind StartDate.Year}"
+                                               FontSize="24" />
+                                    <TextBlock Text="/"
+                                               FontSize="24" />
+                                    <TextBlock Text="{x:Bind StartDate.Month}"
+                                               FontSize="24" />
+                                    <TextBlock Text="/"
+                                               FontSize="24" />
+                                    <TextBlock Text="{x:Bind StartDate.Day}"
+                                               FontSize="24" />
+                                </StackPanel>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -120,35 +145,38 @@
                 <ListView VerticalAlignment="Stretch"
                           ItemsSource="{x:Bind myBookingPageViewModel.NewBookings}"
                           Height="300"
-                          x:Name="bookingsNew"
-                          SelectionChanged="bookingsNew_SelectionChanged">
+                          x:Name="bookingsNew">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Booking">
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="20">
-                                <TextBlock Text="Check-in Datum:"
-                                           FontSize="24" />
-                                <TextBlock Text="{x:Bind StartDate.Year}"
-                                           FontSize="24" />
-                                <TextBlock Text="-"
-                                           FontSize="24" />
-                                <TextBlock Text="{x:Bind StartDate.Month}"
-                                           FontSize="24" />
-                                <TextBlock Text="-"
-                                           FontSize="24" />
-                                <TextBlock Text="{x:Bind StartDate.Day}"
-                                           FontSize="24" />
-                            </StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{x:Bind BookedRoom.RoomName}"
+                                               FontSize="24" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="1">
+                                    <TextBlock Text="{x:Bind StartDate.Year}"
+                                               FontSize="24" />
+                                    <TextBlock Text="/"
+                                               FontSize="24" />
+                                    <TextBlock Text="{x:Bind StartDate.Month}"
+                                               FontSize="24" />
+                                    <TextBlock Text="/"
+                                               FontSize="24" />
+                                    <TextBlock Text="{x:Bind StartDate.Day}"
+                                               FontSize="24" />
+                                </StackPanel>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button Content="Välj bokning" FontSize="24" HorizontalAlignment="Right" x:Name="choosenBookingBtn" Click="choosenBookingBtn_Click"/>
             </StackPanel>
-            <Button Content="Ändra boknings information!"
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    x:Name="changeBookingInfoBtn"
-                    Click="changeBookingInfoBtn_Click" 
-                    />
+
         </Grid>
     </Grid>
 </Page>
