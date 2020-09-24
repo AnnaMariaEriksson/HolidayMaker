@@ -54,14 +54,24 @@ namespace HolidayMakerBackend.Controllers
         [HttpGet("{UserId}/old")]
         public async Task<ActionResult<IEnumerable<Booking>>> GetOldBooking(int UserId)
         {
-            ObservableCollection<Booking> tempBooking = new ObservableCollection<Booking>();
+            ObservableCollection<GetBooking> tempBooking = new ObservableCollection<GetBooking>();
 
             foreach (Booking b in _context.Booking.Where(x => x.UserID == UserId))
             {
                 if (b.EndDate < DateTime.Now)
                 {
-                    tempBooking.Add(b);
-                }
+                    GetBooking TempBooking = new GetBooking
+                    {
+                        BookingID = b.BookingID,
+                        Adress = b.Adress,
+                        BookedRoom = _context.Room.FirstOrDefaultAsync(r => r.ID == b.BookedRoomID).Result,
+                        EndDate = b.EndDate,
+                        StartDate = b.StartDate,
+                        PhoneNumber = b.PhoneNumber,
+                        UserID = b.UserID
+                    };
+                    tempBooking.Add(TempBooking);
+                }                
             }
             return Ok(tempBooking);
         }
@@ -70,14 +80,24 @@ namespace HolidayMakerBackend.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBooking(int id, Booking booking)
+        public async Task<IActionResult> PutBooking(int id, PostBooking booking)
         {
-            if (id != booking.BookingID)
+            Booking b = new Booking()
+            {
+                BookedRoomID = booking.RoomId,
+                UserID = booking.UserID,
+                BookingID = id,
+                StartDate = booking.StartDate,
+                EndDate = booking.EndDate,
+                Adress = booking.Adress,
+                PhoneNumber = booking.PhoneNumber
+            };
+            if (id != b.BookingID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(booking).State = EntityState.Modified;
+            _context.Entry(b).State = EntityState.Modified;
 
             try
             {

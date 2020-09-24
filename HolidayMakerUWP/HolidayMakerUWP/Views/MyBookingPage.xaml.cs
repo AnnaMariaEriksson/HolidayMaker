@@ -42,10 +42,11 @@ namespace HolidayMakerUWP.Views
         }
 
         private void cancelBooking_Click(object sender, RoutedEventArgs e)
-        {
-            
-            myBookingPageViewModel.DeleteBooking(MyBookingViewModel.SelectedBooking);
+        {            
+            myBookingPageViewModel.DeleteBooking(MyBookingViewModel.SelectedBooking);            
             myBookingPageViewModel.NewBookings.Remove(MyBookingViewModel.SelectedBooking);
+            changeBookingInfoBtn.Visibility = Visibility.Collapsed;
+            removeListInfo();
         }
 
         private void bookingHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -59,20 +60,54 @@ namespace HolidayMakerUWP.Views
             BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
             BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
             BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
+
+            changeBookingInfoBtn.Visibility = Visibility.Collapsed;
         }
 
-        private void bookingsNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void changeBookingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            MyBookingViewModel.SelectedBooking = (Booking)bookingsNew.SelectedItem;
-            cancelBooking.Visibility = Visibility.Visible;
-            BookingIdText.Text = MyBookingViewModel.SelectedBooking.BookingID.ToString();
-            BookingPhoneNumberText.Text = MyBookingViewModel.SelectedBooking.PhoneNumber;
-            BookingAdressText.Text = MyBookingViewModel.SelectedBooking.Adress;
-            BookingStartDateText.Text = MyBookingViewModel.SelectedBooking.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
-            BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
-            BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
-            BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
+            ChangeBookingDialog.tempBooking = (Booking)bookingsNew.SelectedItem;
+            await new ChangeBookingDialog().ShowAsync();
+            updateListNewInfo();
+        }
 
+        public void updateListNewInfo()
+        {
+
+                MyBookingViewModel.SelectedBooking = (Booking)bookingsNew.SelectedItem;
+                cancelBooking.Visibility = Visibility.Visible;
+                BookingIdText.Text = MyBookingViewModel.SelectedBooking.BookingID.ToString();
+                BookingPhoneNumberText.Text = MyBookingViewModel.SelectedBooking.PhoneNumber;
+                BookingAdressText.Text = MyBookingViewModel.SelectedBooking.Adress;
+                BookingStartDateText.Text = MyBookingViewModel.SelectedBooking.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
+                BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
+                BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
+                BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
+                changeBookingInfoBtn.Visibility = Visibility.Visible;
+        }
+
+        public void removeListInfo()
+        {
+            cancelBooking.Visibility = Visibility.Collapsed;
+            BookingIdText.Text = "";
+            BookingPhoneNumberText.Text = "";
+            BookingAdressText.Text = "";
+            BookingStartDateText.Text = "";
+            BookingEndDateText.Text = "";
+            BookingRoomNameText.Text = "";
+            BookingRoomPriceText.Text = "";
+            changeBookingInfoBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private void BackToFrontPageSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void choosenBookingBtn_Click(object sender, RoutedEventArgs e)
+        {
+            updateListNewInfo();
+            changeBookingInfoBtn.Visibility = Visibility.Visible;
         }
     }
 }

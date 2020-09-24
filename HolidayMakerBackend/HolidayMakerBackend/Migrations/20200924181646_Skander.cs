@@ -3,10 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Skander : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    BookingID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookedRoomID = table.Column<int>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Adress = table.Column<string>(nullable: true),
+                    UserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.BookingID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Region",
                 columns: table => new
@@ -116,30 +134,6 @@ namespace HolidayMakerBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Booking",
-                columns: table => new
-                {
-                    BookingID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookedRoomID = table.Column<int>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    Adress = table.Column<string>(nullable: true),
-                    UserID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booking", x => x.BookingID);
-                    table.ForeignKey(
-                        name: "FK_Booking_Room_BookedRoomID",
-                        column: x => x.BookedRoomID,
-                        principalTable: "Room",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "Region",
                 columns: new[] { "RegionID", "NameOfRegion" },
@@ -166,11 +160,6 @@ namespace HolidayMakerBackend.Migrations
                 values: new object[] { 1, true, true, false, false, 1, true, 300, 2.5, "Rum 1" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_BookedRoomID",
-                table: "Booking",
-                column: "BookedRoomID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_City_RegionID",
                 table: "City",
                 column: "RegionID");
@@ -192,10 +181,10 @@ namespace HolidayMakerBackend.Migrations
                 name: "Booking");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Room");
 
             migrationBuilder.DropTable(
-                name: "Room");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Hotel");
