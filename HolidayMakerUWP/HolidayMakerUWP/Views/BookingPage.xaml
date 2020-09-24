@@ -47,7 +47,6 @@
                     Background="CornflowerBlue"
                     FontWeight="SemiBold" />
             <Button x:Name="CancelBookingBtn"
-                    
                     Grid.Row="2"
                     Grid.Column="0"
                     HorizontalAlignment="Left"
@@ -57,25 +56,27 @@
                     Background="CornflowerBlue"
                     FontWeight="SemiBold">
                 <Button.Flyout>
-                    <Flyout Placement="Top" x:Name="cancelBookingFlyOut">
+                    <Flyout Placement="Top"
+                            x:Name="cancelBookingFlyOut">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Avrbyt bokning!" FontSize="24"
-                                       FontWeight="SemiBold"/>
+                            <TextBlock Text="Avrbyt bokning!"
+                                       FontSize="24"
+                                       FontWeight="SemiBold" />
                             <StackPanel Grid.Row="1">
-                                <Button Content="Ja. återgå till första sidan."/>
-                                <Button Content="Nej, fortsätt med bokning."/>
+                                <Button x:Name="ReturnToPage"
+                                        Content="Ja. återgå till första sidan." Click="ReturnToPage_Click"/>
                             </StackPanel>
-                                
+
 
                         </Grid>
                     </Flyout>
                 </Button.Flyout>
             </Button>
-            
+
             <StackPanel Grid.Row="1"
                         Grid.Column="0"
                         Orientation="Vertical"
@@ -93,14 +94,10 @@
                         <DataTemplate x:DataType="model:Room">
                             <Grid>
                                 <StackPanel>
-                                    <TextBlock Text="{x:Bind Price}" />
-                                    <TextBlock Text="{x:Bind RoomName}" />
+                                    <TextBlock Text="{x:Bind RoomName}"
+                                               FontSize="24"
+                                               FontWeight="SemiBold" />
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="All inclusive"
-                                                   VerticalAlignment="Center" />
-                                        <CheckBox IsChecked="{x:Bind IsAllInclusive}"
-                                                  IsHitTestVisible="False"
-                                                  Margin="3,0,0,0" />
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
@@ -121,25 +118,30 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal"
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 HorizontalAlignment="left"
-                                VerticalAlignment="Center">
+                                VerticalAlignment="Top"
+                                Height="310">
                         <StackPanel Orientation="Vertical"
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     HorizontalAlignment="Center"
-                                    Height="250"
+                                    Height="300"
                                     VerticalAlignment="Top">
                             <TextBlock Text="Namn"
                                        FontSize="24" />
                             <TextBlock Text="Efternamn"
                                        FontSize="24" />
                             <TextBlock Text="Email"
+                                       FontSize="24" />
+                            <TextBlock Text="Check-in datum:"
+                                       FontSize="24" />
+                            <TextBlock Text="Check-out datum:"
                                        FontSize="24" />
                             <TextBlock Text="Ange information"
                                        FontSize="28"
@@ -151,20 +153,30 @@
                                        FontSize="24" />
                         </StackPanel >
 
-                        <StackPanel VerticalAlignment="Top"
-                                    Height="250">
-                            <TextBlock Text="{}"
+                        <StackPanel VerticalAlignment="Top">
+                            <TextBlock Text="{x:Bind tempUser.FirstName}"
                                        FontSize="24" />
-                            <TextBlock Text="{}"
+                            <TextBlock Text="{x:Bind tempUser.LastName}"
                                        FontSize="24" />
-                            <TextBlock Text="{}"
+                            <TextBlock Text="{x:Bind tempUser.Email}"
+                                       FontSize="24" />
+                            <TextBlock Text="{x:Bind bookingPageViewModel.startDate}"
+                                       FontSize="24" />
+                            <TextBlock Text="{x:Bind bookingPageViewModel.endDate}"
                                        FontSize="24" />
                             <TextBox x:Name="TeleNummer"
                                      PlaceholderText="Ange telefonmummer"
-                                     Margin="0,75,0,0"
+                                     Margin="0,80,0,0"
                                      BeforeTextChanging="TeleNummer_BeforeTextChanging" />
                             <TextBox x:Name="Adress"
                                      PlaceholderText="Ange adress" />
+                        </StackPanel>
+                        <StackPanel>
+
+
+                        </StackPanel>
+                        <StackPanel>
+                            
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
@@ -176,23 +188,48 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Room">
                                     <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="210" />
-                                            <ColumnDefinition Width="85" />
-                                            <ColumnDefinition Width="50" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
                                         <TextBlock Text="{x:Bind RoomName}"
                                                    Grid.Column="0"
                                                    FontSize="16" />
-                                        <TextBlock Text="{x:Bind Price}"
-                                                   Grid.Column="3"
-                                                   FontSize="16" />
-                                        <TextBlock Text="Kr"
-                                                   Grid.Column="4"
-                                                   FontSize="16" />
+
+                                        <StackPanel Grid.Row="1"
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="{x:Bind Price}"
+                                                       Grid.Column="0"
+                                                       Grid.Row="1"
+                                                       FontSize="16" />
+                                            <TextBlock Text="Kr/Natt"
+                                                       Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       FontSize="16" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="2"
+                                                    Orientation="Horizontal"
+                                                    Grid.ColumnSpan="3">
+                                            <TextBlock Text="All inclusive"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsAllInclusive}"
+                                                      IsHitTestVisible="False" />
+                                            <TextBlock Text="Helpension"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsFullBoard}"
+                                                      IsHitTestVisible="False" />
+                                            <TextBlock Text="Halvpension"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsHalfBoard}"
+                                                      IsHitTestVisible="False" />
+                                            <TextBlock Text="Extra säng"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsExtraBed}"
+                                                      IsHitTestVisible="False" />
+                                        </StackPanel>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

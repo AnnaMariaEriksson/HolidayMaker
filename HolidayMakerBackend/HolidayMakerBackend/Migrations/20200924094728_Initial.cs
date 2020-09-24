@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Saimir : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,6 +16,8 @@ namespace HolidayMakerBackend.Migrations
                     roomID = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Adress = table.Column<string>(nullable: true),
                     UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

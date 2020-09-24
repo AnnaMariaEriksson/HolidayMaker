@@ -27,6 +27,7 @@ namespace HolidayMakerUWP
             FrontPageSearchViewModel = new FrontPageSearchViewModel();
             this.DataContext = FrontPageSearchViewModel.Regions;
             GetAllRegionsListView.ItemsSource = FrontPageSearchViewModel.TempCity;
+            CheckLoginState();
         }
 
         public async void GetAllCitiesInRegions()
@@ -91,6 +92,49 @@ namespace HolidayMakerUWP
                 EndDate = (DateTimeOffset)EndDate.Date
             };
             this.Frame.Navigate(typeof(HotelSearch));
+        }
+
+        public void CheckLoginState()
+        {
+            if (LogInViewModel.User != null)
+            {
+                LogInButton.Visibility = Visibility.Collapsed;
+                RegisterButton.Visibility = Visibility.Collapsed;
+                MyBookingsButton.Visibility = Visibility.Visible;
+                LogoutButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LogInButton.Visibility = Visibility.Visible;
+                RegisterButton.Visibility = Visibility.Visible;
+                MyBookingsButton.Visibility = Visibility.Collapsed;
+                LogoutButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void EndDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            LogInViewModel.User = null;
+            this.Frame.Navigate(typeof(FrontPageSearch));
+
+        }
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginPage2));
+        }
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RegistrationPage));
+        }
+
+        private void MyBookingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MyBookingPage));
         }
     }
 }

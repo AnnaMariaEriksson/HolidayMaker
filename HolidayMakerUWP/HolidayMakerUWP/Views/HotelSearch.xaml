@@ -18,15 +18,35 @@
             <ColumnDefinition  Width="7*" />
             <ColumnDefinition  Width="1*" />
         </Grid.ColumnDefinitions>
+        <Button  Grid.Column="2"
+                 Grid.Row="0"
+                 Background="White"
+                 HorizontalAlignment="Stretch"
+                 >
+            <Image Source="../Images/ProfileIcon.png" />
+            <Button.Flyout>
+                <Flyout Placement="TopEdgeAlignedRight" x:Name="MenuFlyout">
+                    <StackPanel Width="170" Height="140">
+                        <TextBlock Text="Meny" TextAlignment="Center" FontWeight="Bold" FontSize="18"/>
+                        <Button Content="Logga in" Width="150" HorizontalAlignment="Center" x:Name="LogInButton"
+                                Click="LogInButton_Click" />
+                        <Button Content="Registrera dig" Width="150"  HorizontalAlignment="Center" x:Name="RegisterButton" Margin="0,5,0,0"
+                                Click="RegisterButton_Click" />
+                        <Button Content="Mina bokningar" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Click="MyBookingsButton_Click" Margin="0,5,0,0" x:Name="MyBookingsButton"/>
+                        <Button Content="Logga ut" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Click="LogoutButton_Click" Margin="0,5,0,0" x:Name="LogoutButton"/>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button  Content="{x:Bind FPSVm.Regions,Mode=TwoWay}" x:Name="RegionsButton" Click="RegionsButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
+                <Button  Content="{x:Bind FPSVm.Regions,Mode=TwoWay}" x:Name="RegionsButton" Click="EndDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.Cities}" x:Name="CityButton" Click="CityButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160" />
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.Cities}" x:Name="CityButton" Click="EndDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="160" />
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
-                <Button Grid.Column="1" Content="{x:Bind FPSVm.StartDate}" x:Name="StartDateButton" Click="StartDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="200"/>
+                <Button Grid.Column="1" Content="{x:Bind FPSVm.StartDate}" x:Name="StartDateButton" Click="EndDateButton_Click" VerticalAlignment="Center" FontSize="35" Height="50" Width="200"/>
             </StackPanel>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Background="LightGray" CornerRadius="10" Margin="50,0,0,0">
                 <Button Grid.Column="1" Content="{x:Bind FPSVm.EndDate}" x:Name="EndDateButton" Click="EndDateButton_Click" FontSize="35" Height="50" Width="200"/>

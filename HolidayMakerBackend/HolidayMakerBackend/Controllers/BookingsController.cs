@@ -25,24 +25,35 @@ namespace HolidayMakerBackend.Controllers
         }
 
         // GET: api/Bookings
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Booking>>> GetBooking()
+        [HttpGet("{UserId}/new")]
+        public async Task<ActionResult<IEnumerable<Booking>>> GetNewBooking(int UserId)
         {
-            return await _context.Booking.ToListAsync();
+            ObservableCollection<Booking> tempBooking = new ObservableCollection<Booking>();
+
+            foreach (Booking b in _context.Booking.Where(x => x.UserID == UserId))
+            {
+                if (b.EndDate >= DateTime.Now)
+                {
+                    tempBooking.Add(b);
+                }
+            }
+            return Ok(tempBooking);
         }
 
         // GET: api/Bookings/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Booking>> GetBooking(int id)
+        [HttpGet("{UserId}/old")]
+        public async Task<ActionResult<IEnumerable<Booking>>> GetOldBooking(int UserId)
         {
-            var booking = await _context.Booking.FindAsync(id);
+            ObservableCollection<Booking> tempBooking = new ObservableCollection<Booking>();
 
-            if (booking == null)
+            foreach (Booking b in _context.Booking.Where(x => x.UserID == UserId))
             {
-                return NotFound();
+                if (b.EndDate < DateTime.Now)
+                {
+                    tempBooking.Add(b);
+                }
             }
-
-            return booking;
+            return Ok(tempBooking);
         }
 
         // PUT: api/Bookings/5
@@ -91,10 +102,11 @@ namespace HolidayMakerBackend.Controllers
                     StartDate = postBooking.StartDate,
                     EndDate = postBooking.EndDate,
                     UserID = postBooking.UserID,
+                    PhoneNumber = postBooking.PhoneNumber,
+                    Adress = postBooking.Adress,
                     BookingID = 0
                 };
                 _context.Booking.Add(booking);
-
             }
 
             var result = await _context.SaveChangesAsync();
