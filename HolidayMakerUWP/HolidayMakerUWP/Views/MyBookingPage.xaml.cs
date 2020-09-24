@@ -77,7 +77,7 @@ namespace HolidayMakerUWP.Views
 
         private async void changeBookingInfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            ChangeBookingDialog.tempBooking = (Booking)listView.SelectedItem;
+            //ChangeBookingDialog.tempBooking = (Booking)listView.SelectedItem;
             await new ChangeBookingDialog().ShowAsync();
         }
     }

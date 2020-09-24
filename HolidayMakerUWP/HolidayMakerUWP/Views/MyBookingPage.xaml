@@ -32,26 +32,54 @@
 
                 <StackPanel Orientation="Vertical"
                             Grid.Row="1">
-                    <TextBlock Text="Boknings id:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingIdText" TextAlignment="Center" FontSize="15"/>
-                    <TextBlock Text="Start Datum:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingStartDateText" TextAlignment="Center" FontSize="15"/>
-                    <TextBlock Text="Slut Datum:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingEndDateText" TextAlignment="Center" FontSize="15"/>
-                    <TextBlock Text="Telefonnummer:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingPhoneNumberText" TextAlignment="Center" FontSize="15"/>
-                    <TextBlock Text="Din adress:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingAdressText" TextAlignment="Center" FontSize="15"/>
-                    <TextBlock Text="Namn på Rummet:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingRoomNameText" TextAlignment="Center" FontSize="15"/>
-                    <TextBlock Text="Namn på Priset:" TextAlignment="Center" FontSize="20"/>
-                    <TextBlock x:Name="BookingRoomPriceText" TextAlignment="Center" FontSize="15"/>
+                    <TextBlock Text="Boknings id:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingIdText"
+                               TextAlignment="Center"
+                               FontSize="15" />
+                    <TextBlock Text="Start Datum:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingStartDateText"
+                               TextAlignment="Center"
+                               FontSize="15" />
+                    <TextBlock Text="Slut Datum:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingEndDateText"
+                               TextAlignment="Center"
+                               FontSize="15" />
+                    <TextBlock Text="Telefonnummer:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingPhoneNumberText"
+                               TextAlignment="Center"
+                               FontSize="15" />
+                    <TextBlock Text="Din adress:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingAdressText"
+                               TextAlignment="Center"
+                               FontSize="15" />
+                    <TextBlock Text="Namn på Rummet:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingRoomNameText"
+                               TextAlignment="Center"
+                               FontSize="15" />
+                    <TextBlock Text="Namn på Priset:"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="BookingRoomPriceText"
+                               TextAlignment="Center"
+                               FontSize="15" />
 
                     <Button Content="Avboka"
                             FontSize="24"
-                            HorizontalAlignment="Center" 
+                            HorizontalAlignment="Center"
                             x:Name="cancelBooking"
-                            Click="cancelBooking_Click"/>
+                            Click="cancelBooking_Click" />
                 </StackPanel>
 
             </Grid>
@@ -63,8 +91,8 @@
                 <ListView VerticalAlignment="Stretch"
                           ItemsSource="{x:Bind myBookingPageViewModel.OldBookings}"
                           Height="300"
-                          x:Name="bookingHistory" SelectionChanged="bookingHistory_SelectionChanged"
-                          >
+                          x:Name="bookingHistory"
+                          SelectionChanged="bookingHistory_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Booking">
                             <StackPanel Orientation="Horizontal"
@@ -91,8 +119,8 @@
                 <ListView VerticalAlignment="Stretch"
                           ItemsSource="{x:Bind myBookingPageViewModel.NewBookings}"
                           Height="300"
-                          x:Name="bookingsNew" SelectionChanged="bookingsNew_SelectionChanged"
-                          >
+                          x:Name="bookingsNew"
+                          SelectionChanged="bookingsNew_SelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Booking">
                             <StackPanel Orientation="Horizontal"
@@ -115,6 +143,11 @@
                 </ListView>
 
             </StackPanel>
+            <Button Content="Ändra boknings information!"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    x:Name="changeBookingInfoBtn"
+                    Click="changeBookingInfoBtn_Click" />
         </Grid>
     </Grid>
 </Page>

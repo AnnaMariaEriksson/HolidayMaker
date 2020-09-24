@@ -36,7 +36,7 @@ namespace HolidayMakerUWP.DAL
                 ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
 
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
-                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //var test = WebServiceUrl + "hotels/" + FrontPageSearchViewModel.Search.Cities.CityID + "/"
                 //        + "2018" + "/" + "2019"
 
