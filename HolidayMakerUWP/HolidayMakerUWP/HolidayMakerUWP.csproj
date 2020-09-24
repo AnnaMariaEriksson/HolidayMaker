@@ -140,6 +140,9 @@
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangeBookingDialog.xaml.cs">
+      <DependentUpon>ChangeBookingDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FrontPageSearch.xaml.cs">
       <DependentUpon>FrontPageSearch.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\BookingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeBookingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

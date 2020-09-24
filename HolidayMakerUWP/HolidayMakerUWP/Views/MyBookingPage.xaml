@@ -93,8 +93,7 @@
                 <ListView VerticalAlignment="Stretch"
                           ItemsSource="{x:Bind myBookingPageViewModel.OldBookings}"
                           Height="300"
-                          x:Name="bookingHistory"
-                          >
+                          x:Name="bookingHistory">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local1:Booking">
                             <StackPanel Orientation="Horizontal"
@@ -115,8 +114,12 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                
             </StackPanel>
+            <Button Content="Ändra boknings information!"
+                    Grid.Column="2" Grid.Row="1"
+                    x:Name="changeBookingInfoBtn"
+                    Click="changeBookingInfoBtn_Click"/>
         </Grid>
+        
     </Grid>
 </Page>

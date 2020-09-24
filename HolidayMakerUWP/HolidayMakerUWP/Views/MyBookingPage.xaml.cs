@@ -44,5 +44,11 @@ namespace HolidayMakerUWP.Views
             myBookingPageViewModel.DeleteBooking((Booking)listView.SelectedItem);
             myBookingPageViewModel.NewBookings.Remove((Booking)listView.SelectedItem);
         }
+
+        private async void changeBookingInfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeBookingDialog.tempBooking = (Booking)listView.SelectedItem;
+            await new ChangeBookingDialog().ShowAsync();
+        }
     }
 }
