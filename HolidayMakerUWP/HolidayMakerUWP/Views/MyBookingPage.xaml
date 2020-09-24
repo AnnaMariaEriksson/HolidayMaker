@@ -35,15 +35,17 @@
 
                     <ListView HorizontalAlignment="Center"
                               x:Name="listView"
-                              ItemsSource="{x:Bind myBookingPageViewModel.NewBookings}" >
+                              ItemsSource="{x:Bind myBookingPageViewModel.NewBookings}">
                         <ListView.ItemTemplate>
-                            <DataTemplate x:Name="dataTemplate" x:DataType="local1:Booking">
+                            <DataTemplate x:Name="dataTemplate"
+                                          x:DataType="local1:Booking">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal"
+                                                Grid.Row="0">
                                         <TextBlock Text="Check-in Datum:"
                                                    FontSize="24" />
                                         <TextBlock Text="{x:Bind StartDate.Year}"
@@ -73,15 +75,15 @@
                                                    FontSize="24" />
                                     </StackPanel>
                                 </Grid>
-                                
+
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                     <Button Content="Avboka"
                             FontSize="24"
-                            HorizontalAlignment="Center" 
+                            HorizontalAlignment="Center"
                             x:Name="cancelBooking"
-                            Click="cancelBooking_Click"/>
+                            Click="cancelBooking_Click" />
                 </StackPanel>
 
             </Grid>
@@ -116,10 +118,10 @@
                 </ListView>
             </StackPanel>
             <Button Content="Ändra boknings information!"
-                    Grid.Column="2" Grid.Row="1"
+                    Grid.Column="2"
+                    Grid.Row="1"
                     x:Name="changeBookingInfoBtn"
-                    Click="changeBookingInfoBtn_Click"/>
+                    Click="changeBookingInfoBtn_Click" />
         </Grid>
-        
     </Grid>
 </Page>

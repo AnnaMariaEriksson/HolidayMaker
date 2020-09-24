@@ -312,6 +312,22 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.Dispose();
             }
         }
+        public static async Task UpdateBooking(Booking booking)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(booking);
+                HttpContent httpContent = new StringContent(json);
+
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpContent.Headers.Clear();
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                await httpClient1.PutAsync(WebServiceUrl + "Bookings/" + booking.BookingID, httpContent);
+
+                httpClient1.Dispose();
+            }
+        }
     }
 
 }

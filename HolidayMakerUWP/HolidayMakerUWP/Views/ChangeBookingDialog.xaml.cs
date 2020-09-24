@@ -1,9 +1,11 @@
-﻿using HolidayMakerUWP.Model;
+﻿using HolidayMakerUWP.DAL;
+using HolidayMakerUWP.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -30,7 +32,20 @@ namespace HolidayMakerUWP.Views
         {
             if(inputAdress.Text != "" && inputPhoneNumber.Text != "")
             {
-                
+                tempBooking.Adress = inputAdress.Text;
+                tempBooking.PhoneNumber = inputPhoneNumber.Text;
+
+                Task.Run(() => HotelsService.UpdateBooking(tempBooking));
+            }
+            else if (inputAdress.Text != "")
+            {
+                tempBooking.Adress = inputAdress.Text;
+                Task.Run(() => HotelsService.UpdateBooking(tempBooking));
+            }
+            else if (inputPhoneNumber.Text != "")
+            {
+                tempBooking.PhoneNumber = inputPhoneNumber.Text;
+                Task.Run(() => HotelsService.UpdateBooking(tempBooking));
             }
         }
 
