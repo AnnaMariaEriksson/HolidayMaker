@@ -99,7 +99,18 @@
                         <DataTemplate x:DataType="local1:Booking">
                             <StackPanel Orientation="Horizontal"
                                         Spacing="20">
-                                <TextBlock Text="{x:Bind StartDate.UtcDateTime}" />
+                                <TextBlock Text="Check-in Datum:"
+                                           FontSize="24" />
+                                <TextBlock Text="{x:Bind StartDate.Year}"
+                                           FontSize="24" />
+                                <TextBlock Text="-"
+                                           FontSize="24" />
+                                <TextBlock Text="{x:Bind StartDate.Month}"
+                                           FontSize="24" />
+                                <TextBlock Text="-"
+                                           FontSize="24" />
+                                <TextBlock Text="{x:Bind StartDate.Day}"
+                                           FontSize="24" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
