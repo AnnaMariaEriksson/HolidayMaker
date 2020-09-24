@@ -9,7 +9,7 @@ namespace HolidayMakerBackend.Models
     public class Booking
     {
         public int BookingID { get; set; }
-        public int roomID { get; set; }
+        public int BookedRoomID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string PhoneNumber { get; set; }
