@@ -49,5 +49,10 @@ namespace HolidayMakerUWP.Views
                 this.Frame.Navigate(typeof(FrontPageSearch));
             }
         }
+
+        private void BackToFrontPageSearch_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FrontPageSearch));
+        }
     }
 }
