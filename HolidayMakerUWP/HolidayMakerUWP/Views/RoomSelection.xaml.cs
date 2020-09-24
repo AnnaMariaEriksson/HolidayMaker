@@ -12,6 +12,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,6 +38,11 @@ namespace HolidayMakerUWP.Views
         {
             this.InitializeComponent();
             this.Vm = new RoomSelectionVm();
+            RegionsButton.Content = FrontPageSearchViewModel.Search.Regions.NameOfRegion;
+            CityButton.Content = FrontPageSearchViewModel.Search.Cities.NameOfCity;
+            StartDateButton.Content = FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd");
+            EndDateButton.Content = FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
+            CheckLoginState();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -46,17 +52,12 @@ namespace HolidayMakerUWP.Views
         }
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(RegistrationPage));
         }
 
         private void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            //temporärt det ska lägga i MenuFlyout_Opening
-            LogInButton.Visibility = Visibility.Collapsed;
-            RegisterButton.Visibility = Visibility.Collapsed;
-            MyBookingsButton.Visibility = Visibility.Visible;
-            LogoutButton.Visibility = Visibility.Visible;
-            /////////////////////////////////////////////
+            Frame.Navigate(typeof(LoginPage2));
         }
 
         private void MenuFlyout_Opening(object sender, object e)
@@ -64,17 +65,39 @@ namespace HolidayMakerUWP.Views
             //kolla om användaren är inloggad och lägg rätt knappar
         }
 
-        private void roomToBasket_Click(object sender, RoutedEventArgs e)
+        private async void roomToBasket_Click(object sender, RoutedEventArgs e)
         {
-            Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
-            Vm.AddRoomToBasket(TempRoom);
-            Vm.Rooms.Remove(TempRoom);
+            if (LogInViewModel.User != null)
+            {
+                Room TempRoom = (Room)((FrameworkElement)sender).DataContext;
+                Vm.AddRoomToBasket(TempRoom);
+                Vm.Rooms.Remove(TempRoom);
+            }
+            if (LogInViewModel.User == null)
+            {
+                MessageDialog confirmDialog = new MessageDialog("Du måste vara inloggad för att välja ett rum", "ERROR");
+                confirmDialog.Commands.Add(new UICommand("OK"));
+                var confirmResult = await confirmDialog.ShowAsync();
+                // "No" button pressed: Keep the app open.
+                if (confirmResult != null && confirmResult.Label == "OK") { return; }
+            }
         }
 
-        private void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
+        private async void ConfirmChoosenRooms_Click(object sender, RoutedEventArgs e)
         {
             var SelectedRooms = Vm.RoomBasket;
-            Frame.Navigate(typeof(BookingPage), SelectedRooms);
+            if (LogInViewModel.User != null)
+            {
+                Frame.Navigate(typeof(BookingPage), SelectedRooms);
+            }
+            if (LogInViewModel.User == null)
+            {
+                MessageDialog confirmDialog = new MessageDialog("Du måste vara inloggad för att genomföra bokningen", "ERROR");
+                confirmDialog.Commands.Add(new UICommand("OK"));
+                var confirmResult = await confirmDialog.ShowAsync();
+                // "No" button pressed: Keep the app open.
+                if (confirmResult != null && confirmResult.Label == "OK") { return; }
+            }
         }
 
         private void Allinclusive_Click(object sender, RoutedEventArgs e)
@@ -230,6 +253,54 @@ namespace HolidayMakerUWP.Views
         private void CityButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(FrontPageSearch));
+        }
+
+        private void SortRoomsByRating_Click(object sender, RoutedEventArgs e)
+        {
+            if (BtnClicked == false)
+            {
+                BtnClicked = true;
+                HotelsService.SortByInt = 1;
+                Vm._rooms = Vm.SortByRating(1);
+                RoomListView.ItemsSource = Vm.Rooms;
+            }
+
+            else
+            {
+                BtnClicked = false;
+                HotelsService.SortByInt = 2;
+                Vm._rooms = Vm.SortByRating(2);
+                RoomListView.ItemsSource = Vm.Rooms;
+            }
+        }
+        public void CheckLoginState()
+        {
+            if(LogInViewModel.User != null)
+            {
+                LogInButton.Visibility = Visibility.Collapsed;
+                RegisterButton.Visibility = Visibility.Collapsed;
+                MyBookingsButton.Visibility = Visibility.Visible;
+                LogoutButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LogInButton.Visibility = Visibility.Visible;
+                RegisterButton.Visibility = Visibility.Visible;
+                MyBookingsButton.Visibility = Visibility.Collapsed;
+                LogoutButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            LogInViewModel.User = null;
+            this.Frame.Navigate(typeof(FrontPageSearch));
+
+        }
+
+        private void MyBookingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MyBookingPage));
         }
     }
 }

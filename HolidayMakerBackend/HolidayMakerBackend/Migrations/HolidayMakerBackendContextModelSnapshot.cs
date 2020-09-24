@@ -26,8 +26,17 @@ namespace HolidayMakerBackend.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BookedRoomID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -35,10 +44,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int>("roomID")
-                        .HasColumnType("int");
-
                     b.HasKey("BookingID");
+
+                    b.HasIndex("BookedRoomID");
 
                     b.ToTable("Booking");
                 });
@@ -143,7 +151,8 @@ namespace HolidayMakerBackend.Migrations
                             HasFullBoard = false,
                             HasHalfBoard = false,
                             HasPool = true,
-                            HasRestaurant = false,
+                            HasRestaurant = true,
+                            HotelDescription = "Ett fint hotell",
                             Name = "Bosses hotell",
                             Test = true,
                             Test2 = true
@@ -200,6 +209,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
@@ -220,6 +232,7 @@ namespace HolidayMakerBackend.Migrations
                             HotelID = 1,
                             IsAllInclusive = true,
                             Price = 300,
+                            Rating = 2.5,
                             RoomName = "Rum 1"
                         });
                 });
@@ -256,6 +269,13 @@ namespace HolidayMakerBackend.Migrations
                             LastName = "Larsson",
                             Password = "hejhej"
                         });
+                });
+
+            modelBuilder.Entity("HolidayMakerBackend.Models.Booking", b =>
+                {
+                    b.HasOne("HolidayMakerBackend.Models.Room", "BookedRoom")
+                        .WithMany()
+                        .HasForeignKey("BookedRoomID");
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>

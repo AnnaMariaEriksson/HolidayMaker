@@ -3,26 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class newMigration1 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Booking",
-                columns: table => new
-                {
-                    BookingID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    roomID = table.Column<int>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    UserID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booking", x => x.BookingID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Region",
                 columns: table => new
@@ -115,6 +99,7 @@ namespace HolidayMakerBackend.Migrations
                     Price = table.Column<int>(nullable: false),
                     ExtraBed = table.Column<bool>(nullable: false),
                     HasAllInclusive = table.Column<bool>(nullable: false),
+                    Rating = table.Column<double>(nullable: false),
                     IsAllInclusive = table.Column<bool>(nullable: false),
                     HasFullBoard = table.Column<bool>(nullable: false),
                     HasHalfBoard = table.Column<bool>(nullable: false),
@@ -131,15 +116,59 @@ namespace HolidayMakerBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    BookingID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookedRoomID = table.Column<int>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Adress = table.Column<string>(nullable: true),
+                    UserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.BookingID);
+                    table.ForeignKey(
+                        name: "FK_Booking_Room_BookedRoomID",
+                        column: x => x.BookedRoomID,
+                        principalTable: "Room",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Region",
                 columns: new[] { "RegionID", "NameOfRegion" },
                 values: new object[] { 1, "Skåne" });
 
             migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "ID", "Email", "FirstName", "LastName", "Password" },
+                values: new object[] { 1, "bosse@123.se", "Bosse", "Larsson", "hejhej" });
+
+            migrationBuilder.InsertData(
                 table: "City",
                 columns: new[] { "CityID", "NameOfCity", "RegionID" },
                 values: new object[] { 1, "Malmö", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Hotel",
+                columns: new[] { "HotelID", "CityID", "DistansToBeach", "DistansToCenter", "FilterReset", "HasAllInclusive", "HasChildrensClub", "HasEntertainment", "HasFullBoard", "HasHalfBoard", "HasPool", "HasRestaurant", "HotelDescription", "Name", "Test", "Test2" },
+                values: new object[] { 1, 1, 20, 1, true, true, false, true, false, false, true, true, "Ett fint hotell", "Bosses hotell", true, true });
+
+            migrationBuilder.InsertData(
+                table: "Room",
+                columns: new[] { "ID", "ExtraBed", "HasAllInclusive", "HasFullBoard", "HasHalfBoard", "HotelID", "IsAllInclusive", "Price", "Rating", "RoomName" },
+                values: new object[] { 1, true, true, false, false, 1, true, 300, 2.5, "Rum 1" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Booking_BookedRoomID",
+                table: "Booking",
+                column: "BookedRoomID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_RegionID",
@@ -163,10 +192,10 @@ namespace HolidayMakerBackend.Migrations
                 name: "Booking");
 
             migrationBuilder.DropTable(
-                name: "Room");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Room");
 
             migrationBuilder.DropTable(
                 name: "Hotel");

@@ -14,6 +14,7 @@ namespace HolidayMakerUWP.Model
         public bool ExtraBed { get; set; }
         public bool IsExtraBed { get; set; }
         public bool HasAllInclusive { get; set; }
+        public double Rating { get; set; }
         public bool IsAllInclusive { get; set; }
         public bool HasFullBoard { get; set; }
         public bool IsFullBoard { get; set; }

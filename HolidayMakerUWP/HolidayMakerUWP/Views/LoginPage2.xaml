@@ -23,6 +23,11 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="BackToFrontPageSearch" Click="BackToFrontPageSearch_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" FontSize="40">
+                <Image Source="../Images/BackArrow.png" Height="50" Width="100"/>
+            </Button>
+        </StackPanel>
         <Grid Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.ColumnSpan="2" Background="White">
             <StackPanel BorderBrush="Black" BorderThickness="0.5" Width="400" Spacing="5" CornerRadius="5" >
                 <Border Background="CadetBlue">

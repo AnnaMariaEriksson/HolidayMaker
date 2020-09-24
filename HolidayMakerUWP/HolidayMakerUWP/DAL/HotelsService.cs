@@ -17,34 +17,41 @@ namespace HolidayMakerUWP.DAL
 {
     public class HotelsService
     {
+        LogInViewModel lVm;
         private string roomURL = "https://localhost:44368/api/rooms";
         private static string regionURL = "https://localhost:44368/api/regions";
         private static string cityURL = "https://localhost:44368/api/cities";
         private static string userURL = "https://localhost:44368/api/users";
-        
+
         public static Hotel SelectedHotel { get; set; }
         public static int SortByInt { get; set; } = 1;
 
         private const string WebServiceUrl = "https://localhost:44368/api/";
         private static string TempOrderId = null;
+        //Hotels
         public static async Task<ObservableCollection<Hotel>> GetHotels()
         {
-                using (HttpClient httpClient1 = new HttpClient())
-                {
-                    ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
-      
-                    httpClient1.DefaultRequestHeaders.Accept.Clear();
-                    httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                ObservableCollection<Hotel> Hotels = new ObservableCollection<Hotel>();
 
-                    var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels");
+                httpClient1.DefaultRequestHeaders.Accept.Clear();
+                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //var test = WebServiceUrl + "hotels/" + FrontPageSearchViewModel.Search.Cities.CityID + "/"
+                //        + "2018" + "/" + "2019"
 
-                    Hotels = JsonConvert.DeserializeObject<ObservableCollection<Hotel>>(jsonResult);
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "hotels/"
+                        + FrontPageSearchViewModel.Search.Cities.CityID + "/"
+                        + FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd") + "/"
+                        + FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd"));
 
-                    httpClient1.Dispose();
-                    return Hotels;
-                }
+                Hotels = JsonConvert.DeserializeObject<ObservableCollection<Hotel>>(jsonResult);
+
+                httpClient1.Dispose();
+                return Hotels;
+            }
         }
-
+        //Rooms
         public static async Task<ObservableCollection<Room>> GetRooms(int HotelId)
         {
             using (HttpClient httpClient1 = new HttpClient())
@@ -54,7 +61,9 @@ namespace HolidayMakerUWP.DAL
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + HotelId + "/" + SortByInt);
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + HotelId + "/" + SortByInt + "/"
+                    + FrontPageSearchViewModel.Search.StartDate.UtcDateTime.ToString("yyyy-MM-dd") + "/"
+                    + FrontPageSearchViewModel.Search.EndDate.UtcDateTime.ToString("yyyy-MM-dd"));
 
                 Rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonResult);
 
@@ -63,57 +72,24 @@ namespace HolidayMakerUWP.DAL
                 return Rooms;
             }
         }
-
-        public static async Task<ObservableCollection<City>> GetCities(int regionID)
+        public static async Task<Room> GetRoom(int RoomId)
         {
             using (HttpClient httpClient1 = new HttpClient())
             {
-                ObservableCollection<City> Cities = new ObservableCollection<City>();
-                httpClient1.Timeout = new TimeSpan(0,0,5);
-                httpClient1.DefaultRequestHeaders.Accept.Clear();
-                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "cities/" + regionID);
-
-                Cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonResult);
-
-                httpClient1.Dispose();
-                return Cities;
-            }
-        }
-        public static async Task<ObservableCollection<Regions>> GetRegions(int regionID)
-        {
-            using (HttpClient httpClient1 = new HttpClient())
-            {
-                ObservableCollection<Regions> Regions = new ObservableCollection<Regions>();
+                Room Room = new Room();
                 httpClient1.Timeout = new TimeSpan(0, 0, 5);
                 httpClient1.DefaultRequestHeaders.Accept.Clear();
                 httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "regions/" + regionID);
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Rooms/" + RoomId);
 
-                Regions = JsonConvert.DeserializeObject<ObservableCollection<Regions>>(jsonResult);
+                Room = JsonConvert.DeserializeObject<Room>(jsonResult);
 
                 httpClient1.Dispose();
-                return Regions;
+                return Room;
             }
         }
-
-        public async Task<ObservableCollection<Room>> GetAllRoomsAsync()
-        {
-            using (HttpClient httpClient1 = new HttpClient())
-            {
-                var jsonRooms = await httpClient1.GetStringAsync(roomURL);
-
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.MissingMemberHandling = MissingMemberHandling.Error;
-
-                var rooms = JsonConvert.DeserializeObject<ObservableCollection<Room>>(jsonRooms, settings);
-
-                return rooms;
-            }
-        }
-
+        //Regions
         public static async Task<ObservableCollection<Regions>> GetAllRegionsAsync()
         {
             using (HttpClient httpClient1 = new HttpClient())
@@ -128,41 +104,7 @@ namespace HolidayMakerUWP.DAL
                 return regions;
             }
         }
-
-        public static async Task<ObservableCollection<City>> GetCities()
-        {
-            using (HttpClient httpClient1 = new HttpClient())
-            {
-                ObservableCollection<City> Cities = new ObservableCollection<City>();
-                httpClient1.Timeout = new TimeSpan(0, 0, 5);
-                httpClient1.DefaultRequestHeaders.Accept.Clear();
-                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "Cities/");
-
-                Cities = JsonConvert.DeserializeObject<ObservableCollection<City>>(jsonResult);
-
-                httpClient1.Dispose();
-                return Cities;
-            }
-        }
-
-        public async Task<ObservableCollection<User>> GetAllUsersAsync()
-        {
-            using (HttpClient httpClient1 = new HttpClient())
-            {
-                var jsonUsers = await httpClient1.GetStringAsync(userURL);
-
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.MissingMemberHandling = MissingMemberHandling.Error;
-
-                var users = JsonConvert.DeserializeObject<ObservableCollection<User>>(userURL, settings);
-
-                return users;
-            }
-            
-        }
-
+        //User
         public static async Task<User> AddUsersAsync(User user)
         {
             using (HttpClient httpClient1 = new HttpClient())
@@ -187,32 +129,7 @@ namespace HolidayMakerUWP.DAL
                 throw new Exception($"Failed to post {userURL} with {await httpContent.ReadAsStringAsync()}. Got statuscode {response.StatusCode} with message: {await response.Content.ReadAsStringAsync()}");
             }
         }
-
-
-
-        //public  ObservableCollection<Regions> GetRegions()
-        //{
-        //    ObservableCollection<Regions> Regions = FrontPageSearchViewModel.Regions;
-        //    // todo fix the list below so it's accessible.
-        //    ObservableCollection<Hotel> hotels = GetHotels();
-        //    var cities = new List<City>
-        //    {
-        //        new City { NameOfCity = "Malmö", CityID = 1, RegionID = 1, Hotels = hotels},
-        //        new City {NameOfCity = "Lund", CityID = 2, RegionID = 1, Hotels = hotels},
-        //        new City {NameOfCity = "Kristianstad", CityID = 3, RegionID = 1, Hotels = hotels}
-        //    };
-        //    Regions region1 = new Regions
-        //    {
-        //        NameOfRegion = "Skåne",
-        //        RegionID = 1,
-        //        Cities = cities
-        //    };
-
-        //    Regions.Add(region1);
-
-        //    return Regions;
-        //}
-public static async Task<User> GetUser(string email, string password)
+        public static async Task<User> GetUser(string email, string password)
         {
             using (HttpClient httpClient1 = new HttpClient())
             {
@@ -229,28 +146,84 @@ public static async Task<User> GetUser(string email, string password)
                 return user;
             }
         }
-        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTime startDate, DateTime endDate)
-        {            
+        //Bookings
+        public static async Task PostBooking(ObservableCollection<Room> rooms, DateTimeOffset startDate, DateTimeOffset endDate, string phoneNumber, string adress)
+        {
+            foreach (Room r in rooms) { 
             using (HttpClient httpClient1 = new HttpClient())
             {
                 Booking booking = new Booking()
                 {
-                    BookingRooms = rooms,
+                    BookedRoom = r,
+                    roomID = r.ID,
                     StartDate = startDate,
                     EndDate = endDate,
-                    UserID = LogInViewModel.User.ID
+                    UserID = LogInViewModel.User.ID,
+                    PhoneNumber = phoneNumber,
+                    Adress = adress
                 };
                 var json = JsonConvert.SerializeObject(booking);
                 HttpContent httpContent = new StringContent(json);
 
                 httpClient1.Timeout = new TimeSpan(0, 0, 5);
                 httpContent.Headers.Clear();
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");               
-                                                                                             
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
                 await httpClient1.PostAsync(WebServiceUrl + "Bookings", httpContent);
 
-                httpClient1.Dispose();                
-            }            
+                httpClient1.Dispose();
+            }
+            }
+        }
+        public static async Task<ObservableCollection<Booking>> GetNewBookings(int userId)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+                ObservableCollection<Booking> newBooking= new ObservableCollection<Booking>();
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpClient1.DefaultRequestHeaders.Accept.Clear();
+                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "bookings/" + userId + "/new");
+
+                newBooking = JsonConvert.DeserializeObject<ObservableCollection<Booking>>(jsonResult);
+
+                httpClient1.Dispose();
+                return newBooking;
+            }
+        }
+        public static async Task<ObservableCollection<Booking>> GetOldBookings(int userId)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {
+               ObservableCollection<Booking> oldBookings = new ObservableCollection<Booking>();
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpClient1.DefaultRequestHeaders.Accept.Clear();
+                httpClient1.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var jsonResult = await httpClient1.GetStringAsync(WebServiceUrl + "bookings/" + userId + "/old");
+
+                oldBookings = JsonConvert.DeserializeObject<ObservableCollection<Booking>>(jsonResult);
+
+                httpClient1.Dispose();
+                return oldBookings;
+            }
+        }
+        public static async Task DeleteBooking(Booking booking)
+        {
+            using (HttpClient httpClient1 = new HttpClient())
+            {                
+                var json = JsonConvert.SerializeObject(booking);
+                HttpContent httpContent = new StringContent(json);
+
+                httpClient1.Timeout = new TimeSpan(0, 0, 5);
+                httpContent.Headers.Clear();
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                await httpClient1.DeleteAsync(WebServiceUrl + "Bookings/" + booking.BookingID);
+
+                httpClient1.Dispose();
+            }
         }
     }
 

@@ -18,6 +18,11 @@
             <ColumnDefinition Width="7*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="BackToFrontPageSearch1" Click="BackToFrontPageSearch1_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" FontSize="40">
+                <Image Source="../Images/BackArrow.png" Height="50" Width="100"/>
+            </Button>
+        </StackPanel>
         <TextBlock
             Grid.Row="0"
             Grid.Column="1"

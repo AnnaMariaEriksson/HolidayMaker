@@ -21,31 +21,50 @@ namespace HolidayMakerBackend.Controllers
         {
             _context = context;
         }
-        
-            // GET: api/Hotels
-            [HttpGet]
+
+        // GET: api/Hotels
+        [HttpGet("{CityID}/{StartDate}/{EndDate}")]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel(int CityID,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Hotel> TempHotels = new ObservableCollection<Hotel>();
             ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
            await foreach(Hotel h in _context.Hotel)
             {
-            foreach(Room r in _context.Room.Where(x => x.HotelID == h.HotelID))
+                var test = _context.Room.Where(x => x.HotelID == h.HotelID);
+            foreach (Room r in test)
             {
-                    Booking booking = await _context.Booking.FirstAsync(b => b.roomID == r.ID);
-                    if(booking.StartDate < StartDate && booking.EndDate < EndDate)
+                    Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.BookedRoomID == r.ID);
+                    if (booking != null)
+                    {
+                     
+                        if (booking.StartDate < StartDate && booking.EndDate > EndDate)
+                        {
+                            TempRooms.Add(r);
+                        }
+                    }
+                    else
                     {
                         TempRooms.Add(r);
                     }
             }
             if(TempRooms.Count > 0)
                 {
-                    TempHotels.Add(h);
+                    if(h.CityID == CityID)
+                    {
+                        TempHotels.Add(h);
+                    }
+                    
                     TempRooms.Clear();
                 }
             }
-
-            return TempHotels;
+            if (TempHotels.Count() > 0)
+            {
+                return Ok(TempHotels);
+            }
+            else
+            {
+                return Ok(TempHotels);
+            }
         }
 
         // PUT: api/Hotels/5

@@ -61,16 +61,19 @@ namespace HolidayMakerBackend.Data
                 HasFullBoard = false,
                 HasHalfBoard = false,
                 HasPool = true,
-                Test = true,
-                HotelID = 1,
+                Test = true,    
                 Test2 = true,
-                Name = "Bosses hotell"
+                HotelID = 1,
+                Name = "Bosses hotell",
+                HasRestaurant = true,
+                HotelDescription = "Ett fint hotell"
             });
 
             modelBuilder.Entity<Room>().HasData(new Room
             {
                 ExtraBed = true,
                 HasAllInclusive = true,
+                Rating = 2.5,
                 HasFullBoard = false,
                 HasHalfBoard = false,
                 IsAllInclusive = true,
@@ -78,6 +81,7 @@ namespace HolidayMakerBackend.Data
                 ID = 1,
                 HotelID = 1,
                 RoomName = "Rum 1",
+                ID = 1
             });
         }
     }

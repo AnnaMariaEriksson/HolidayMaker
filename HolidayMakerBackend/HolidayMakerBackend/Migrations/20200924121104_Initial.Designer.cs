@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200921085026_newMigration1")]
-    partial class newMigration1
+    [Migration("20200924121104_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,8 +28,17 @@ namespace HolidayMakerBackend.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("BookedRoomID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -37,10 +46,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int>("roomID")
-                        .HasColumnType("int");
-
                     b.HasKey("BookingID");
+
+                    b.HasIndex("BookedRoomID");
 
                     b.ToTable("Booking");
                 });
@@ -130,6 +138,27 @@ namespace HolidayMakerBackend.Migrations
                     b.HasIndex("CityID");
 
                     b.ToTable("Hotel");
+
+                    b.HasData(
+                        new
+                        {
+                            HotelID = 1,
+                            CityID = 1,
+                            DistansToBeach = 20,
+                            DistansToCenter = 1,
+                            FilterReset = true,
+                            HasAllInclusive = true,
+                            HasChildrensClub = false,
+                            HasEntertainment = true,
+                            HasFullBoard = false,
+                            HasHalfBoard = false,
+                            HasPool = true,
+                            HasRestaurant = true,
+                            HotelDescription = "Ett fint hotell",
+                            Name = "Bosses hotell",
+                            Test = true,
+                            Test2 = true
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.Region", b =>
@@ -182,6 +211,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
@@ -190,6 +222,21 @@ namespace HolidayMakerBackend.Migrations
                     b.HasIndex("HotelID");
 
                     b.ToTable("Room");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ExtraBed = true,
+                            HasAllInclusive = true,
+                            HasFullBoard = false,
+                            HasHalfBoard = false,
+                            HotelID = 1,
+                            IsAllInclusive = true,
+                            Price = 300,
+                            Rating = 2.5,
+                            RoomName = "Rum 1"
+                        });
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.User", b =>
@@ -214,6 +261,23 @@ namespace HolidayMakerBackend.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "bosse@123.se",
+                            FirstName = "Bosse",
+                            LastName = "Larsson",
+                            Password = "hejhej"
+                        });
+                });
+
+            modelBuilder.Entity("HolidayMakerBackend.Models.Booking", b =>
+                {
+                    b.HasOne("HolidayMakerBackend.Models.Room", "BookedRoom")
+                        .WithMany()
+                        .HasForeignKey("BookedRoomID");
                 });
 
             modelBuilder.Entity("HolidayMakerBackend.Models.City", b =>
