@@ -30,7 +30,8 @@ namespace HolidayMakerBackend.Controllers
             ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
            await foreach(Hotel h in _context.Hotel)
             {
-            foreach(Room r in _context.Room.Where(x => x.HotelID == h.HotelID))
+                var test = _context.Room.Where(x => x.HotelID == h.HotelID);
+            foreach (Room r in test)
             {
                     Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.roomID == r.ID);
                     if (booking != null)
