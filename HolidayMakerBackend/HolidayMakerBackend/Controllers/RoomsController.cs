@@ -32,7 +32,7 @@ namespace HolidayMakerBackend.Controllers
                   
             foreach (Room r in _context.Room.Where(x => x.HotelID == HotelId))
             {
-                Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.roomID == r.ID);
+                Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.BookedRoomID == r.ID);
                 if (booking != null)
                 {
                     if (booking.StartDate < StartDate && booking.EndDate < EndDate)
@@ -58,19 +58,19 @@ namespace HolidayMakerBackend.Controllers
             return rooms;
         }
 
-        //// GET: api/Rooms/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Room>> GetRoom(int id)
-        //{
-        //    var room = await _context.Room.FindAsync(id);
+        // GET: api/Rooms/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Room>> GetRoom(int id)
+        {
+            var room = await _context.Room.FindAsync(id);
 
-        //    if (room == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (room == null)
+            {
+                return NotFound();
+            }
 
-        //    return room;
-        //}
+            return room;
+        }
 
         // PUT: api/Rooms/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

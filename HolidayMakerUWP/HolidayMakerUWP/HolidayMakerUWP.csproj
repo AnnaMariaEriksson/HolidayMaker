@@ -172,6 +172,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\BackArrow.png" />
     <Content Include="Images\SortIcon.png" />
     <Content Include="Images\MalmoImage.png" />
     <Content Include="Images\ProfileIcon.png" />
