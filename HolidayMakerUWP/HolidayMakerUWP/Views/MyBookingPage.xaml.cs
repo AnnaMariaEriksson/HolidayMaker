@@ -42,10 +42,10 @@ namespace HolidayMakerUWP.Views
         }
 
         private void cancelBooking_Click(object sender, RoutedEventArgs e)
-        {
-            
-            myBookingPageViewModel.DeleteBooking(MyBookingViewModel.SelectedBooking);
+        {            
+            myBookingPageViewModel.DeleteBooking(MyBookingViewModel.SelectedBooking);            
             myBookingPageViewModel.NewBookings.Remove(MyBookingViewModel.SelectedBooking);
+            changeBookingInfoBtn.Visibility = Visibility.Collapsed;
         }
 
         private void bookingHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -59,9 +59,27 @@ namespace HolidayMakerUWP.Views
             BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
             BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
             BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
+
+            changeBookingInfoBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private async void changeBookingInfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeBookingDialog.tempBooking = (Booking)bookingsNew.SelectedItem;
+            await new ChangeBookingDialog().ShowAsync();
+            updateListNewInfo();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FrontPageSearch));
         }
 
         private void bookingsNew_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateListNewInfo();
+        }
+        public void updateListNewInfo()
         {
             MyBookingViewModel.SelectedBooking = (Booking)bookingsNew.SelectedItem;
             cancelBooking.Visibility = Visibility.Visible;
@@ -72,13 +90,7 @@ namespace HolidayMakerUWP.Views
             BookingEndDateText.Text = MyBookingViewModel.SelectedBooking.EndDate.UtcDateTime.ToString("yyyy-MM-dd");
             BookingRoomNameText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.RoomName;
             BookingRoomPriceText.Text = MyBookingViewModel.SelectedBooking.BookedRoom.Price.ToString();
-
-        }
-
-        private async void changeBookingInfoBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //ChangeBookingDialog.tempBooking = (Booking)listView.SelectedItem;
-            await new ChangeBookingDialog().ShowAsync();
+            changeBookingInfoBtn.Visibility = Visibility.Visible;
         }
     }
 }

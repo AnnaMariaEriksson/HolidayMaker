@@ -22,6 +22,7 @@ namespace HolidayMakerUWP.Views
 {
     public sealed partial class ChangeBookingDialog : ContentDialog
     {
+        public MyBookingPage mBP;
         public static Booking tempBooking;
         public ChangeBookingDialog()
         {

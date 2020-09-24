@@ -126,6 +126,7 @@
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Hotel.cs" />
+    <Compile Include="Model\PostBooking.cs" />
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\Search.cs" />
