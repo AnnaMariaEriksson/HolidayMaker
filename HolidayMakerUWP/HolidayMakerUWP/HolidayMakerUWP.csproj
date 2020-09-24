@@ -126,6 +126,7 @@
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Hotel.cs" />
+    <Compile Include="Model\PostBooking.cs" />
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\Search.cs" />
@@ -139,6 +140,9 @@
     <Compile Include="Viewmodel\RoomSelectionVm.cs" />
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeBookingDialog.xaml.cs">
+      <DependentUpon>ChangeBookingDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FrontPageSearch.xaml.cs">
       <DependentUpon>FrontPageSearch.xaml</DependentUpon>
@@ -188,6 +192,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\BookingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangeBookingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Skander : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace HolidayMakerBackend.Migrations
                 {
                     BookingID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    roomID = table.Column<int>(nullable: false),
+                    BookedRoomID = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),

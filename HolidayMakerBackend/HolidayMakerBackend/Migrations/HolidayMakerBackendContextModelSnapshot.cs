@@ -29,6 +29,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BookedRoomID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -39,9 +42,6 @@ namespace HolidayMakerBackend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("roomID")
                         .HasColumnType("int");
 
                     b.HasKey("BookingID");

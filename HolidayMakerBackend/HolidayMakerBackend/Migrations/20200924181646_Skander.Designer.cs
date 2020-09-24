@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    [Migration("20200924094728_Initial")]
-    partial class Initial
+    [Migration("20200924181646_Skander")]
+    partial class Skander
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("BookedRoomID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -41,9 +44,6 @@ namespace HolidayMakerBackend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("roomID")
                         .HasColumnType("int");
 
                     b.HasKey("BookingID");
