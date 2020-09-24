@@ -33,7 +33,7 @@ namespace HolidayMakerBackend.Controllers
                 var test = _context.Room.Where(x => x.HotelID == h.HotelID);
             foreach (Room r in test)
             {
-                    Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.roomID == r.ID);
+                    Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.BookedRoomID == r.ID);
                     if (booking != null)
                     {
                      
