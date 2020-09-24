@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HolidayMakerBackend.Migrations
 {
-    public partial class Saimir : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -115,7 +115,6 @@ namespace HolidayMakerBackend.Migrations
                     Price = table.Column<int>(nullable: false),
                     ExtraBed = table.Column<bool>(nullable: false),
                     HasAllInclusive = table.Column<bool>(nullable: false),
-                    Rating = table.Column<double>(nullable: false),
                     IsAllInclusive = table.Column<bool>(nullable: false),
                     HasFullBoard = table.Column<bool>(nullable: false),
                     HasHalfBoard = table.Column<bool>(nullable: false),
@@ -150,12 +149,12 @@ namespace HolidayMakerBackend.Migrations
             migrationBuilder.InsertData(
                 table: "Hotel",
                 columns: new[] { "HotelID", "CityID", "DistansToBeach", "DistansToCenter", "FilterReset", "HasAllInclusive", "HasChildrensClub", "HasEntertainment", "HasFullBoard", "HasHalfBoard", "HasPool", "HasRestaurant", "HotelDescription", "Name", "Test", "Test2" },
-                values: new object[] { 1, 1, 20, 1, true, true, false, true, false, false, true, true, "Ett fint hotell", "Bosses hotell", true, true });
+                values: new object[] { 1, 1, 20, 1, true, true, false, true, false, false, true, false, null, "Bosses hotell", true, true });
 
             migrationBuilder.InsertData(
                 table: "Room",
-                columns: new[] { "ID", "ExtraBed", "HasAllInclusive", "HasFullBoard", "HasHalfBoard", "HotelID", "IsAllInclusive", "Price", "Rating", "RoomName" },
-                values: new object[] { 1, true, true, false, false, 1, true, 300, 2.5, "Rum 1" });
+                columns: new[] { "ID", "ExtraBed", "HasAllInclusive", "HasFullBoard", "HasHalfBoard", "HotelID", "IsAllInclusive", "Price", "RoomName" },
+                values: new object[] { 1, true, true, false, false, 1, true, 300, "Rum 1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_RegionID",

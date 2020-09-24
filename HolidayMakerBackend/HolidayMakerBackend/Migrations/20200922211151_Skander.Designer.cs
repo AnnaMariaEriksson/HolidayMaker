@@ -4,14 +4,16 @@ using HolidayMakerBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HolidayMakerBackend.Migrations
 {
     [DbContext(typeof(HolidayMakerBackendContext))]
-    partial class HolidayMakerBackendContextModelSnapshot : ModelSnapshot
+    [Migration("20200922211151_Skander")]
+    partial class Skander
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,9 +209,6 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
-
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
@@ -230,7 +229,6 @@ namespace HolidayMakerBackend.Migrations
                             HotelID = 1,
                             IsAllInclusive = true,
                             Price = 300,
-                            Rating = 2.5,
                             RoomName = "Rum 1"
                         });
                 });

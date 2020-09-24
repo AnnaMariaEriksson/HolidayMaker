@@ -62,6 +62,13 @@
                 Click="SearchButton_OnClick"
                 Content="Sök"
                 FontSize="24" />
+            <Button Content="mybooking"
+                    x:Name="mybooking"
+                    Click="mybooking_Click"
+                    Grid.Column="4"
+                    Margin="100,37,0,0"
+                    Grid.Row="1"
+                    VerticalAlignment="Top" />
 
         </Grid>
 
