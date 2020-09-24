@@ -121,12 +121,11 @@
     </Compile>
     <Compile Include="BoolConverter\BooleanColorConverter.cs" />
     <Compile Include="BoolConverter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="BoolConverter\LoginToVisibilityConverter.cs" />
     <Compile Include="DAL\HotelsService.cs" />
     <Compile Include="Model\Booking.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\Hotel.cs" />
-    <Compile Include="Model\Nav.cs" />
-    <Compile Include="Model\NavMenu.cs" />
     <Compile Include="Model\Regions.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\Search.cs" />
@@ -138,9 +137,6 @@
     <Compile Include="Viewmodel\MyBookingViewModel.cs" />
     <Compile Include="Viewmodel\RegistrationPageViewModel.cs" />
     <Compile Include="Viewmodel\RoomSelectionVm.cs" />
-    <Compile Include="Views\BasePage.xaml.cs">
-      <DependentUpon>BasePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\BookingPage.xaml.cs">
       <DependentUpon>BookingPage.xaml</DependentUpon>
     </Compile>
@@ -173,6 +169,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\SortIcon.png" />
     <Content Include="Images\MalmoImage.png" />
     <Content Include="Images\ProfileIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -189,10 +186,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\BasePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\BookingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

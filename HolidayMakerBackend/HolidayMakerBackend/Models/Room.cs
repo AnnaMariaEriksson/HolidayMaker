@@ -14,6 +14,7 @@ namespace HolidayMakerBackend.Models
         public int Price { get; set; }
         public bool ExtraBed { get; set; }
         public bool HasAllInclusive { get; set; }
+        public double Rating { get; set; }
         public bool IsAllInclusive { get; set; }
         public bool HasFullBoard { get; set; }
         public bool HasHalfBoard { get; set; }

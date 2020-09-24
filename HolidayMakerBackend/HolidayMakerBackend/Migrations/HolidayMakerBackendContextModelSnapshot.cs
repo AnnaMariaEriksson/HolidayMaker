@@ -207,6 +207,9 @@ namespace HolidayMakerBackend.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
@@ -227,6 +230,7 @@ namespace HolidayMakerBackend.Migrations
                             HotelID = 1,
                             IsAllInclusive = true,
                             Price = 300,
+                            Rating = 2.5,
                             RoomName = "Rum 1"
                         });
                 });

@@ -73,6 +73,7 @@ namespace HolidayMakerBackend.Data
             {
                 ExtraBed = true,
                 HasAllInclusive = true,
+                Rating = 2.5,
                 HasFullBoard = false,
                 HasHalfBoard = false,
                 HotelID = 1,

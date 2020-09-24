@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 namespace HolidayMakerUWP.Viewmodel
 {
     public class LogInViewModel
-    {        
+    {
         public static User User { get; set; }
         public LogInViewModel()
-        {       
-            
+        {
         }
         public void GetUser(string email, string password)
         {
