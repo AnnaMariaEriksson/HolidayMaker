@@ -80,6 +80,7 @@ namespace HolidayMakerUWP.Views
 
             bookingPageViewModel.updateTotalPrice();
             totalSumman.Text = "Total priset:" + " " + bookingPageViewModel.totalPrice.ToString() + "Kr";
+            totalDaysText.Text = bookingPageViewModel.totalDate.ToString();
         }
 
         private void ReturnToPage_Click(object sender, RoutedEventArgs e)

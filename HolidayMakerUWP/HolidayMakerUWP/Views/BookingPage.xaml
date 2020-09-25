@@ -143,6 +143,8 @@
                                        FontSize="24" />
                             <TextBlock Text="Check-out datum:"
                                        FontSize="24" />
+                            <TextBlock Text="Antal nätter:"
+                                       FontSize="24" />
                             <TextBlock Text="Ange information"
                                        FontSize="28"
                                        VerticalAlignment="Bottom"
@@ -164,9 +166,12 @@
                                        FontSize="24" />
                             <TextBlock Text="{x:Bind bookingPageViewModel.endDate}"
                                        FontSize="24" />
+                            <TextBlock Text="{}"
+                                       FontSize="24" 
+                                       x:Name="totalDaysText"/>
                             <TextBox x:Name="TeleNummer"
                                      PlaceholderText="Ange telefonmummer"
-                                     Margin="0,80,0,0"
+                                     Margin="0,45,0,0"
                                      BeforeTextChanging="TeleNummer_BeforeTextChanging" />
                             <TextBox x:Name="Adress"
                                      PlaceholderText="Ange adress" />
