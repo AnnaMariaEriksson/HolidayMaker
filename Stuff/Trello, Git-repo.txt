@@ -1,0 +1,10 @@
+Trello: https://trello.com/b/lrNXZ0Yr/holidaymaker
+Katundari_ = Saimir Avdija
+skanderdamoussi = Skander Damoussi
+andreroygaard = André Röygaard
+greatdanemaniac = Anna-Maria Eriksson
+Git-repository: https://github.com/AnnaMariaEriksson/HolidayMaker
+SaimirAvdija = Saimir Avdija
+Andre3671 = André Röygaard
+AnnaMariaEriksson = Anna-Maria Eriksson
+Skander Damoussi = Skander Damoussi
