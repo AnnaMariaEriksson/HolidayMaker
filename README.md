@@ -1,28 +1,64 @@
 # HolidayMaker
 
-Holiday Maker is a desktop application for Windows where you can search and book rooms in hotels in various parts of Sweden. It's supposed to mimic an AirBnB app, but we chose to implement this as a main hotel search feature.
+Holiday Maker is a desktop application for Windows that talks with a backend service. You can search and book rooms in hotels in various parts of Sweden. It's supposed to mimic an AirBnB app, but we chose to implement this as a main hotel search feature.
 
-## Rest specifikation
+## Rest specification
 
-`api/regions`
+### Regions
 
-`api/cities`
+`GET api/regions`  
+`GET api/regions/{id}`  
+`PUT api/regions/{id}/{region}`  
+`POST api/regions/{region}`  
+`DELETE api/regions/{id}`
 
-`api/hotels`
+### Cities
 
-`api/rooms`
+`GET api/cities`  
+`GET api/cities/{id}`  
+`PUT api/cities/{id}/{city}`  
+`POST api/cities/{city}`  
+`DELETE api/cities/{id}`
 
-`api/users`
+### Hotels
 
-`api/bookings`
+`GET api/hotels`  
+`GET api/hotels/{id}`  
+`PUT api/hotels/{id}/{city}`  
+`POST api/hotels/{city}`  
+`DELETE api/hotels/{id}`
+
+### Rooms
+
+`GET api/rooms`  
+`GET api/rooms/{id}`  
+`PUT api/rooms/{id}/{city}`  
+`POST api/rooms/{city}`  
+`DELETE api/rooms/{id}`
+
+### Users
+
+`GET api/users`  
+`GET api/users/{id}`  
+`PUT api/users/{id}/{city}`  
+`POST api/users/{city}`  
+`DELETE api/users/{id}`
+
+### Bookings
+
+`GET api/bookings`  
+`GET api/bookings/{id}`  
+`PUT api/bookings/{id}/{city}`  
+`POST api/bookings/{city}`  
+`DELETE api/bookings/{id}`
 
 
-## Usage
-1. Make sure you have needed Nuget packages installed. Entity Framework, Newtonsoft are primary.
-2. Start the application (two seperate projects), one client and one server.
-3. Log in if you are a user, if not - create an account.
-4. Search for a region and dates between a needed period.
-5. Click on the wanted city.
-6. Choose the hotel you want and filter between the different features that the hotel you want has to offer.
-7. Choose the room you want and book it.
+## Getting started
+
+1. Open `HolidayMakerBackend.sln` in Visual Studio and press run. 
+2. Run `Update-Database` in Package Manager Console.
+3. Press Run in Visual Studio and now the backend is running.
+4. Open a new Visual Studio instance and select the client project `HolidayMakerUWP`.
+5. Press Run in Visual Studio and now the frontend is running.
+
 

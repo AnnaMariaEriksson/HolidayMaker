@@ -1,0 +1,118 @@
+﻿<Page
+    x:Class="HolidayMakerUWP.FrontPageSearch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:HolidayMakerUWP"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:HolidayMakerUWP.Model"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Button  Grid.Column="2"
+                 Grid.Row="0"
+                 Background="White"
+                 HorizontalAlignment="Stretch"
+                 >
+            <Image Source="../Images/ProfileIcon.png" />
+            <Button.Flyout>
+                <Flyout Placement="TopEdgeAlignedRight" x:Name="MenuFlyout">
+                    <StackPanel Width="170" Height="140">
+                        <TextBlock Text="Meny" TextAlignment="Center" FontWeight="Bold" FontSize="18"/>
+                        <Button Content="Logga in" Width="150" HorizontalAlignment="Center" x:Name="LogInButton"
+                                Click="LogInButton_Click" />
+                        <Button Content="Registrera dig" Width="150"  HorizontalAlignment="Center" x:Name="RegisterButton" Margin="0,5,0,0"
+                                Click="RegisterButton_Click" />
+                        <Button Content="Mina bokningar" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Click="MyBookingsButton_Click" Margin="0,5,0,0" x:Name="MyBookingsButton"/>
+                        <Button Content="Logga ut" Width="150" Visibility="Collapsed" HorizontalAlignment="Center" Click="LogoutButton_Click" Margin="0,5,0,0" x:Name="LogoutButton"/>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                x:Name="SearchField"
+                Grid.Row="1"
+                Grid.Column="0"
+                Width="189"
+                Height="50"
+                HorizontalAlignment="Center"
+                PlaceholderText="Sök efter region..." />
+            <CalendarDatePicker
+                x:Name="StartDate"
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Date="{x:Bind FrontPageSearchViewModel.StartDate, Mode=TwoWay}" />
+            <CalendarDatePicker
+                x:Name="EndDate"
+                Grid.Row="1"
+                Grid.Column="2"
+                VerticalAlignment="Center"
+                Date="{x:Bind FrontPageSearchViewModel.EndDate, Mode=TwoWay}" />
+
+            <Button
+                x:Name="SearchButton"
+                Grid.Row="1"
+                Grid.Column="3"
+                Width="auto"
+                Click="SearchButton_OnClick"
+                Content="Sök"
+                FontSize="24" />
+
+        </Grid>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock
+                x:Name="IfNotFoundLabel"
+                FontSize="40"
+                Text="Väntar på sökresultat..."
+                TextAlignment="Center" />
+            <ListView
+                x:Name="GetAllRegionsListView"
+                IsItemClickEnabled="True"
+                ItemsSource="{x:Bind FrontPageSearchViewModel.TempCity}"
+                      SelectionChanged="GetAllRegionsListView_SelectionChanged">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="center" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:City">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontWeight="Bold" Text="{x:Bind NameOfCity}" />
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

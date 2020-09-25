@@ -1,14 +1,247 @@
-﻿<Page
-    x:Class="HolidayMakerUWP.Views.BookingPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HolidayMakerUWP.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<Page x:Class="HolidayMakerUWP.Views.BookingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:HolidayMakerUWP.Views"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:model="using:HolidayMakerUWP.Model"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="6*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Text="Bokning"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="56" />
 
+            <Button x:Name="ConfirmBookingBtn"
+                    Click="ConfirmBookingBtn_Click"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Content="Bekräfta bokning"
+                    FontSize="24"
+                    Background="CornflowerBlue"
+                    FontWeight="SemiBold" />
+            <Button x:Name="CancelBookingBtn"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Avbryt bokning"
+                    FontSize="24"
+                    Background="CornflowerBlue"
+                    FontWeight="SemiBold">
+                <Button.Flyout>
+                    <Flyout Placement="Top"
+                            x:Name="cancelBookingFlyOut">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Avrbyt bokning!"
+                                       FontSize="24"
+                                       FontWeight="SemiBold" />
+                            <StackPanel Grid.Row="1">
+                                <Button x:Name="ReturnToPage"
+                                        Content="Ja. återgå till första sidan." Click="ReturnToPage_Click"/>
+                            </StackPanel>
+
+
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Orientation="Vertical"
+                        Width="710"
+                        HorizontalAlignment="Left">
+                <ListView x:Name="RoomListView"
+                          ItemsSource="{x:Bind bookingPageViewModel.SelectedRooms}"
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          BorderThickness="1"
+                          BorderBrush="Black"
+                          HorizontalAlignment="Stretch"
+                          Height="500">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Room">
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="{x:Bind RoomName}"
+                                               FontSize="24"
+                                               FontWeight="SemiBold" />
+                                    <StackPanel Orientation="Horizontal">
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="RemoveRoomBtn"
+                        Click="RemoveRoomBtn_Click"
+                        Content="Ta bort rum"
+                        HorizontalAlignment="Right"
+                        FontSize="22" />
+            </StackPanel>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                HorizontalAlignment="left"
+                                VerticalAlignment="Top"
+                                Height="310">
+                        <StackPanel Orientation="Vertical"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Center"
+                                    Height="300"
+                                    VerticalAlignment="Top">
+                            <TextBlock Text="Namn"
+                                       FontSize="24" />
+                            <TextBlock Text="Efternamn"
+                                       FontSize="24" />
+                            <TextBlock Text="Email"
+                                       FontSize="24" />
+                            <TextBlock Text="Check-in datum:"
+                                       FontSize="24" />
+                            <TextBlock Text="Check-out datum:"
+                                       FontSize="24" />
+                            <TextBlock Text="Ange information"
+                                       FontSize="28"
+                                       VerticalAlignment="Bottom"
+                                       Margin="0,35,0,0" />
+                            <TextBlock Text="Telefonnummer"
+                                       FontSize="24" />
+                            <TextBlock Text="Adress"
+                                       FontSize="24" />
+                        </StackPanel >
+
+                        <StackPanel VerticalAlignment="Top">
+                            <TextBlock Text="{x:Bind tempUser.FirstName}"
+                                       FontSize="24" />
+                            <TextBlock Text="{x:Bind tempUser.LastName}"
+                                       FontSize="24" />
+                            <TextBlock Text="{x:Bind tempUser.Email}"
+                                       FontSize="24" />
+                            <TextBlock Text="{x:Bind bookingPageViewModel.startDate}"
+                                       FontSize="24" />
+                            <TextBlock Text="{x:Bind bookingPageViewModel.endDate}"
+                                       FontSize="24" />
+                            <TextBox x:Name="TeleNummer"
+                                     PlaceholderText="Ange telefonmummer"
+                                     Margin="0,80,0,0"
+                                     BeforeTextChanging="TeleNummer_BeforeTextChanging" />
+                            <TextBox x:Name="Adress"
+                                     PlaceholderText="Ange adress" />
+                        </StackPanel>
+                        <StackPanel>
+
+
+                        </StackPanel>
+                        <StackPanel>
+                            
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Row="1"
+                                Grid.Column="0">
+                        <ListView HorizontalAlignment="Left"
+                                  ItemsSource="{x:Bind bookingPageViewModel.SelectedRooms}"
+                                  SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="model:Room">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Text="{x:Bind RoomName}"
+                                                   Grid.Column="0"
+                                                   FontSize="16" />
+
+                                        <StackPanel Grid.Row="1"
+                                                    Orientation="Horizontal">
+                                            <TextBlock Text="{x:Bind Price}"
+                                                       Grid.Column="0"
+                                                       Grid.Row="1"
+                                                       FontSize="16" />
+                                            <TextBlock Text="Kr/Natt"
+                                                       Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       FontSize="16" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="2"
+                                                    Orientation="Horizontal"
+                                                    Grid.ColumnSpan="3">
+                                            <TextBlock Text="All inclusive"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsAllInclusive}"
+                                                      IsHitTestVisible="False" />
+                                            <TextBlock Text="Helpension"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsFullBoard}"
+                                                      IsHitTestVisible="False" />
+                                            <TextBlock Text="Halvpension"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsHalfBoard}"
+                                                      IsHitTestVisible="False" />
+                                            <TextBlock Text="Extra säng"
+                                                       VerticalAlignment="Center" />
+                                            <CheckBox IsChecked="{x:Bind IsExtraBed}"
+                                                      IsHitTestVisible="False" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBlock x:Name="totalSumman"
+                                   HorizontalAlignment="Left"
+                                   Margin="12,0,0,0"
+                                   FontSize="20"
+                                   FontWeight="Bold" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="275a9ec8-d55a-40c1-ab33-0ae46be39a3b"
+    Name="275a9ec8-d55a-40c1-ab33-0ae46be39a5b"
     Publisher="CN=Windows 10"
     Version="1.0.0.0" />
 
@@ -45,5 +45,8 @@
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="internetClientServer"/>
+    <Capability Name="privateNetworkClientServer"/>
+    <uap:Capability Name="sharedUserCertificates"/>
   </Capabilities>
 </Package>
