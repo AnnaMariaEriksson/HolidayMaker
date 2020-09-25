@@ -27,27 +27,35 @@ namespace HolidayMakerBackend.Controllers
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel(int CityID,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Hotel> TempHotels = new ObservableCollection<Hotel>();
-            ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();
+            List<Room> TempRooms = new List<Room>();
            await foreach(Hotel h in _context.Hotel)
             {
+                List<Booking> bookings = new List<Booking>();
                 var test = _context.Room.Where(x => x.HotelID == h.HotelID);
-            foreach (Room r in test)
-            {
-                    Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.BookedRoomID == r.ID);
-                    if (booking != null)
+                foreach (Room r in test)
+                {
+
+                    bookings = _context.Booking.Where(b => b.BookedRoomID == r.ID).ToList();
+                    if (bookings.Count() != 0)
                     {
-                     
-                        if (booking.StartDate < StartDate && booking.EndDate > EndDate)
+                        foreach (var b in bookings)
                         {
-                            TempRooms.Add(r);
+                            if (b.StartDate < StartDate && b.EndDate < StartDate || b.StartDate > EndDate && b.EndDate > StartDate)
+                            {
+                                TempRooms.RemoveAll(x => x.ID == r.ID);
+                                TempRooms.Add(r);
+
+                            }
+                            else
+                            {
+                                TempRooms.RemoveAll(x => x.ID == r.ID);
+                                break;
+                            }
                         }
                     }
-                    else
-                    {
-                        TempRooms.Add(r);
-                    }
-            }
-            if(TempRooms.Count > 0)
+                    else { TempRooms.Add(r); }
+                }
+                if (TempRooms.Count > 0)
                 {
                     if(h.CityID == CityID)
                     {

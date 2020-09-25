@@ -9,6 +9,7 @@ using HolidayMakerBackend.Data;
 using HolidayMakerBackend.Models;
 using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Routing;
+using SQLitePCL;
 
 namespace HolidayMakerBackend.Controllers
 {
@@ -28,33 +29,45 @@ namespace HolidayMakerBackend.Controllers
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms(int HotelId,int sorrtby,DateTimeOffset StartDate,DateTimeOffset EndDate)
         {
             ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-            ObservableCollection<Room> TempRooms = new ObservableCollection<Room>();        
-                  
-            foreach (Room r in _context.Room.Where(x => x.HotelID == HotelId))
+           
+            List<Booking> bookings = new List<Booking>();
+            var test = _context.Room.Where(x => x.HotelID == HotelId).ToList();
+            List<Room> TempRooms = new List<Room>();
+            foreach (Room r in test)
             {
-                Booking booking = await _context.Booking.FirstOrDefaultAsync(b => b.BookedRoomID == r.ID);
-                if (booking != null)
+               
+                bookings = _context.Booking.Where(b => b.BookedRoomID == r.ID ).ToList();
+                if (bookings.Count() != 0)
                 {
-                    if (booking.StartDate < StartDate && booking.EndDate < EndDate)
+                    foreach (var b in bookings)
                     {
-                        if (r.HotelID == HotelId)
+                        if (b.StartDate < StartDate && b.EndDate < StartDate || b.StartDate > EndDate && b.EndDate > StartDate)
+                        {
+                            TempRooms.RemoveAll(x => x.ID == r.ID);
                             TempRooms.Add(r);
+
+                        }
+                        else
+                        {
+                            TempRooms.RemoveAll(x => x.ID == r.ID);
+                            break;
+                        }
                     }
                 }
-                else
-                {
-                    TempRooms.Add(r);
-                }
+                else { TempRooms.Add(r); }
             }
+
+           
 
             if (sorrtby == 1)
             {
                 rooms = new ObservableCollection<Room>(TempRooms.OrderBy(r => r.Price));
-            }else if (sorrtby == 2)
+            }
+            else if (sorrtby == 2)
             {
                 rooms = new ObservableCollection<Room>(TempRooms.OrderByDescending(r => r.Price));
             }
-            
+
             return rooms;
         }
 
